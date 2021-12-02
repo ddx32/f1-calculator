@@ -4,7 +4,7 @@ import {
   getDriverStandings,
   getConstructorStandings,
 } from "../utils/getStandings";
-import { getTeamByName } from "../utils/getTeam";
+import { getTitleChance } from "../utils/getTitleChance";
 
 export default function CurrentStandings() {
   return (
@@ -13,6 +13,7 @@ export default function CurrentStandings() {
         <h2>Current championship standings</h2>
         <table className="standings">
           <tr>
+            <th>Title</th>
             <th>Pos</th>
             <th>Driver</th>
             <th>Points</th>
@@ -20,13 +21,8 @@ export default function CurrentStandings() {
           </tr>
           {getDriverStandings(driverData).map((driver, index) => (
             <tr>
-              <td
-                style={{
-                  backgroundColor: `${getTeamByName(driver.team).color}80`,
-                }}
-              >
-                {index + 1}
-              </td>
+              <td>{getTitleChance(driverData, index, 2) && "🏆"}</td>
+              <td>{index + 1}</td>
               <td>{driver.abbreviation}</td>
               <td>{driver.points}</td>
               <td>{driver.wins > 0 && driver.wins}</td>
