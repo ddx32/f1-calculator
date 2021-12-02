@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CurrentStandings from "./components/currentStandings";
 import RaceResults from "./components/raceResults";
 import driverData from "./data/driverData";
-import { getDriverStandings } from "./data/getStandings";
+import { getDriverStandings } from "./utils/getStandings";
 import AfterRaceStandings from "./components/afterRaceStandings";
 
 const driverList = getDriverStandings(driverData).map((driver, index) => ({

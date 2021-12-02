@@ -3,7 +3,8 @@ import driverData from "../data/driverData";
 import {
   getDriverStandings,
   getConstructorStandings,
-} from "../data/getStandings";
+} from "../utils/getStandings";
+import { getTeamByName } from "../utils/getTeam";
 
 export default function CurrentStandings() {
   return (

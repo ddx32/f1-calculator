@@ -2,7 +2,7 @@ import {
   getUpdatedDriversPointsStandings,
   getDriversChampionshipPositionChange,
   getUpdatedConstructorsPointsStandings,
-} from "../data/pointsCalculations";
+} from "../utils/pointsCalculations";
 
 export default function AfterRaceStandings({ raceResults }) {
   const updatedPointsStandings = getUpdatedDriversPointsStandings(raceResults);
@@ -10,7 +10,7 @@ export default function AfterRaceStandings({ raceResults }) {
   return (
     <div>
       <div>
-        <h2>Drivers</h2>
+        <h2>Championship standings after next race</h2>
         <table>
           <tr>
             <th>Driver</th>
@@ -30,7 +30,6 @@ export default function AfterRaceStandings({ raceResults }) {
       </div>
 
       <div>
-        <h2>Teams</h2>
         <table>
           {getUpdatedConstructorsPointsStandings(raceResults).map((team) => (
             <tr>

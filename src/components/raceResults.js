@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { getGainedPoints } from "../data/pointsCalculations";
+import { getGainedPoints } from "../utils/pointsCalculations";
+import { getTeamByName } from "../utils/getTeam";
 
 const initialDnDState = {
   draggedFrom: 0,
