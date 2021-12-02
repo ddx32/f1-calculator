@@ -1,8 +1,7 @@
-import { getConstructorStandings } from "../data/getStandings";
-import driverData from "../data/driverData";
 import {
   getUpdatedDriversPointsStandings,
   getDriversChampionshipPositionChange,
+  getUpdatedConstructorsPointsStandings,
 } from "../data/pointsCalculations";
 
 export default function AfterRaceStandings({ raceResults }) {
@@ -33,7 +32,7 @@ export default function AfterRaceStandings({ raceResults }) {
       <div>
         <h2>Teams</h2>
         <table>
-          {getConstructorStandings(driverData).map((team) => (
+          {getUpdatedConstructorsPointsStandings(raceResults).map((team) => (
             <tr>
               <td>{team.name}</td>
               <td>{team.points}</td>
