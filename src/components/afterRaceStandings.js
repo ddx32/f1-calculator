@@ -13,10 +13,17 @@ export default function AfterRaceStandings({ raceResults }) {
       <div>
         <h2>Drivers</h2>
         <table>
+          <tr>
+            <th>Driver</th>
+            <th>Points</th>
+            <th>Wins</th>
+            <th>Change</th>
+          </tr>
           {updatedPointsStandings.map((driver, index) => (
             <tr>
               <td>{driver.name}</td>
               <td>{driver.points}</td>
+              <td>{driver.wins}</td>
               <td>{getDriversChampionshipPositionChange(driver, index)}</td>
             </tr>
           ))}

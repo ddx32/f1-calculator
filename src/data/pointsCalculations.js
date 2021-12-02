@@ -1,4 +1,5 @@
 import driverData from "./driverData";
+import { getDriverStandings } from "./getStandings";
 
 export const pointsPerPosition = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 
@@ -13,13 +14,13 @@ export function getGainedPoints(index, fastestLap) {
 }
 
 export function getUpdatedDriversPointsStandings(raceResults) {
-  return [...raceResults]
-    .map((driver, index) => ({
-      ...driver,
-      points:
-        raceResults[index].points + getPointsPerRace(index, driver.fastestLap),
-    }))
-    .sort((a, b) => b.points - a.points);
+  const updatedDriverData = [...raceResults].map((driver, index) => ({
+    ...driver,
+    points:
+      raceResults[index].points + getPointsPerRace(index, driver.fastestLap),
+    wins: index === 0 ? driver.wins + 1 : driver.wins,
+  }));
+  return getDriverStandings(updatedDriverData);
 }
 
 export function getDriversChampionshipPositionChange(driver, currentPosition) {
