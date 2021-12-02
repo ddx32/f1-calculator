@@ -13,13 +13,15 @@ export default function AfterRaceStandings({ raceResults }) {
         <h2>Championship standings after next race</h2>
         <table>
           <tr>
+            <th>Pos</th>
             <th>Driver</th>
             <th>Points</th>
             <th>Wins</th>
-            <th>Change</th>
+            <th>Chg</th>
           </tr>
           {updatedPointsStandings.map((driver, index) => (
             <tr>
+              <td>{index + 1}</td>
               <td>{driver.name}</td>
               <td>{driver.points}</td>
               <td>{driver.wins}</td>
