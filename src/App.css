@@ -1,0 +1,81 @@
+body {
+  background-color: #171717;
+}
+
+h2 {
+  color: #fff;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 10px;
+  width: 100%;
+  border: 2px solid black;
+  background-color: #cccccc;
+}
+
+td {
+  margin: 0;
+  padding: 0.25rem;
+  border: none;
+}
+
+.race-results {
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+}
+
+.race-results td {
+  padding: 1rem;
+}
+
+.race-results .driver-name {
+  flex-grow: 4;
+}
+
+.race-results td:last-child {
+}
+
+.race-results tr {
+  display: flex;
+  margin-bottom: 0.1rem;
+  border-radius: 1rem;
+  cursor: move;
+  align-items: center;
+}
+
+.fastestLapContainer {
+  position: relative;
+  padding: 0 !important;
+  width: 25px;
+  height: 25px;
+  display: block;
+  cursor: pointer;
+}
+
+.fastestLapContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  border-radius: 3px;
+}
+
+.checkmark:hover {
+  background-image: url("./fastestLap.png");
+}
+
+.fastestLapContainer input:checked ~ .checkmark {
+  background-image: url("./fastestLap.png");
+}

@@ -71,7 +71,7 @@ export default function RaceResults({ driverList, setRaceResults }) {
   return (
     <div>
       <h2>Next race results</h2>
-      <table>
+      <table className="race-results">
         {driverList.map((driver, index) => (
           <tr
             key={index}
@@ -80,17 +80,23 @@ export default function RaceResults({ driverList, setRaceResults }) {
             onDragOver={onDragOver}
             onDrop={onDrop}
             data-position={index}
+            style={{
+              backgroundColor: `${getTeamByName(driver.team).color}50`,
+              border: `2px solid ${getTeamByName(driver.team).color}`,
+            }}
           >
             <td>
-              <input
-                type="checkbox"
-                checked={driver.fastestLap}
-                onChange={() => setFastestLap(index)}
-              />{" "}
-              FL
+              <label className="fastestLapContainer">
+                <input
+                  type="checkbox"
+                  checked={driver.fastestLap}
+                  onChange={() => setFastestLap(index)}
+                />
+                <span className="checkmark" />
+              </label>
             </td>
-            <td>{index + 1}</td>
-            <td>{driver.name}</td>
+            <td>P{index + 1}</td>
+            <td className="driver-name">{driver.name}</td>
             <td>{getGainedPoints(index, driver.fastestLap)}</td>
           </tr>
         ))}
