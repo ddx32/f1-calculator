@@ -11,10 +11,16 @@ export default function CurrentStandings() {
       <div>
         <h2>Drivers</h2>
         <table>
+          <tr>
+            <th>Driver</th>
+            <th>Points</th>
+            <th>Wins</th>
+          </tr>
           {getDriverStandings(driverData).map((driver) => (
             <tr>
               <td>{driver.name}</td>
               <td>{driver.points}</td>
+              <td>{driver.wins}</td>
             </tr>
           ))}
         </table>
