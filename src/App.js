@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CurrentStandings from "./components/currentStandings";
+import RaceResults from "./components/raceResults";
+import driverData from "./data/driverData";
+import { getDriverStandings } from "./data/getStandings";
+import AfterRaceStandings from "./components/afterRaceStandings";
+
+const driverList = getDriverStandings(driverData).map((driver, index) => ({
+  ...driver,
+  fastestLap: index === 0,
+}));
 
 function App() {
+  const [raceResults, setRaceResults] = useState(driverList);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+      <CurrentStandings />
+      <RaceResults driverList={raceResults} setRaceResults={setRaceResults} />
+      <AfterRaceStandings raceResults={raceResults} />
     </div>
   );
 }
