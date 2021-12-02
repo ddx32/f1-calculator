@@ -11,7 +11,7 @@ export default function CurrentStandings() {
     <div>
       <div>
         <h2>Current championship standings</h2>
-        <table>
+        <table className="standings">
           <tr>
             <th>Pos</th>
             <th>Driver</th>
@@ -22,24 +22,21 @@ export default function CurrentStandings() {
             <tr>
               <td
                 style={{
-                  borderLeft: `.25rem solid ${
-                    getTeamByName(driver.team).color
-                  }`,
-                  backgroundColor: `${getTeamByName(driver.team).color}30`,
+                  backgroundColor: `${getTeamByName(driver.team).color}80`,
                 }}
               >
                 {index + 1}
               </td>
-              <td>{driver.name}</td>
+              <td>{driver.abbreviation}</td>
               <td>{driver.points}</td>
-              <td>{driver.wins}</td>
+              <td>{driver.wins > 0 && driver.wins}</td>
             </tr>
           ))}
         </table>
       </div>
 
       <div>
-        <table>
+        <table className="standings">
           {getConstructorStandings(driverData).map((team, index) => (
             <tr>
               <td>{index + 1}</td>
