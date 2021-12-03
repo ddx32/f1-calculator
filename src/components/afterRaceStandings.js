@@ -2,11 +2,11 @@ import {
   getUpdatedDriversPointsStandings,
   getDriversChampionshipPositionChange,
   getUpdatedConstructorsPointsStandings,
+  getConstructorsChampionshipPositionChange,
 } from "../utils/pointsCalculations";
 import { getTitleChance } from "../utils/getTitleChance";
 
-function getPositionChange(driver, index) {
-  const changeValue = getDriversChampionshipPositionChange(driver, index);
+function getPositionChange(changeValue) {
   if (changeValue === 0) {
     return;
   }
@@ -32,6 +32,19 @@ function getPositionChange(driver, index) {
       {Math.abs(changeValue)}
     </span>
   );
+}
+
+function getDriversPositionChange(driver, index) {
+  const changeValue = getDriversChampionshipPositionChange(driver, index);
+  return getPositionChange(changeValue);
+}
+
+function getConstructorsPositionChange(constructor, raceResults) {
+  const changeValue = getConstructorsChampionshipPositionChange(
+    constructor,
+    raceResults
+  );
+  return getPositionChange(changeValue);
 }
 
 export default function AfterRaceStandings({ raceResults }) {
@@ -62,7 +75,7 @@ export default function AfterRaceStandings({ raceResults }) {
                 <td>{driver.abbreviation}</td>
                 <td>{driver.points}</td>
                 <td>{driver.wins > 0 && driver.wins}</td>
-                <td>{getPositionChange(driver, index)}</td>
+                <td>{getDriversPositionChange(driver, index)}</td>
               </tr>
             ))}
           </tbody>
@@ -75,8 +88,10 @@ export default function AfterRaceStandings({ raceResults }) {
             {getUpdatedConstructorsPointsStandings(raceResults).map(
               (team, index) => (
                 <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{team.name}</td>
                   <td>{team.points}</td>
+                  <td>{getConstructorsPositionChange(team, raceResults)}</td>
                 </tr>
               )
             )}

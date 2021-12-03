@@ -38,3 +38,18 @@ export function getUpdatedConstructorsPointsStandings(raceResults) {
   const updatedDriverData = getUpdatedDriverData(raceResults);
   return getConstructorStandings(updatedDriverData);
 }
+
+export function getConstructorsChampionshipPositionChange(
+  constructor,
+  raceResults
+) {
+  const previousStandings = getConstructorStandings(driverData);
+  const currentStandings = getUpdatedConstructorsPointsStandings(raceResults);
+  const prevPosition = previousStandings.findIndex(
+    (originalConstructor) => originalConstructor.name === constructor.name
+  );
+  const newPosition = currentStandings.findIndex(
+    (currentConstructor) => currentConstructor.name === constructor.name
+  );
+  return prevPosition - newPosition;
+}
