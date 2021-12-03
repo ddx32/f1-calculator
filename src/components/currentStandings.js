@@ -24,7 +24,7 @@ export default function CurrentStandings() {
           <tbody>
             {getDriverStandings(driverData).map((driver, index) => (
               <tr key={index}>
-                <td>{getTitleChance(driverData, index, 2) && "🏆"}</td>
+                <td>{getTitleChance(driverData, index, 1) && "🏆"}</td>
                 <td>{index + 1}</td>
                 <td>{driver.abbreviation}</td>
                 <td>{driver.points}</td>
