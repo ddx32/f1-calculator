@@ -11,7 +11,7 @@ h2 {
   grid-template-columns: 2fr 3fr 3fr;
   gap: 1rem;
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto 3rem;
 }
 
 table {
@@ -87,7 +87,7 @@ td {
 
 .standings {
   text-align: center;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: #cccccc;
   margin-bottom: 1rem;
 }
@@ -102,6 +102,10 @@ td {
 
 .help-text {
   color: #fff;
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  gap: 5rem;
 }
 
 .help-text a {
