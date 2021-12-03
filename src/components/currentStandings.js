@@ -12,34 +12,40 @@ export default function CurrentStandings() {
       <div>
         <h2>Current championship standings</h2>
         <table className="standings">
-          <tr>
-            <th>Title</th>
-            <th>Pos</th>
-            <th>Driver</th>
-            <th>Points</th>
-            <th>Wins</th>
-          </tr>
-          {getDriverStandings(driverData).map((driver, index) => (
+          <thead>
             <tr>
-              <td>{getTitleChance(driverData, index, 2) && "🏆"}</td>
-              <td>{index + 1}</td>
-              <td>{driver.abbreviation}</td>
-              <td>{driver.points}</td>
-              <td>{driver.wins > 0 && driver.wins}</td>
+              <th>Title</th>
+              <th>Pos</th>
+              <th>Driver</th>
+              <th>Points</th>
+              <th>Wins</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {getDriverStandings(driverData).map((driver, index) => (
+              <tr key={index}>
+                <td>{getTitleChance(driverData, index, 2) && "🏆"}</td>
+                <td>{index + 1}</td>
+                <td>{driver.abbreviation}</td>
+                <td>{driver.points}</td>
+                <td>{driver.wins > 0 && driver.wins}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 
       <div>
         <table className="standings">
-          {getConstructorStandings(driverData).map((team, index) => (
-            <tr>
-              <td>{index + 1}</td>
-              <td>{team.name}</td>
-              <td>{team.points}</td>
-            </tr>
-          ))}
+          <tbody>
+            {getConstructorStandings(driverData).map((team, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{team.name}</td>
+                <td>{team.points}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

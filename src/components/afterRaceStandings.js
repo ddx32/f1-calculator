@@ -42,37 +42,45 @@ export default function AfterRaceStandings({ raceResults }) {
       <div>
         <h2>Championship standings after next race</h2>
         <table className="standings">
-          <tr>
-            <th>Title</th>
-            <th>Pos</th>
-            <th>Driver</th>
-            <th>Points</th>
-            <th>Wins</th>
-            <th>Chg</th>
-          </tr>
-          {updatedPointsStandings.map((driver, index) => (
+          <thead>
             <tr>
-              <td>
-                {getTitleChance(updatedPointsStandings, index, 1) && "🏆"}
-              </td>
-              <td>{index + 1}</td>
-              <td>{driver.abbreviation}</td>
-              <td>{driver.points}</td>
-              <td>{driver.wins > 0 && driver.wins}</td>
-              <td>{getPositionChange(driver, index)}</td>
+              <th>Title</th>
+              <th>Pos</th>
+              <th>Driver</th>
+              <th>Points</th>
+              <th>Wins</th>
+              <th>Chg</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {updatedPointsStandings.map((driver, index) => (
+              <tr key={index}>
+                <td>
+                  {getTitleChance(updatedPointsStandings, index, 1) && "🏆"}
+                </td>
+                <td>{index + 1}</td>
+                <td>{driver.abbreviation}</td>
+                <td>{driver.points}</td>
+                <td>{driver.wins > 0 && driver.wins}</td>
+                <td>{getPositionChange(driver, index)}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 
       <div>
         <table className="standings">
-          {getUpdatedConstructorsPointsStandings(raceResults).map((team) => (
-            <tr>
-              <td>{team.name}</td>
-              <td>{team.points}</td>
-            </tr>
-          ))}
+          <tbody>
+            {getUpdatedConstructorsPointsStandings(raceResults).map(
+              (team, index) => (
+                <tr key={index}>
+                  <td>{team.name}</td>
+                  <td>{team.points}</td>
+                </tr>
+              )
+            )}
+          </tbody>
         </table>
       </div>
     </div>
