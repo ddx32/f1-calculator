@@ -4,6 +4,7 @@ import RaceResults from "./components/raceResults";
 import driverData from "./data/driverData";
 import { getDriverStandings } from "./utils/getStandings";
 import AfterRaceStandings from "./components/afterRaceStandings";
+import HelpText from "./components/helpText";
 import "./App.css";
 
 const driverList = getDriverStandings(driverData).map((driver, index) => ({
@@ -15,11 +16,14 @@ function App() {
   const [raceResults, setRaceResults] = useState(driverList);
 
   return (
-    <div className="app-container">
-      <CurrentStandings />
-      <RaceResults driverList={raceResults} setRaceResults={setRaceResults} />
-      <AfterRaceStandings raceResults={raceResults} />
-    </div>
+    <>
+      <div className="app-container">
+        <CurrentStandings />
+        <RaceResults driverList={raceResults} setRaceResults={setRaceResults} />
+        <AfterRaceStandings raceResults={raceResults} />
+      </div>
+      <HelpText />
+    </>
   );
 }
 

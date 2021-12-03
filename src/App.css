@@ -99,3 +99,15 @@ td {
 .standings tr:last-child {
   border-bottom: none;
 }
+
+.help-text {
+  color: #fff;
+}
+
+.help-text a {
+  color: #fff;
+}
+
+.help-text a:hover {
+  color: #c7c7c7;
+}
