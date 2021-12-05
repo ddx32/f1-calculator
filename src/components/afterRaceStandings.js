@@ -69,7 +69,7 @@ export default function AfterRaceStandings({ raceResults }) {
             {updatedPointsStandings.map((driver, index) => (
               <tr key={index}>
                 <td>
-                  {getTitleChance(updatedPointsStandings, index, 1) && "🏆"}
+                  {getTitleChance(updatedPointsStandings, index, 0) && "🏆"}
                 </td>
                 <td>{index + 1}</td>
                 <td>{driver.abbreviation}</td>
