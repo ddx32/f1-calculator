@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import CurrentStandings from "./components/currentStandings";
 import RaceResults from "./components/raceResults";
-import driverData from "./data/driverData";
-import { getDriverStandings } from "./utils/getStandings";
+import { drivers } from "./services/standings";
 import AfterRaceStandings from "./components/afterRaceStandings";
 import HelpText from "./components/helpText";
 import "./App.css";
 
-const driverList = getDriverStandings(driverData).map((driver, index) => ({
+const driverList = drivers.getCurrentStandings().map((driver, index) => ({
   ...driver,
   fastestLap: index === 0,
 }));
