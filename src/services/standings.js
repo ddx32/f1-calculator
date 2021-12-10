@@ -79,14 +79,36 @@ function getConstructorsData(driverData) {
   }, []);
 }
 
+function getConstructorsMaximumResult(constructor, roundsToGo) {
+  const maximumPoints =
+    constructor.points +
+    roundsToGo *
+      (POINTS_PER_POSITION.fullGrandPrix[0] +
+        POINTS_PER_POSITION.fullGrandPrix[1] +
+        FASTEST_LAP_POINTS);
+  return {
+    ...constructor,
+    maximumPoints,
+    maximumWins: constructor.wins + roundsToGo,
+  };
+}
+
 export const constructors = {
   getCurrentStandings: function () {
-    const constructorsData = getConstructorsData(DRIVER_DATA);
+    const constructorsData = getConstructorsData(DRIVER_DATA).map(
+      (constructor) => {
+        return getConstructorsMaximumResult(constructor, ROUNDS_TO_GO);
+      }
+    );
     return sortPositions(constructorsData);
   },
   getStandingsAfterNextRound: function (raceResults) {
     const updatedDriverData = drivers.getStandingsAfterNextRound(raceResults);
-    const updatedConstructorData = getConstructorsData(updatedDriverData);
+    const updatedConstructorData = getConstructorsData(updatedDriverData).map(
+      (constructor) => {
+        return getConstructorsMaximumResult(constructor, ROUNDS_TO_GO - 1);
+      }
+    );
     return sortPositions(updatedConstructorData);
   },
 };
