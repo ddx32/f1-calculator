@@ -1,9 +1,9 @@
 import {
   getDriversChampionshipPositionChange,
   getConstructorsChampionshipPositionChange,
-} from "../utils/pointsCalculations";
+} from "../services/pointsCalculations";
 import { drivers, constructors } from "../services/standings";
-import { getTitleChance } from "../utils/getTitleChance";
+import getTitleChance from "../services/getTitleChance";
 
 function getPositionChange(changeValue) {
   if (changeValue === 0) {
@@ -47,8 +47,9 @@ function getConstructorsPositionChange(constructor, raceResults) {
 }
 
 export default function AfterRaceStandings({ raceResults }) {
-  const updatedPointsStandings =
-    drivers.getStandingsAfterNextRound(raceResults);
+  const driverStandings = drivers.getStandingsAfterNextRound(raceResults);
+  const constructorStandings =
+    constructors.getStandingsAfterNextRound(raceResults);
 
   return (
     <div>
@@ -66,11 +67,9 @@ export default function AfterRaceStandings({ raceResults }) {
             </tr>
           </thead>
           <tbody>
-            {updatedPointsStandings.map((driver, index) => (
+            {driverStandings.map((driver, index) => (
               <tr key={index}>
-                <td>
-                  {getTitleChance(updatedPointsStandings, index, 0) && "🏆"}
-                </td>
+                <td>{getTitleChance(driverStandings, index) && "🏆"}</td>
                 <td>{index + 1}</td>
                 <td>{driver.abbreviation}</td>
                 <td>{driver.points}</td>
@@ -85,16 +84,16 @@ export default function AfterRaceStandings({ raceResults }) {
       <div>
         <table className="standings">
           <tbody>
-            {constructors
-              .getStandingsAfterNextRound(raceResults)
-              .map((team, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{team.name}</td>
-                  <td>{team.points}</td>
-                  <td>{getConstructorsPositionChange(team, raceResults)}</td>
-                </tr>
-              ))}
+            {constructorStandings.map((team, index) => (
+              <tr key={index}>
+                <td>{getTitleChance(constructorStandings, index) && "🏆"}</td>
+                <td>{index + 1}</td>
+                <td>{team.name}</td>
+                <td>{team.points}</td>
+                <td>{team.wins > 0 && team.wins}</td>
+                <td>{getConstructorsPositionChange(team, raceResults)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
