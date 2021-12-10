@@ -1,9 +1,6 @@
 import React from "react";
-import driverData from "../data/driverData";
-import {
-  getDriverStandings,
-  getConstructorStandings,
-} from "../utils/getStandings";
+import driverData from "../constants/driverData";
+import { drivers, constructors } from "../services/standings";
 import { getTitleChance } from "../utils/getTitleChance";
 
 export default function CurrentStandings() {
@@ -22,7 +19,7 @@ export default function CurrentStandings() {
             </tr>
           </thead>
           <tbody>
-            {getDriverStandings(driverData).map((driver, index) => (
+            {drivers.getCurrentStandings().map((driver, index) => (
               <tr key={index}>
                 <td>{getTitleChance(driverData, index, 1) && "🏆"}</td>
                 <td>{index + 1}</td>
@@ -38,7 +35,7 @@ export default function CurrentStandings() {
       <div>
         <table className="standings">
           <tbody>
-            {getConstructorStandings(driverData).map((team, index) => (
+            {constructors.getCurrentStandings().map((team, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{team.name}</td>

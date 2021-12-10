@@ -1,4 +1,4 @@
-const driverData = [
+const DRIVER_DATA = [
   {
     name: "Max Verstappen",
     number: 33,
@@ -161,4 +161,4 @@ const driverData = [
   },
 ];
 
-export default driverData;
+export default DRIVER_DATA;

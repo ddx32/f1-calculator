@@ -1,9 +1,8 @@
 import {
-  getUpdatedDriversPointsStandings,
   getDriversChampionshipPositionChange,
-  getUpdatedConstructorsPointsStandings,
   getConstructorsChampionshipPositionChange,
 } from "../utils/pointsCalculations";
+import { drivers, constructors } from "../services/standings";
 import { getTitleChance } from "../utils/getTitleChance";
 
 function getPositionChange(changeValue) {
@@ -48,7 +47,8 @@ function getConstructorsPositionChange(constructor, raceResults) {
 }
 
 export default function AfterRaceStandings({ raceResults }) {
-  const updatedPointsStandings = getUpdatedDriversPointsStandings(raceResults);
+  const updatedPointsStandings =
+    drivers.getStandingsAfterNextRound(raceResults);
 
   return (
     <div>
@@ -85,16 +85,16 @@ export default function AfterRaceStandings({ raceResults }) {
       <div>
         <table className="standings">
           <tbody>
-            {getUpdatedConstructorsPointsStandings(raceResults).map(
-              (team, index) => (
+            {constructors
+              .getStandingsAfterNextRound(raceResults)
+              .map((team, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{team.name}</td>
                   <td>{team.points}</td>
                   <td>{getConstructorsPositionChange(team, raceResults)}</td>
                 </tr>
-              )
-            )}
+              ))}
           </tbody>
         </table>
       </div>

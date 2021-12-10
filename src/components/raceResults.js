@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getGainedPoints } from "../utils/pointsCalculations";
-import { getTeamByName } from "../utils/getTeam";
+import constructorData from "../constants/constructorsData";
 
 const initialDnDState = {
   draggedFrom: 0,
@@ -66,6 +66,10 @@ export default function RaceResults({ driverList, setRaceResults }) {
       draggedTo: 0,
       isDragging: false,
     });
+  }
+
+  function getTeamByName(name) {
+    return constructorData.find((constructor) => constructor.name === name);
   }
 
   return (

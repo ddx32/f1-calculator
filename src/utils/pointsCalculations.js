@@ -1,20 +1,9 @@
-import driverData from "../data/driverData";
-import { getConstructorStandings, getDriverStandings } from "./getStandings";
+import { POINTS_PER_POSITION } from "../constants/championshipRoundsData";
+import { drivers, constructors } from "../services/standings";
 
-export const pointsPerPosition = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
-
-function getPointsPerRace(index, fastestLap) {
-  const positionPoints = pointsPerPosition[index];
+export function getPointsPerRace(index, fastestLap) {
+  const positionPoints = POINTS_PER_POSITION.fullGrandPrix[index];
   return index < 10 && fastestLap ? positionPoints + 1 : positionPoints || 0;
-}
-
-function getUpdatedDriverData(raceResults) {
-  return [...raceResults].map((driver, index) => ({
-    ...driver,
-    points:
-      raceResults[index].points + getPointsPerRace(index, driver.fastestLap),
-    wins: index === 0 ? driver.wins + 1 : driver.wins,
-  }));
 }
 
 export function getGainedPoints(index, fastestLap) {
@@ -22,34 +11,22 @@ export function getGainedPoints(index, fastestLap) {
   return points ? `+ ${points}` : null;
 }
 
-export function getUpdatedDriversPointsStandings(raceResults) {
-  const updatedDriverData = getUpdatedDriverData(raceResults);
-  return getDriverStandings(updatedDriverData);
-}
-
 export function getDriversChampionshipPositionChange(driver, currentPosition) {
-  const previousPosition = driverData.findIndex(
-    (originalDriver) => originalDriver.name === driver.name
-  );
+  const previousPosition = drivers
+    .getCurrentStandings()
+    .findIndex((originalDriver) => originalDriver.name === driver.name);
   return previousPosition - currentPosition;
-}
-
-export function getUpdatedConstructorsPointsStandings(raceResults) {
-  const updatedDriverData = getUpdatedDriverData(raceResults);
-  return getConstructorStandings(updatedDriverData);
 }
 
 export function getConstructorsChampionshipPositionChange(
   constructor,
   raceResults
 ) {
-  const previousStandings = getConstructorStandings(driverData);
-  const currentStandings = getUpdatedConstructorsPointsStandings(raceResults);
-  const prevPosition = previousStandings.findIndex(
-    (originalConstructor) => originalConstructor.name === constructor.name
-  );
-  const newPosition = currentStandings.findIndex(
-    (currentConstructor) => currentConstructor.name === constructor.name
-  );
+  const previousStandings = constructors.getCurrentStandings();
+  const currentStandings = constructors.getStandingsAfterNextRound(raceResults);
+  const getConstructorPosition = (searchedArray) =>
+    searchedArray.name === constructor.name;
+  const prevPosition = previousStandings.findIndex(getConstructorPosition);
+  const newPosition = currentStandings.findIndex(getConstructorPosition);
   return prevPosition - newPosition;
 }
