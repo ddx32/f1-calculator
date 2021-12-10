@@ -1,9 +1,9 @@
 import {
   getDriversChampionshipPositionChange,
   getConstructorsChampionshipPositionChange,
-} from "../utils/pointsCalculations";
+} from "../services/pointsCalculations";
 import { drivers, constructors } from "../services/standings";
-import { getTitleChance } from "../utils/getTitleChance";
+import getTitleChance from "../services/getTitleChance";
 
 function getPositionChange(changeValue) {
   if (changeValue === 0) {
@@ -68,9 +68,7 @@ export default function AfterRaceStandings({ raceResults }) {
           <tbody>
             {updatedPointsStandings.map((driver, index) => (
               <tr key={index}>
-                <td>
-                  {getTitleChance(updatedPointsStandings, index, 0) && "🏆"}
-                </td>
+                <td>{getTitleChance(updatedPointsStandings, index) && "🏆"}</td>
                 <td>{index + 1}</td>
                 <td>{driver.abbreviation}</td>
                 <td>{driver.points}</td>

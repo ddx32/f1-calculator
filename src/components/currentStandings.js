@@ -1,9 +1,10 @@
 import React from "react";
-import driverData from "../constants/driverData";
 import { drivers, constructors } from "../services/standings";
-import { getTitleChance } from "../utils/getTitleChance";
+import getTitleChance from "../services/getTitleChance";
 
 export default function CurrentStandings() {
+  const currentStandings = drivers.getCurrentStandings();
+
   return (
     <div>
       <div>
@@ -19,9 +20,9 @@ export default function CurrentStandings() {
             </tr>
           </thead>
           <tbody>
-            {drivers.getCurrentStandings().map((driver, index) => (
+            {currentStandings.map((driver, index) => (
               <tr key={index}>
-                <td>{getTitleChance(driverData, index, 1) && "🏆"}</td>
+                <td>{getTitleChance(currentStandings, index) && "🏆"}</td>
                 <td>{index + 1}</td>
                 <td>{driver.abbreviation}</td>
                 <td>{driver.points}</td>

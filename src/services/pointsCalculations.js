@@ -1,5 +1,5 @@
 import { POINTS_PER_POSITION } from "../constants/championshipRoundsData";
-import { drivers, constructors } from "../services/standings";
+import { drivers, constructors } from "./standings";
 
 export function getPointsPerRace(index, fastestLap) {
   const positionPoints = POINTS_PER_POSITION.fullGrandPrix[index];

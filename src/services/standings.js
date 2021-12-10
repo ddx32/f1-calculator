@@ -2,8 +2,9 @@ import DRIVER_DATA from "../constants/driverData";
 import {
   POINTS_PER_POSITION,
   ROUNDS_TO_GO,
+  FASTEST_LAP_POINTS,
 } from "../constants/championshipRoundsData";
-import { getPointsPerRace } from "../utils/pointsCalculations";
+import { getPointsPerRace } from "./pointsCalculations";
 
 function sortPositions(drivers) {
   return drivers.sort((a, b) => {
@@ -18,10 +19,12 @@ function sortPositions(drivers) {
 }
 
 function getDriverMaximumResults(driver, roundsToGo) {
+  const maximumPoints =
+    driver.points +
+    roundsToGo * (POINTS_PER_POSITION.fullGrandPrix[0] + FASTEST_LAP_POINTS);
   return {
     ...driver,
-    maximumPoints:
-      driver.points + roundsToGo * POINTS_PER_POSITION.fullGrandPrix[0],
+    maximumPoints,
     maximumWins: driver.wins + roundsToGo,
   };
 }
@@ -47,7 +50,8 @@ export const drivers = {
         wins: originalDriverEntry.wins + gainedWins,
       };
       const updatedMaxResultDriverEntry = getDriverMaximumResults(
-        updatedPointsDriverEntry
+        updatedPointsDriverEntry,
+        ROUNDS_TO_GO - 1
       );
       acc.push(updatedMaxResultDriverEntry);
       return acc;

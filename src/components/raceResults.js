@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getGainedPoints } from "../utils/pointsCalculations";
+import { getGainedPoints } from "../services/pointsCalculations";
 import constructorData from "../constants/constructorsData";
 
 const initialDnDState = {
