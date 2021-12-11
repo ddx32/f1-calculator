@@ -1,4 +1,4 @@
-const constructorData = [
+const CONSTRUCTOR_DATA = [
   {
     name: "Mercedes",
     color: "#00827D",
@@ -41,4 +41,4 @@ const constructorData = [
   },
 ];
 
-export default constructorData;
+export default CONSTRUCTOR_DATA;

@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { getGainedPoints } from "../services/pointsCalculations";
-import constructorData from "../constants/constructorsData";
+import CONSTRUCTOR_DATA from "../constants/constructorsData";
+import DRIVER_DATA from "../constants/driverData";
 
-const initialDnDState = {
+import type { DriverResult } from "../constants/types";
+
+const initialDnDState: {
+  draggedFrom: number;
+  draggedTo: number;
+  isDragging: boolean;
+  originalOrder: DriverResult[];
+  updatedOrder: DriverResult[];
+} = {
   draggedFrom: 0,
   draggedTo: 0,
   isDragging: false,
@@ -10,8 +19,14 @@ const initialDnDState = {
   updatedOrder: [],
 };
 
-export default function RaceResults({ driverList, setRaceResults }) {
-  function setFastestLap(index) {
+export default function RaceResults({
+  driverList,
+  setRaceResults,
+}: {
+  driverList: DriverResult[];
+  setRaceResults(results: DriverResult[]): void;
+}) {
+  function setFastestLap(index: number) {
     const updatedDriverList = driverList.map((driver, currentIndex) => ({
       ...driver,
       fastestLap: index === currentIndex,
@@ -21,8 +36,10 @@ export default function RaceResults({ driverList, setRaceResults }) {
 
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
-  function onDragStart(event) {
-    const initialPosition = Number(event.currentTarget.dataset.position);
+  function onDragStart(event: React.DragEvent) {
+    const initialPosition = Number(
+      (event?.currentTarget as HTMLTableRowElement)?.dataset.position
+    );
     setDragAndDrop({
       ...dragAndDrop,
       draggedFrom: initialPosition,
@@ -31,12 +48,14 @@ export default function RaceResults({ driverList, setRaceResults }) {
     });
   }
 
-  function onDragOver(event) {
+  function onDragOver(event: React.DragEvent) {
     event.preventDefault();
 
     let newList = dragAndDrop.originalOrder;
     const draggedFrom = dragAndDrop.draggedFrom;
-    const draggedTo = Number(event.currentTarget.dataset.position);
+    const draggedTo = Number(
+      (event?.currentTarget as HTMLTableRowElement)?.dataset.position
+    );
     const itemDragged = newList[draggedFrom];
     const remainingItems = newList.filter(
       (item, index) => index !== draggedFrom
@@ -68,8 +87,15 @@ export default function RaceResults({ driverList, setRaceResults }) {
     });
   }
 
-  function getTeamByName(name) {
-    return constructorData.find((constructor) => constructor.name === name);
+  function getConstructorColor(driver: DriverResult) {
+    const driverData = DRIVER_DATA.find(
+      (driverData) => driver.name === driverData.name
+    );
+    const teamName = driverData?.team || "";
+    const constructor = CONSTRUCTOR_DATA.find(
+      (constructorData) => constructorData.name === teamName
+    );
+    return constructor?.color || "#fff";
   }
 
   return (
@@ -86,8 +112,8 @@ export default function RaceResults({ driverList, setRaceResults }) {
               onDrop={onDrop}
               data-position={index}
               style={{
-                backgroundColor: `${getTeamByName(driver.team).color}50`,
-                border: `2px solid ${getTeamByName(driver.team).color}`,
+                backgroundColor: `${getConstructorColor(driver)}50`,
+                border: `2px solid ${getConstructorColor(driver)}`,
               }}
             >
               <td>
