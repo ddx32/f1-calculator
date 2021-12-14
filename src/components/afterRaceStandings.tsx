@@ -4,8 +4,13 @@ import {
 } from "../services/pointsCalculations";
 import { drivers, constructors } from "../services/standings";
 import getTitleChance from "../services/getTitleChance";
+import {
+  ConstructorEntry,
+  DriverEntry,
+  DriverResult,
+} from "../constants/types";
 
-function getPositionChange(changeValue) {
+function getPositionChange(changeValue: number) {
   if (changeValue === 0) {
     return;
   }
@@ -33,12 +38,15 @@ function getPositionChange(changeValue) {
   );
 }
 
-function getDriversPositionChange(driver, index) {
+function getDriversPositionChange(driver: DriverEntry, index: number) {
   const changeValue = getDriversChampionshipPositionChange(driver, index);
   return getPositionChange(changeValue);
 }
 
-function getConstructorsPositionChange(constructor, raceResults) {
+function getConstructorsPositionChange(
+  constructor: ConstructorEntry,
+  raceResults: DriverResult[]
+) {
   const changeValue = getConstructorsChampionshipPositionChange(
     constructor,
     raceResults
@@ -46,7 +54,11 @@ function getConstructorsPositionChange(constructor, raceResults) {
   return getPositionChange(changeValue);
 }
 
-export default function AfterRaceStandings({ raceResults }) {
+export default function AfterRaceStandings({
+  raceResults,
+}: {
+  raceResults: DriverResult[];
+}) {
   const driverStandings = drivers.getStandingsAfterNextRound(raceResults);
   const constructorStandings =
     constructors.getStandingsAfterNextRound(raceResults);
