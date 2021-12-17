@@ -30,7 +30,7 @@ export function getDriversChampionshipPositionChange(
 export function getConstructorsChampionshipPositionChange(
   constructor: ConstructorEntry,
   raceResults: DriverResult[]
-) {
+): number {
   const previousStandings = constructors.getCurrentStandings();
   const currentStandings = constructors.getStandingsAfterNextRound(raceResults);
   const getConstructorPosition = (searchedArray: ConstructorEntry) =>
