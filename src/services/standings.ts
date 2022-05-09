@@ -3,6 +3,7 @@ import {
   POINTS_PER_POSITION,
   ROUNDS_TO_GO,
   FASTEST_LAP_POINTS,
+  SPRINT_RACES_TO_GO,
 } from "../constants/championshipRoundsData";
 import { getPointsPerRace } from "./pointsCalculations";
 
@@ -27,11 +28,13 @@ function sortPositions<T extends Entry>(entrants: T[]) {
 
 function getDriverMaximumResults(
   driver: DriverEntry,
-  roundsToGo: number
+  roundsToGo: number,
+  sprintRacesToGo: number
 ): DriverEntry {
   const maximumPoints =
     driver.points +
-    roundsToGo * (POINTS_PER_POSITION.fullGrandPrix[0] + FASTEST_LAP_POINTS);
+    roundsToGo * (POINTS_PER_POSITION.fullGrandPrix[0] + FASTEST_LAP_POINTS) +
+    sprintRacesToGo * POINTS_PER_POSITION.sprintRace[0];
   return {
     ...driver,
     maximumPoints,
@@ -58,7 +61,8 @@ function reduceResultsToDriverData(
     };
     const updatedMaxResultDriverEntry = getDriverMaximumResults(
       updatedPointsDriverEntry,
-      ROUNDS_TO_GO - 1
+      ROUNDS_TO_GO - 1,
+      SPRINT_RACES_TO_GO - 1
     );
     acc.push(updatedMaxResultDriverEntry);
   }
@@ -68,7 +72,7 @@ function reduceResultsToDriverData(
 export const drivers = {
   getCurrentStandings: function () {
     const drivers = DRIVER_DATA.map((driver) =>
-      getDriverMaximumResults(driver, ROUNDS_TO_GO)
+      getDriverMaximumResults(driver, ROUNDS_TO_GO, SPRINT_RACES_TO_GO)
     );
     return sortPositions(drivers);
   },
@@ -99,14 +103,17 @@ function getConstructorsData(driverList: DriverEntry[]): ConstructorEntry[] {
 
 function getConstructorsMaximumResult(
   constructor: ConstructorEntry,
-  roundsToGo: number
+  roundsToGo: number,
+  sprintRacesToGo: number
 ): ConstructorEntry {
   const maximumPoints =
     constructor.points +
     roundsToGo *
       (POINTS_PER_POSITION.fullGrandPrix[0] +
         POINTS_PER_POSITION.fullGrandPrix[1] +
-        FASTEST_LAP_POINTS);
+        FASTEST_LAP_POINTS) +
+    sprintRacesToGo *
+      (POINTS_PER_POSITION.sprintRace[0] + POINTS_PER_POSITION.sprintRace[1]);
   return {
     ...constructor,
     maximumPoints,
@@ -118,7 +125,11 @@ export const constructors = {
   getCurrentStandings: function (): ConstructorEntry[] {
     const constructorsData = getConstructorsData(DRIVER_DATA).map(
       (constructor) => {
-        return getConstructorsMaximumResult(constructor, ROUNDS_TO_GO);
+        return getConstructorsMaximumResult(
+          constructor,
+          ROUNDS_TO_GO,
+          SPRINT_RACES_TO_GO
+        );
       }
     );
     return sortPositions(constructorsData);
@@ -127,7 +138,11 @@ export const constructors = {
     const updatedDriverData = drivers.getStandingsAfterNextRound(raceResults);
     const updatedConstructorData = getConstructorsData(updatedDriverData).map(
       (constructor) => {
-        return getConstructorsMaximumResult(constructor, ROUNDS_TO_GO - 1);
+        return getConstructorsMaximumResult(
+          constructor,
+          ROUNDS_TO_GO - 1,
+          SPRINT_RACES_TO_GO - 1
+        );
       }
     );
     return sortPositions(updatedConstructorData);
