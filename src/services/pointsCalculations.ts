@@ -1,4 +1,9 @@
-import { POINTS_PER_POSITION } from "../constants/championshipRoundsData";
+import {
+  FASTEST_LAP_POINTS,
+  POINTS_PER_POSITION,
+  ROUNDS_TO_GO,
+  SPRINT_RACES_TO_GO,
+} from "../constants/championshipRoundsData";
 import { drivers, constructors } from "./standings";
 
 import type {
@@ -38,4 +43,18 @@ export function getConstructorsChampionshipPositionChange(
   const prevPosition = previousStandings.findIndex(getConstructorPosition);
   const newPosition = currentStandings.findIndex(getConstructorPosition);
   return prevPosition - newPosition;
+}
+
+export function getRemainingDriverPoints(position: number = 1): number {
+  const fastestLap = position === 1 ? FASTEST_LAP_POINTS : 0;
+  const gpPoints =
+    ROUNDS_TO_GO *
+    (POINTS_PER_POSITION.fullGrandPrix[position - 1] + fastestLap);
+  const sprintPoints =
+    SPRINT_RACES_TO_GO * POINTS_PER_POSITION.sprintRace[position - 1];
+  return gpPoints + sprintPoints;
+}
+
+export function getRemainingConstructorsPoints(): number {
+  return getRemainingDriverPoints(1) + getRemainingDriverPoints(2);
 }
