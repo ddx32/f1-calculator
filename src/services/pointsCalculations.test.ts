@@ -1,78 +1,16 @@
 import {
-  getConstructorsChampionshipPositionChange,
-  getDriversChampionshipPositionChange,
   getGainedPoints,
   getPointsPerRace,
+  getPositionChange,
   getRemainingDriverPoints,
   getRemainingConstructorsPoints,
 } from "./pointsCalculations";
 
-jest.mock("./standings", () => ({
-  drivers: {
-    getCurrentStandings: () => [
-      {
-        name: "Hemis Lewinton",
-        points: 100,
-        wins: 1,
-        team: "Nercebes",
-      },
-      {
-        name: "Vax Mercslappen",
-        points: 100,
-        wins: 0,
-        team: "Pink Cow",
-      },
-      {
-        name: "Baltteri Vottas",
-        points: 81,
-        wins: 0,
-        team: "Nercebes",
-      },
-      {
-        name: "Pernio Serez",
-        points: 80,
-        wins: 0,
-        team: "Pink Cow",
-      },
-    ],
-  },
-  constructors: {
-    getCurrentStandings: () => [
-      {
-        name: "Nercebes",
-        points: 100,
-        wins: 5,
-      },
-      {
-        name: "Pink Cow",
-        points: 80,
-        wins: 3,
-      },
-    ],
-    getStandingsAfterNextRound: () => [
-      {
-        name: "Pink Cow",
-        points: 101,
-        wins: 4,
-      },
-      {
-        name: "Nercebes",
-        points: 100,
-        wins: 5,
-      },
-    ],
-  },
-}));
-
-jest.mock("../constants/championshipRoundsData", () => ({
-  ROUNDS_TO_GO: 4,
-  SPRINT_RACES_TO_GO: 2,
-  POINTS_PER_POSITION: {
-    fullGrandPrix: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1],
-    sprintRace: [8, 7, 6, 5, 4, 3, 2, 1],
-  },
-  FASTEST_LAP_POINTS: 1,
-}));
+import {
+  driverStandings,
+  constructorStandings,
+} from "../../fixtures/standings";
+import { raceSchedule } from "../../fixtures/raceSchedule";
 
 test("returns points for a race result", () => {
   expect(getPointsPerRace(0, false)).toBe(25);
@@ -85,46 +23,44 @@ test("returns string with gained points", () => {
 });
 
 test("returns change in drivers championship", () => {
-  const driverEntry = {
-    name: "Vax Mercslappen",
-    points: 100,
-    wins: 0,
-    team: "Pink Cow",
-    number: 1,
-    abbreviation: "VER",
+  const standing = {
+    position: 2,
+    positionText: "2",
+    points: 125,
+    wins: 4,
+    Driver: {
+      driverId: "max_verstappen",
+    },
   };
 
-  expect(getDriversChampionshipPositionChange(driverEntry, 0)).toBe(1);
-  expect(getDriversChampionshipPositionChange(driverEntry, 3)).toBe(-2);
+  expect(getPositionChange(standing, driverStandings)).toBe(-1);
 });
 
 test("returns change in constructors championship", () => {
-  const raceResults = [
-    {
-      name: "Hemis Lewinton",
-      fastestLap: true,
+  const standing = {
+    position: 3,
+    positionText: "3",
+    points: 235,
+    wins: 5,
+    Constructor: {
+      constructorId: "red_bull",
+      url: "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+      name: "Red Bull",
+      nationality: "Austrian",
     },
-    {
-      name: "Vax Mercslappen",
-      fastestLap: false,
-    },
-  ];
-  const constructorEntry = { name: "Nercebes", points: 100, wins: 5 };
+  };
 
-  const positionChange = getConstructorsChampionshipPositionChange(
-    constructorEntry,
-    raceResults
-  );
-
-  expect(positionChange).toBe(-1);
+  expect(getPositionChange(standing, constructorStandings)).toBe(-2);
 });
 
 test("returns maximum remaining WDC points", () => {
-  expect(getRemainingDriverPoints()).toBe(120);
-  expect(getRemainingDriverPoints(1)).toBe(120);
-  expect(getRemainingDriverPoints(2)).toBe(86);
+  expect(getRemainingDriverPoints(raceSchedule, 1)).toBe(112);
+  expect(getRemainingDriverPoints(raceSchedule, 2)).toBe(86);
+  expect(getRemainingDriverPoints(raceSchedule, 4)).toBe(26);
+  expect(getRemainingDriverPoints(raceSchedule, 2, 2)).toBe(61);
 });
 
 test("returns maximum remaining WCC points", () => {
-  expect(getRemainingConstructorsPoints()).toBe(206);
+  expect(getRemainingConstructorsPoints(raceSchedule, 1)).toBe(191);
+  expect(getRemainingConstructorsPoints(raceSchedule, 4)).toBe(44);
 });

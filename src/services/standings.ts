@@ -1,20 +1,9 @@
-import DRIVER_DATA from "../constants/driverData";
-import {
-  POINTS_PER_POSITION,
-  ROUNDS_TO_GO,
-  FASTEST_LAP_POINTS,
-  SPRINT_RACES_TO_GO,
-} from "../constants/championshipRoundsData";
 import { getPointsPerRace } from "./pointsCalculations";
 
-import type {
-  Entry,
-  DriverEntry,
-  ConstructorEntry,
-  DriverResult,
-} from "../constants/types";
+import { IStanding, IRaceResult, RaceTypes } from "../constants/types";
+import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
 
-function sortPositions<T extends Entry>(entrants: T[]) {
+function sortPositions<T extends IStanding>(entrants: T[]) {
   return entrants.sort((a, b) => {
     const pointsComparison = b.points - a.points;
 
@@ -26,125 +15,53 @@ function sortPositions<T extends Entry>(entrants: T[]) {
   });
 }
 
-function getDriverMaximumResults(
-  driver: DriverEntry,
-  roundsToGo: number,
-  sprintRacesToGo: number
-): DriverEntry {
-  const maximumPoints =
-    driver.points +
-    roundsToGo * (POINTS_PER_POSITION.fullGrandPrix[0] + FASTEST_LAP_POINTS) +
-    sprintRacesToGo * POINTS_PER_POSITION.sprintRace[0];
-  return {
-    ...driver,
-    maximumPoints,
-    maximumWins: driver.wins + roundsToGo,
-  };
-}
+export function getStandingsAfterRounds<T extends IStanding>(
+  currentStandings: T[],
+  raceResultsList: IRaceResult[][],
+  raceType = RaceTypes.GRAND_PRIX
+) {
+  const resultReducer = (
+    standings: T[],
+    result: IRaceResult,
+    position: number
+  ) => {
+    const standingIndex = standings.findIndex((standing) => {
+      if (isDriverStanding(standing)) {
+        return standing.Driver.driverId === result.Driver.driverId;
+      }
 
-function reduceResultsToDriverData(
-  acc: DriverEntry[],
-  current: DriverResult,
-  index: number
-): DriverEntry[] {
-  const originalDriverEntry = DRIVER_DATA.find(
-    (driver) => driver.name === current.name
-  );
-  const gainedPoints = getPointsPerRace(index, current.fastestLap);
-  const gainedWins = index === 0 ? 1 : 0;
+      if (isConstructorStanding(standing)) {
+        return (
+          standing.Constructor.constructorId ===
+          result.Constructors[0].constructorId
+        );
+      }
 
-  if (originalDriverEntry) {
-    const updatedPointsDriverEntry = {
-      ...originalDriverEntry,
-      points: originalDriverEntry.points + gainedPoints,
-      wins: originalDriverEntry.wins + gainedWins,
+      return false;
+    });
+
+    const points = getPointsPerRace(position, result.fastestLap, raceType);
+
+    const updatedStandings = [...standings];
+    updatedStandings[standingIndex] = {
+      ...updatedStandings[standingIndex],
+      points: standings[standingIndex].points + points,
+      wins:
+        position === 0
+          ? standings[standingIndex].wins + 1
+          : standings[standingIndex].wins,
     };
-    const updatedMaxResultDriverEntry = getDriverMaximumResults(
-      updatedPointsDriverEntry,
-      ROUNDS_TO_GO - 1,
-      SPRINT_RACES_TO_GO - 1
-    );
-    acc.push(updatedMaxResultDriverEntry);
-  }
-  return acc;
-}
-
-export const drivers = {
-  getCurrentStandings: function () {
-    const drivers = DRIVER_DATA.map((driver) =>
-      getDriverMaximumResults(driver, ROUNDS_TO_GO, SPRINT_RACES_TO_GO)
-    );
-    return sortPositions(drivers);
-  },
-  getStandingsAfterNextRound: function (raceResults: DriverResult[]) {
-    const updatedStandings = raceResults.reduce(reduceResultsToDriverData, []);
-    return sortPositions(updatedStandings);
-  },
-};
-
-function getConstructorsData(driverList: DriverEntry[]): ConstructorEntry[] {
-  return driverList.reduce((acc: ConstructorEntry[], current) => {
-    const teamIndex = acc.findIndex((team) => team.name === current.team);
-
-    if (teamIndex < 0) {
-      acc.push({
-        name: current.team,
-        points: current.points,
-        wins: current.wins,
-      });
-    } else {
-      acc[teamIndex].points += current.points;
-      acc[teamIndex].wins += current.wins;
-    }
-
-    return acc;
-  }, []);
-}
-
-function getConstructorsMaximumResult(
-  constructor: ConstructorEntry,
-  roundsToGo: number,
-  sprintRacesToGo: number
-): ConstructorEntry {
-  const maximumPoints =
-    constructor.points +
-    roundsToGo *
-      (POINTS_PER_POSITION.fullGrandPrix[0] +
-        POINTS_PER_POSITION.fullGrandPrix[1] +
-        FASTEST_LAP_POINTS) +
-    sprintRacesToGo *
-      (POINTS_PER_POSITION.sprintRace[0] + POINTS_PER_POSITION.sprintRace[1]);
-  return {
-    ...constructor,
-    maximumPoints,
-    maximumWins: constructor.wins + roundsToGo,
+    return updatedStandings;
   };
-}
 
-export const constructors = {
-  getCurrentStandings: function (): ConstructorEntry[] {
-    const constructorsData = getConstructorsData(DRIVER_DATA).map(
-      (constructor) => {
-        return getConstructorsMaximumResult(
-          constructor,
-          ROUNDS_TO_GO,
-          SPRINT_RACES_TO_GO
-        );
-      }
-    );
-    return sortPositions(constructorsData);
-  },
-  getStandingsAfterNextRound: function (raceResults: DriverResult[]) {
-    const updatedDriverData = drivers.getStandingsAfterNextRound(raceResults);
-    const updatedConstructorData = getConstructorsData(updatedDriverData).map(
-      (constructor) => {
-        return getConstructorsMaximumResult(
-          constructor,
-          ROUNDS_TO_GO - 1,
-          SPRINT_RACES_TO_GO - 1
-        );
-      }
-    );
-    return sortPositions(updatedConstructorData);
-  },
-};
+  const finalStandings = raceResultsList.reduce((standings, raceResults) => {
+    return raceResults.reduce(resultReducer, standings);
+  }, currentStandings);
+
+  const sortedPositions = sortPositions(finalStandings);
+  return sortedPositions.map((standing, index) => ({
+    ...standing,
+    position: index + 1,
+    positionText: (index + 1).toString(),
+  }));
+}

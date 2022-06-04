@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { getGainedPoints } from "../services/pointsCalculations";
 import CONSTRUCTOR_DATA from "../constants/constructorsData";
-import DRIVER_DATA from "../constants/driverData";
 
-import type { DriverResult } from "../constants/types";
+import type { IRaceResult, IRaceTable } from "../constants/types";
 
 const initialDnDState: {
   draggedFrom: number;
   draggedTo: number;
   isDragging: boolean;
-  originalOrder: DriverResult[];
-  updatedOrder: DriverResult[];
+  originalOrder: IRaceResult[];
+  updatedOrder: IRaceResult[];
 } = {
   draggedFrom: 0,
   draggedTo: 0,
@@ -20,18 +19,22 @@ const initialDnDState: {
 };
 
 export default function RaceResults({
-  driverList,
+  raceResults,
   setRaceResults,
+  raceSchedule,
+  currentRound,
 }: {
-  driverList: DriverResult[];
-  setRaceResults(results: DriverResult[]): void;
+  raceResults: IRaceResult[];
+  setRaceResults(results: IRaceResult[]): void;
+  raceSchedule: IRaceTable;
+  currentRound: number;
 }) {
   function setFastestLap(index: number) {
-    const updatedDriverList = driverList.map((driver, currentIndex) => ({
-      ...driver,
+    const updatedRaceResults = raceResults.map((raceResult, currentIndex) => ({
+      ...raceResult,
       fastestLap: index === currentIndex,
     }));
-    setRaceResults(updatedDriverList);
+    setRaceResults(updatedRaceResults);
   }
 
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
@@ -44,7 +47,7 @@ export default function RaceResults({
       ...dragAndDrop,
       draggedFrom: initialPosition,
       isDragging: true,
-      originalOrder: driverList,
+      originalOrder: raceResults,
     });
   }
 
@@ -87,23 +90,26 @@ export default function RaceResults({
     });
   }
 
-  function getConstructorColor(driver: DriverResult) {
-    const driverData = DRIVER_DATA.find(
-      (driverData) => driver.name === driverData.name
+  function getConstructorColor(raceResult: IRaceResult) {
+    const constructorMeta = CONSTRUCTOR_DATA.find(
+      (constructorData) =>
+        constructorData.constructorId ===
+        raceResult.Constructors[0].constructorId
     );
-    const teamName = driverData?.team || "";
-    const constructor = CONSTRUCTOR_DATA.find(
-      (constructorData) => constructorData.name === teamName
-    );
-    return constructor?.color || "#fff";
+    return constructorMeta?.color || "#fff";
   }
+
+  const nextRound = raceSchedule.Races[currentRound];
 
   return (
     <div>
       <h2>Next race results</h2>
+      <p style={{ color: "white" }}>
+        Next round: #{nextRound.round} {nextRound.raceName}
+      </p>
       <table className="race-results">
         <tbody>
-          {driverList.map((driver, index) => (
+          {raceResults.map((raceResult, index) => (
             <tr
               key={index}
               draggable="true"
@@ -112,23 +118,25 @@ export default function RaceResults({
               onDrop={onDrop}
               data-position={index}
               style={{
-                backgroundColor: `${getConstructorColor(driver)}50`,
-                border: `2px solid ${getConstructorColor(driver)}`,
+                backgroundColor: `${getConstructorColor(raceResult)}50`,
+                border: `2px solid ${getConstructorColor(raceResult)}`,
               }}
             >
               <td>
                 <label className="fastestLapContainer">
                   <input
                     type="checkbox"
-                    checked={driver.fastestLap}
+                    checked={raceResult.fastestLap}
                     onChange={() => setFastestLap(index)}
                   />
                   <span className="checkmark" />
                 </label>
               </td>
               <td>P{index + 1}</td>
-              <td className="driver-name">{driver.name}</td>
-              <td>{getGainedPoints(index, driver.fastestLap)}</td>
+              <td className="driver-name">
+                {raceResult.Driver.givenName} {raceResult.Driver.familyName}
+              </td>
+              <td>{getGainedPoints(index, raceResult.fastestLap)}</td>
             </tr>
           ))}
         </tbody>

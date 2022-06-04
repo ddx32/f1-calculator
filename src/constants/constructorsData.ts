@@ -1,42 +1,42 @@
 const CONSTRUCTOR_DATA = [
   {
-    name: "Mercedes",
+    constructorId: "mercedes",
     color: "#00827D",
   },
   {
-    name: "Red Bull",
+    constructorId: "red_bull",
     color: "#001061",
   },
   {
-    name: "McLaren",
+    constructorId: "mclaren",
     color: "#FF9800",
   },
   {
-    name: "Ferrari",
+    constructorId: "ferrari",
     color: "#D8291B",
   },
   {
-    name: "AlphaTauri",
+    constructorId: "alphatauri",
     color: "#1f2e49",
   },
   {
-    name: "Alpine",
+    constructorId: "alpine",
     color: "#023E9B",
   },
   {
-    name: "Aston Martin",
+    constructorId: "aston_martin",
     color: "#00584F",
   },
   {
-    name: "Williams",
+    constructorId: "williams",
     color: "#00A0DE",
   },
   {
-    name: "Alfa Romeo",
+    constructorId: "alfa",
     color: "#720700",
   },
   {
-    name: "Haas",
+    constructorId: "haas",
     color: "#e3e3e3",
   },
 ];

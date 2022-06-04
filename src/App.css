@@ -102,8 +102,6 @@ td {
 
 .help-text {
   color: #fff;
-  max-width: 1400px;
-  margin: auto;
   display: flex;
   gap: 5rem;
 }
@@ -114,4 +112,8 @@ td {
 
 .help-text a:hover {
   color: #c7c7c7;
+}
+
+.potentialTitle {
+	filter: grayscale(1);
 }
