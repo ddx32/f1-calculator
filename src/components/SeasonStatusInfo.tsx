@@ -1,4 +1,4 @@
-export default function seasonStatusInfo({
+export default function SeasonStatusInfo({
   currentSeason,
   remainingDriverPoints,
   remainingConstructorPoints,

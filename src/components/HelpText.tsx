@@ -10,11 +10,11 @@ export default function HelpText() {
           race.
         </p>
         <p>
-          A "🏆" icon signifies a mathematical chance of winning the
-          championship title. If only one driver has this icon, the title is
-          secured. This currently only works for the WDC and the final
-          calculation only takes into account the amount of points and the
-          amount of wins.
+          A "🏆" icon indicates that the driver or constructor has already
+          secured the championship title. If multiple drivers or constructors
+          have a greyed out trophy icon next to them, they are still in the
+          title fight. The final calculation only takes into account the amount
+          of points and the amount of wins.
         </p>
       </div>
 
