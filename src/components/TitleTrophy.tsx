@@ -1,5 +1,9 @@
-import { IStanding, TitleChance } from "../constants/types";
 import React from "react";
+import styled from "styled-components";
+
+import { ReactComponent as TrophyPotentialIcon } from "../svg/trophy-potential.svg";
+import { ReactComponent as TrophySecuredIcon } from "../svg/trophy-secured.svg";
+import { IStanding, TitleChance } from "../types/api";
 
 function getDescription(titleChance: TitleChance): string {
   switch (titleChance) {
@@ -12,22 +16,28 @@ function getDescription(titleChance: TitleChance): string {
   }
 }
 
+const TrophyContainer = styled.div`
+  svg {
+    width: 1rem;
+  }
+`;
+
 export function TitleTrophy<T extends IStanding>({
   standing,
 }: {
   standing: T;
 }) {
   return standing.titleChance ? (
-    <span
+    <TrophyContainer
       className={
         standing.titleChance === TitleChance.POTENTIAL ? "potentialTitle" : ""
       }
       title={getDescription(standing.titleChance)}
     >
-      {(standing.titleChance === TitleChance.POTENTIAL ||
-        standing.titleChance === TitleChance.SECURED) &&
-        "🏆"}
-      {standing.titleChance === TitleChance.NONE && "–"}
-    </span>
+      {standing.titleChance === TitleChance.POTENTIAL && (
+        <TrophyPotentialIcon />
+      )}
+      {standing.titleChance === TitleChance.SECURED && <TrophySecuredIcon />}
+    </TrophyContainer>
   ) : null;
 }

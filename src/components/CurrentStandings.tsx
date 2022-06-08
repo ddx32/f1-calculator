@@ -1,11 +1,12 @@
 import React from "react";
+
+import { getStandingsWithTitleChance } from "../services/getTitleChance";
 import {
   IConstructorStanding,
   IDriverStanding,
   IRaceTable,
   IStandingsList,
-} from "../constants/types";
-import { getStandingsWithTitleChance } from "../services/getTitleChance";
+} from "../types/api";
 import { TitleTrophy } from "./TitleTrophy";
 
 interface Props {

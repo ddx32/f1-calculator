@@ -1,14 +1,15 @@
+import React from "react";
+
+import { getStandingsWithTitleChance } from "../services/getTitleChance";
+import { getPositionChange } from "../services/pointsCalculations";
+import { getStandingsAfterRounds } from "../services/standings";
 import {
   IConstructorStanding,
   IDriverStanding,
   IRaceResult,
   IRaceTable,
-} from "../constants/types";
-import { getStandingsAfterRounds } from "../services/standings";
-import { getPositionChange } from "../services/pointsCalculations";
-import { getStandingsWithTitleChance } from "../services/getTitleChance";
+} from "../types/api";
 import { TitleTrophy } from "./TitleTrophy";
-import React from "react";
 
 function PositionChange({ changeValue }: { changeValue: number }) {
   if (changeValue === 0) {

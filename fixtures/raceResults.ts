@@ -1,4 +1,4 @@
-import { IRaceResult } from "../src/constants/types";
+import { IRaceResult } from "../src/types/api";
 
 export const raceResults: IRaceResult[][] = [
   [

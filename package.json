@@ -10,9 +10,11 @@
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.25",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.0",
+    "styled-components": "^5.3.5",
     "typescript": "^4.5.5",
     "web-vitals": "^1.0.1"
   },
@@ -21,12 +23,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -41,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.5.0"
   }
 }

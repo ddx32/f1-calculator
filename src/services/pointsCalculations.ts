@@ -1,8 +1,7 @@
-import { FASTEST_LAP_POINTS, POINTS_PER_POSITION } from "../constants/scoring";
-
-import { IRaceTable, IStanding, RaceTypes } from "../constants/types";
-import { getRemainingRaces } from "./getRemainingRaces";
 import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
+import { FASTEST_LAP_POINTS, POINTS_PER_POSITION } from "../constants/scoring";
+import { IRaceTable, IStanding, RaceTypes } from "../types/api";
+import { getRemainingRaces } from "./getRemainingRaces";
 
 export function getPointsPerRace(
   index: number,

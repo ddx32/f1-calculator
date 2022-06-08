@@ -1,4 +1,4 @@
-import { IRaceTable } from "../src/constants/types";
+import { IRaceTable } from "../src/types/api";
 
 export const raceSchedule: IRaceTable = {
   season: 2022,

@@ -1,7 +1,7 @@
 import { getStandingsWithTitleChance } from "./getTitleChance";
 import { driverStandings } from "../../fixtures/standings";
 import { raceSchedule } from "../../fixtures/raceSchedule";
-import { TitleChance } from "../constants/types";
+import { TitleChance } from "../types/api";
 
 test("should calculate title chance", () => {
   expect(

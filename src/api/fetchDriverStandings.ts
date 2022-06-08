@@ -1,5 +1,5 @@
-import { IStandingsList, IDriverStanding } from "../constants/types";
 import { BASE_URL, PATH } from "../constants/apiPaths";
+import { IDriverStanding, IStandingsList } from "../types/api";
 
 export function getDriverStandings(
   responseData: any

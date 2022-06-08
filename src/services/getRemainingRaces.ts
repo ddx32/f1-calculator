@@ -1,4 +1,4 @@
-import { IRace, IRaceTable } from "../constants/types";
+import { IRace, IRaceTable } from "../types/api";
 
 export function getRemainingRaces(
   raceSchedule: IRaceTable,

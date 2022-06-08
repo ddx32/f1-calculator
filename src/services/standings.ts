@@ -1,7 +1,6 @@
-import { getPointsPerRace } from "./pointsCalculations";
-
-import { IStanding, IRaceResult, RaceTypes } from "../constants/types";
 import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
+import { IRaceResult, IStanding, RaceTypes } from "../types/api";
+import { getPointsPerRace } from "./pointsCalculations";
 
 function sortPositions<T extends IStanding>(entrants: T[]) {
   return entrants.sort((a, b) => {
