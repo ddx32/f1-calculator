@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { IConstructorStanding, IStandingsList } from "../constants/types";
+
 import { BASE_URL, PATH } from "../constants/apiPaths";
+import { IConstructorStanding, IStandingsList } from "../types/api";
 
 function getConstructorStandings(
   responseData: any

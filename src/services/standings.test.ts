@@ -1,7 +1,7 @@
 import { getStandingsAfterRounds } from "./standings";
 import { driverStandings } from "../../fixtures/standings";
 import { raceResults } from "../../fixtures/raceResults";
-import { RaceTypes } from "../constants/types";
+import { RaceTypes } from "../types/api";
 
 test("should calculate standings after a race (races)", () => {
   const afterRaceStandings = getStandingsAfterRounds(

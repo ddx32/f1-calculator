@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { getGainedPoints } from "../services/pointsCalculations";
-import CONSTRUCTOR_DATA from "../constants/constructorsData";
 
-import type { IRaceResult, IRaceTable } from "../constants/types";
+import CONSTRUCTOR_DATA from "../constants/constructorsData";
+import { getGainedPoints } from "../services/pointsCalculations";
+import type { IRaceResult, IRaceTable } from "../types/api";
 
 const initialDnDState: {
   draggedFrom: number;
@@ -96,7 +96,7 @@ export default function RaceResults({
         constructorData.constructorId ===
         raceResult.Constructors[0].constructorId
     );
-    return constructorMeta?.color || "#fff";
+    return constructorMeta?.primaryColor || "#fff";
   }
 
   const nextRound = raceSchedule.Races[currentRound];
@@ -104,7 +104,7 @@ export default function RaceResults({
   return (
     <div>
       <h2>Next race results</h2>
-      <p style={{ color: "white" }}>
+      <p>
         Next round: #{nextRound.round} {nextRound.raceName}
       </p>
       <table className="race-results">
@@ -117,10 +117,6 @@ export default function RaceResults({
               onDragOver={onDragOver}
               onDrop={onDrop}
               data-position={index}
-              style={{
-                backgroundColor: `${getConstructorColor(raceResult)}50`,
-                border: `2px solid ${getConstructorColor(raceResult)}`,
-              }}
             >
               <td>
                 <label className="fastestLapContainer">

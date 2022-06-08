@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { IStandingsList } from "../constants/types";
+
+import { IStandingsList } from "../types/api";
 import { fetchDriverStandings } from "./fetchDriverStandings";
 
 export function useDriverStandings() {
