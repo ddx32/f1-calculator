@@ -6,6 +6,7 @@ import {
 } from "../types/api";
 import { StandingsType } from "../types/app";
 import { Standings } from "./Standings/Standings";
+import { UpcomingRaces } from "./UpcomingRaces/UpcomingRaces";
 
 type Props = {
   standingsList: IStandingsList;
@@ -27,6 +28,12 @@ export function LayoutContainer(props: Props) {
           driverStandings={props.driverStandings}
           constructorStandings={props.constructorStandings}
           standingsType={StandingsType.CURRENT}
+        />
+
+        <UpcomingRaces
+          raceSchedule={props.raceSchedule}
+          driverStandings={props.driverStandings}
+          round={props.standingsList.round}
         />
       </div>
     </div>
