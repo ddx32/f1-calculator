@@ -1,6 +1,6 @@
+import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
 import { FASTEST_LAP_POINTS, POINTS_PER_POSITION } from "../constants/scoring";
-import { IRaceTable, IStanding, TitleChance } from "../constants/types";
-import { isDriverStanding, isConstructorStanding } from "../common/typeGuards";
+import { IRaceTable, IStanding, TitleChance } from "../types/api";
 
 function getRemainingEvents(raceSchedule: IRaceTable, currentRound: number) {
   const eventsRemaining = raceSchedule.Races.filter(

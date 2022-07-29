@@ -1,4 +1,4 @@
-import { IConstructorStanding, IDriverStanding } from "../constants/types";
+import { IConstructorStanding, IDriverStanding } from "../types/api";
 
 export function isDriverStanding(standing: any): standing is IDriverStanding {
   return standing.Driver !== undefined;

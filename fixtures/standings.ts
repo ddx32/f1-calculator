@@ -1,4 +1,4 @@
-import { IConstructorStanding, IDriverStanding } from "../src/constants/types";
+import { IConstructorStanding, IDriverStanding } from "../src/types/api";
 
 export const driverStandings: IDriverStanding[] = [
   {

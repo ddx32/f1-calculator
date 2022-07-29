@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { IRaceTable } from "../constants/types";
+
 import { BASE_URL, PATH } from "../constants/apiPaths";
+import { IRaceTable } from "../types/api";
 
 export function getRaceSchedule(responseData: any): IRaceTable | undefined {
   if (!Array.isArray(responseData?.MRData?.RaceTable?.Races)) {
