@@ -31,7 +31,7 @@ function getRemainingDriverPoints(
     sprintsRemaining * POINTS_PER_POSITION.sprintRace[bestPosition - 1];
   const fastestLapPointsRemaining =
     bestPosition === 1
-      ? grandsPrixRemaining * grandsPrixPointsRemaining * FASTEST_LAP_POINTS
+      ? grandsPrixRemaining * FASTEST_LAP_POINTS
       : 0;
 
   return (

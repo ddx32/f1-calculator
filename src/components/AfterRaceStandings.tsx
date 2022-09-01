@@ -43,11 +43,13 @@ export default function AfterRaceStandings({
   currentDriverStandings,
   currentConstructorStandings,
   raceSchedule,
+  currentRound
 }: {
   raceResults: IRaceResult[];
   currentDriverStandings: IDriverStanding[];
   currentConstructorStandings: IConstructorStanding[];
   raceSchedule: IRaceTable;
+  currentRound: number;
 }) {
   const allRaceResults = [raceResults];
   const driverStandings = getStandingsAfterRounds(
@@ -57,7 +59,7 @@ export default function AfterRaceStandings({
   const driverStandingsWithTitleChance = getStandingsWithTitleChance(
     driverStandings,
     raceSchedule,
-    allRaceResults.length
+    currentRound
   );
 
   const constructorStandings = getStandingsAfterRounds(
@@ -67,7 +69,7 @@ export default function AfterRaceStandings({
   const constructorStandingsWithTitleChance = getStandingsWithTitleChance(
     constructorStandings,
     raceSchedule,
-    allRaceResults.length
+    currentRound
   );
 
   return (
