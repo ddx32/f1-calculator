@@ -61,6 +61,7 @@ function App() {
                   constructorStandings.ConstructorStandings
                 }
                 raceSchedule={raceSchedule}
+                currentRound={driverStandings.round + 1}
               />
             </div>
             <div style={{ maxWidth: "1400px", margin: "auto" }}>
