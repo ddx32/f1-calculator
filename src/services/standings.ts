@@ -1,5 +1,6 @@
 import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
-import { IRaceResult, IStanding, RaceTypes } from "../types/api";
+import { IRaceResult, IStanding } from "../types/api";
+import { RaceType } from "../types/app";
 import { getPointsPerRace } from "./pointsCalculations";
 
 function sortPositions<T extends IStanding>(entrants: T[]) {
@@ -17,7 +18,7 @@ function sortPositions<T extends IStanding>(entrants: T[]) {
 export function getStandingsAfterRounds<T extends IStanding>(
   currentStandings: T[],
   raceResultsList: IRaceResult[][],
-  raceType = RaceTypes.GRAND_PRIX
+  raceType = RaceType.GRAND_PRIX
 ) {
   const resultReducer = (
     standings: T[],

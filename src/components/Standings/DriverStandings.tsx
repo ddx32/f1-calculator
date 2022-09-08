@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import { ReactComponent as HelmetIcon } from "../../svg/helmet.svg";
-import { IDriverStanding, IRaceTable } from "../../types/api";
+import { IDriverStanding } from "../../types/api";
+import { IRaceEvent } from "../../types/app";
 import { DriverPill } from "../common/DriverPill";
 import { TitleTrophy } from "../TitleTrophy";
 import {
@@ -16,20 +17,20 @@ import {
 
 type Props = {
   driverStandings: IDriverStanding[];
-  raceSchedule: IRaceTable;
-  round: number;
+  raceSchedule: IRaceEvent[];
+  lastRound: IRaceEvent;
 };
 
 export function DriverStandings({
   driverStandings,
   raceSchedule,
-  round,
+  lastRound,
 }: Props) {
   const [expanded, setExpanded] = useState(false);
   const fullStandings = getStandingsWithTitleChance(
     driverStandings,
     raceSchedule,
-    round
+    lastRound
   );
   const shortList = fullStandings.slice(0, 3);
 

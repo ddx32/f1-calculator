@@ -27,7 +27,7 @@ function App() {
     }
   }, [driverStandings]);
 
-  return raceSchedule &&
+  return raceSchedule.length > 0 &&
     driverStandings?.DriverStandings &&
     constructorStandings?.ConstructorStandings &&
     raceResults.length > 0 ? (

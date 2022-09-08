@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import {
-  IConstructorStanding,
-  IDriverStanding,
-  IRaceTable,
-} from "../../types/api";
-import { StandingsType } from "../../types/app";
+import { IConstructorStanding, IDriverStanding } from "../../types/api";
+import { IRaceEvent, StandingsType } from "../../types/app";
 import { SectionHeader } from "../common/SectionHeader";
 import { ConstructorStandings } from "./ConstructorStandings";
 import { DriverStandings } from "./DriverStandings";
@@ -23,41 +19,41 @@ const RoundInfo = styled.div`
 `;
 
 type Props = {
-  round: number;
   driverStandings: IDriverStanding[];
   constructorStandings: IConstructorStanding[];
-  raceSchedule: IRaceTable;
+  raceSchedule: IRaceEvent[];
+  lastRound: IRaceEvent;
   standingsType: StandingsType;
 };
 
-export function Standings(props: Props) {
-  const lastRound = props.raceSchedule.Races.find(
-    (race) => race.round === props.round
-  );
-
+export function Standings({
+  lastRound,
+  standingsType,
+  raceSchedule,
+  driverStandings,
+  constructorStandings,
+}: Props) {
   return (
     <section className="standings">
       <SectionHeader active={true}>
-        {props.standingsType === StandingsType.CURRENT && "Current standings"}
-        {props.standingsType === StandingsType.CALCULATED &&
-          "Calculated standings"}
+        {standingsType === StandingsType.CURRENT && "Current standings"}
+        {standingsType === StandingsType.CALCULATED && "Calculated standings"}
       </SectionHeader>
       <div className="standings-container">
         <RoundInfo>
           <h3 className="last-round">
-            Last Round: {lastRound?.season} {lastRound?.raceName} ({props.round}
-            /{props.raceSchedule.Races.length})
+            Last Round: {lastRound.Race.season} {lastRound.Race.raceName}
           </h3>
         </RoundInfo>
         <DriverStandings
-          driverStandings={props.driverStandings}
-          raceSchedule={props.raceSchedule}
-          round={props.round}
+          driverStandings={driverStandings}
+          raceSchedule={raceSchedule}
+          lastRound={lastRound}
         />
         <ConstructorStandings
-          constructorStandings={props.constructorStandings}
-          raceSchedule={props.raceSchedule}
-          round={props.round}
+          constructorStandings={constructorStandings}
+          raceSchedule={raceSchedule}
+          lastRound={lastRound}
         />
       </div>
     </section>

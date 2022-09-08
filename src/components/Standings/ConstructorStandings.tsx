@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import { ReactComponent as FormulaCarIcon } from "../../svg/formula_car.svg";
-import { IConstructorStanding, IRaceTable } from "../../types/api";
+import { IConstructorStanding } from "../../types/api";
+import { IRaceEvent } from "../../types/app";
 import { TitleTrophy } from "../TitleTrophy";
 import { ConstructorPill } from "./ConstructorPill";
 import {
@@ -16,20 +17,20 @@ import {
 
 type Props = {
   constructorStandings: IConstructorStanding[];
-  raceSchedule: IRaceTable;
-  round: number;
+  raceSchedule: IRaceEvent[];
+  lastRound: IRaceEvent;
 };
 
 export function ConstructorStandings({
   constructorStandings,
   raceSchedule,
-  round,
+  lastRound,
 }: Props) {
   const [expanded, setExpanded] = useState(false);
   const fullStandings = getStandingsWithTitleChance(
     constructorStandings,
     raceSchedule,
-    round
+    lastRound
   );
   const shortList = fullStandings.slice(0, 3);
 

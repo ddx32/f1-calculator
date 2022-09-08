@@ -1,39 +1,66 @@
+import { useState } from "react";
+
 import {
   IConstructorStanding,
   IDriverStanding,
-  IRaceTable,
   IStandingsList,
 } from "../types/api";
-import { StandingsType } from "../types/app";
+import {
+  IRaceEvent,
+  IUpcomingRaceResult,
+  RaceType,
+  StandingsType,
+} from "../types/app";
 import { Standings } from "./Standings/Standings";
-import { UpcomingRaces } from "./UpcomingRaces/UpcomingRaces";
+import { UpcomingRaceResultList } from "./UpcomingRaceResults/UpcomingRaceResultList";
 
 type Props = {
   standingsList: IStandingsList;
   driverStandings: IDriverStanding[];
   constructorStandings: IConstructorStanding[];
-  raceSchedule: IRaceTable;
+  raceSchedule: IRaceEvent[];
 };
 
 export function LayoutContainer(props: Props) {
+  const [upcomingRaceResultList, setUpcomingRaceResultList] = useState<
+    IUpcomingRaceResult[]
+  >([]);
+
+  const reversedSchedule = [...props.raceSchedule].reverse();
+
+  const lastRoundIndex = reversedSchedule.findIndex((event) => {
+    return (
+      event.Race.round <= props.standingsList.round &&
+      event.eventType === RaceType.GRAND_PRIX
+    );
+  });
+
+  const lastRound = reversedSchedule[lastRoundIndex];
+
+  // const lastHypotheticalRound = upcomingRaceResultList.at(-1)?.RaceEvent;
+
   return (
     <div className="app-container">
       <header>
         <h1>F1 Championship Calculator</h1>
       </header>
       <div className="content-container">
-        <Standings
-          round={props.standingsList.round}
-          raceSchedule={props.raceSchedule}
-          driverStandings={props.driverStandings}
-          constructorStandings={props.constructorStandings}
-          standingsType={StandingsType.CURRENT}
-        />
+        {lastRound && (
+          <Standings
+            lastRound={lastRound}
+            raceSchedule={props.raceSchedule}
+            driverStandings={props.driverStandings}
+            constructorStandings={props.constructorStandings}
+            standingsType={StandingsType.CURRENT}
+          />
+        )}
 
-        <UpcomingRaces
+        <UpcomingRaceResultList
           raceSchedule={props.raceSchedule}
+          lastRound={lastRound}
           driverStandings={props.driverStandings}
-          round={props.standingsList.round}
+          upcomingRaceResultList={upcomingRaceResultList}
+          setUpcomingRaceResultList={setUpcomingRaceResultList}
         />
       </div>
     </div>

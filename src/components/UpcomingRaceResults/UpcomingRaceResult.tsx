@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import { IUpcomingRaceResults } from "../../types/app";
+import { IUpcomingRaceResult, RaceType } from "../../types/app";
 import { DriverPill } from "../common/DriverPill";
 
 const UpcomingRaceContainer = styled.div`
@@ -27,25 +27,31 @@ const UpcomingRaceContainer = styled.div`
   }
 `;
 
-export function UpcomingRace({
+export function UpcomingRaceResult({
   raceResult,
 }: {
-  raceResult: IUpcomingRaceResults;
+  raceResult: IUpcomingRaceResult;
 }) {
   const { RaceEvent } = raceResult;
   return (
     <UpcomingRaceContainer>
       <div className="race-event-round">
-        {RaceEvent.isSprintRace ? "S" : `#${RaceEvent.Race.round}`}
+        {RaceEvent.eventType === RaceType.SPRINT_RACE
+          ? "S"
+          : `#${RaceEvent.Race.round}`}
       </div>
       <div className="race-event-details">
         <div className="race-event-name">
           {RaceEvent.Race.raceName}
-          {RaceEvent.isSprintRace ? " (Sprint race)" : ""}
+          {RaceEvent.eventType === RaceType.SPRINT_RACE ? " (Sprint race)" : ""}
         </div>
         <div className="race-event-short-results">
           {raceResult.results.slice(0, 3).map((result, index) => (
-            <DriverPill driverCode={result.Driver.code} position={index + 1} />
+            <DriverPill
+              key={result.Driver.code}
+              driverCode={result.Driver.code}
+              position={index + 1}
+            />
           ))}
         </div>
       </div>

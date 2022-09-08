@@ -1,13 +1,13 @@
-import { getStandingsAfterRounds } from "./standings";
-import { driverStandings } from "../../fixtures/standings";
 import { raceResults } from "../../fixtures/raceResults";
-import { RaceTypes } from "../types/api";
+import { driverStandings } from "../../fixtures/standings";
+import { RaceType } from "../types/app";
+import { getStandingsAfterRounds } from "./standings";
 
 test("should calculate standings after a race (races)", () => {
   const afterRaceStandings = getStandingsAfterRounds(
     driverStandings,
     raceResults,
-    RaceTypes.GRAND_PRIX
+    RaceType.GRAND_PRIX
   );
 
   expect(afterRaceStandings[3].Driver.driverId).toBe("sainz");

@@ -5,12 +5,18 @@ export enum StandingsType {
   CALCULATED,
 }
 
-export interface IRaceEvent {
-  Race: IRace;
-  isSprintRace: boolean;
+export enum RaceType {
+  GRAND_PRIX,
+  SPRINT_RACE,
 }
 
-export interface IUpcomingRaceResults {
+export interface IRaceEvent {
+  Race: IRace;
+  eventType: RaceType;
+  id: string;
+}
+
+export interface IUpcomingRaceResult {
   RaceEvent: IRaceEvent;
   results: IRaceResult[];
 }
