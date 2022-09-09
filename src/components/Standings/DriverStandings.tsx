@@ -74,7 +74,7 @@ export function DriverStandings({
 
           <tbody>
             {fullStandings.map((standing) => (
-              <tr>
+              <tr key={standing.Driver.driverId}>
                 <td>
                   <TitleTrophy standing={standing} />
                 </td>

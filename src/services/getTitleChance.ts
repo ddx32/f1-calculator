@@ -54,7 +54,7 @@ function getStandingsWithMaximumValues<T extends IStanding>(
         ...standing,
         maximumPoints:
           standing.points + getRemainingDriverPoints(raceSchedule, lastRound),
-        maximumWins: grandsPrixRemaining,
+        maximumWins: standing.wins + grandsPrixRemaining,
       };
     }
 
@@ -64,7 +64,7 @@ function getStandingsWithMaximumValues<T extends IStanding>(
         maximumPoints:
           standing.points +
           getRemainingConstructorPoints(raceSchedule, lastRound),
-        maximumWins: grandsPrixRemaining,
+        maximumWins: standing.wins + grandsPrixRemaining,
       };
     }
 
@@ -97,7 +97,9 @@ export function getStandingsWithTitleChance<T extends IStanding>(
     lastRound
   );
 
-  if (!standingsWithMaximumValues.every((standing) => standing.maximumPoints)) {
+  if (
+    !standingsWithMaximumValues.every((standing) => "maximumPoints" in standing)
+  ) {
     throw new Error("Standings in the list must contain maximumPoints");
   }
 

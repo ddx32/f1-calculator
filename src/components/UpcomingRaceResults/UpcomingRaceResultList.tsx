@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import styled from "styled-components";
 
 import { getRemainingEventList } from "../../common/getRemainingEvents";
 import { IDriverStanding } from "../../types/api";
@@ -6,6 +7,10 @@ import { IRaceEvent, IUpcomingRaceResult, RaceType } from "../../types/app";
 import { SectionHeader } from "../common/SectionHeader";
 import { AddNextRaceResults } from "./AddNextRaceResults";
 import { UpcomingRaceResult } from "./UpcomingRaceResult";
+
+const UpcomingRaceResultListContainer = styled.section`
+  margin-bottom: 1rem;
+`;
 
 type Props = {
   lastRound: IRaceEvent;
@@ -53,7 +58,7 @@ export function UpcomingRaceResultList({
   };
 
   return (
-    <div>
+    <UpcomingRaceResultListContainer>
       <SectionHeader active={true}>Upcoming Races:</SectionHeader>
       {upcomingRaceResultList.length > 0 &&
         upcomingRaceResultList.map((raceResult) => (
@@ -68,6 +73,6 @@ export function UpcomingRaceResultList({
           onClick={addNextRace}
         />
       )}
-    </div>
+    </UpcomingRaceResultListContainer>
   );
 }

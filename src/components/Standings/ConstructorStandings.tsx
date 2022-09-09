@@ -73,7 +73,7 @@ export function ConstructorStandings({
 
           <tbody>
             {fullStandings.map((standing) => (
-              <tr>
+              <tr key={standing.Constructor.constructorId}>
                 <td>
                   <TitleTrophy standing={standing} />
                 </td>

@@ -7,6 +7,10 @@ import { SectionHeader } from "../common/SectionHeader";
 import { ConstructorStandings } from "./ConstructorStandings";
 import { DriverStandings } from "./DriverStandings";
 
+const StandingsContainer = styled.section`
+  margin-bottom: 1rem;
+`;
+
 const RoundInfo = styled.div`
   background-color: ${colors.lightGray};
   padding: 0.2rem 0.5rem;
@@ -34,28 +38,32 @@ export function Standings({
   constructorStandings,
 }: Props) {
   return (
-    <section className="standings">
+    <StandingsContainer>
       <SectionHeader active={true}>
         {standingsType === StandingsType.CURRENT && "Current standings"}
         {standingsType === StandingsType.CALCULATED && "Calculated standings"}
       </SectionHeader>
       <div className="standings-container">
-        <RoundInfo>
-          <h3 className="last-round">
-            Last Round: {lastRound.Race.season} {lastRound.Race.raceName}
-          </h3>
-        </RoundInfo>
+        {standingsType === StandingsType.CURRENT && (
+          <RoundInfo>
+            <h3 className="last-round">
+              Last Round: {lastRound.Race.season} {lastRound.Race.raceName}
+            </h3>
+          </RoundInfo>
+        )}
+
         <DriverStandings
           driverStandings={driverStandings}
           raceSchedule={raceSchedule}
           lastRound={lastRound}
         />
+
         <ConstructorStandings
           constructorStandings={constructorStandings}
           raceSchedule={raceSchedule}
           lastRound={lastRound}
         />
       </div>
-    </section>
+    </StandingsContainer>
   );
 }

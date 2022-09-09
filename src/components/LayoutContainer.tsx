@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { getStandingsAfterRounds } from "../services/standings";
 import {
   IConstructorStanding,
   IDriverStanding,
@@ -36,8 +37,17 @@ export function LayoutContainer(props: Props) {
   });
 
   const lastRound = reversedSchedule[lastRoundIndex];
-
-  // const lastHypotheticalRound = upcomingRaceResultList.at(-1)?.RaceEvent;
+  const lastCalculatedRound = upcomingRaceResultList.at(-1)?.RaceEvent;
+  const calculatedResults = {
+    drivers: getStandingsAfterRounds(
+      props.driverStandings,
+      upcomingRaceResultList
+    ),
+    constructors: getStandingsAfterRounds(
+      props.constructorStandings,
+      upcomingRaceResultList
+    ),
+  };
 
   return (
     <div className="app-container">
@@ -62,6 +72,16 @@ export function LayoutContainer(props: Props) {
           upcomingRaceResultList={upcomingRaceResultList}
           setUpcomingRaceResultList={setUpcomingRaceResultList}
         />
+
+        {lastCalculatedRound && (
+          <Standings
+            standingsType={StandingsType.CALCULATED}
+            lastRound={lastCalculatedRound}
+            raceSchedule={props.raceSchedule}
+            driverStandings={calculatedResults.drivers}
+            constructorStandings={calculatedResults.constructors}
+          />
+        )}
       </div>
     </div>
   );
