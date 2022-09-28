@@ -6,6 +6,7 @@ import { IDriverStanding } from "../../types/api";
 import { IRaceEvent, IUpcomingRaceResult, RaceType } from "../../types/app";
 import { SectionHeader } from "../common/SectionHeader";
 import { AddNextRaceResults } from "./AddNextRaceResults";
+import { RemoveLastRaceResult } from "./RemoveLastRaceResult";
 import { UpcomingRaceResult } from "./UpcomingRaceResult";
 
 const UpcomingRaceResultListContainer = styled.section`
@@ -57,6 +58,14 @@ export function UpcomingRaceResultList({
     setUpcomingRaceResultList((prevState) => [...prevState, nextRaceResult]);
   };
 
+  const removeLastRace = () => {
+    setUpcomingRaceResultList((prevState) => {
+      const updatedList = [...prevState];
+      updatedList.pop();
+      return updatedList;
+    });
+  };
+
   return (
     <UpcomingRaceResultListContainer>
       <SectionHeader active={true}>Upcoming Races:</SectionHeader>
@@ -67,11 +76,16 @@ export function UpcomingRaceResultList({
             raceResult={raceResult}
           />
         ))}
+
       {upcomingRaceEvent && (
         <AddNextRaceResults
           raceName={getNextRaceName()}
           onClick={addNextRace}
         />
+      )}
+
+      {upcomingRaceResultList.length > 0 && (
+        <RemoveLastRaceResult onClick={removeLastRace} />
       )}
     </UpcomingRaceResultListContainer>
   );
