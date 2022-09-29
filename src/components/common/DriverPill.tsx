@@ -4,11 +4,26 @@ import { colors } from "../../common/colors";
 
 const DriverPillStyled = styled.div`
   background-color: ${colors.white};
-  border: 0.2rem ${colors.black} solid;
+  border: 0.1rem ${colors.black} solid;
   color: ${colors.black};
-  padding: 0.15rem 0.5rem;
   margin-right: 0.3rem;
+  padding: 0;
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .position {
+    background-color: ${colors.thinGray};
+    border: none;
+    border-right: 0.1rem ${colors.black} solid;
+    color: ${colors.black};
+    padding: 0.1rem 0.3rem;
+  }
+
+  .driver-code {
+    padding: 0 0.3rem;
+  }
 `;
 
 export function DriverPill({
@@ -20,7 +35,8 @@ export function DriverPill({
 }) {
   return (
     <DriverPillStyled>
-      {position}. {driverCode}
+      <div className="position">{position}</div>
+      <div className="driver-code">{driverCode}</div>
     </DriverPillStyled>
   );
 }
