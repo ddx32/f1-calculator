@@ -5,7 +5,6 @@ import { ReactComponent as HelmetIcon } from "../../svg/helmet.svg";
 import { IDriverStanding } from "../../types/api";
 import { IRaceEvent } from "../../types/app";
 import { DriverPill } from "../common/DriverPill";
-import { TitleTrophy } from "../TitleTrophy";
 import {
   Chevron,
   IconCell,
@@ -14,6 +13,7 @@ import {
   StandingsContainer,
   StandingsHeader,
 } from "./StandingsSection";
+import { TitleTrophy } from "./TitleTrophy";
 
 type Props = {
   driverStandings: IDriverStanding[];

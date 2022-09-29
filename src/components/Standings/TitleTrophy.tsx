@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ReactComponent as TrophyPotentialIcon } from "../svg/trophy-potential.svg";
-import { ReactComponent as TrophySecuredIcon } from "../svg/trophy-secured.svg";
-import { IStanding, TitleChance } from "../types/api";
+import { ReactComponent as TrophyPotentialIcon } from "../../svg/trophy-potential.svg";
+import { ReactComponent as TrophySecuredIcon } from "../../svg/trophy-secured.svg";
+import { IStanding, TitleChance } from "../../types/api";
 
 function getDescription(titleChance: TitleChance): string {
   switch (titleChance) {

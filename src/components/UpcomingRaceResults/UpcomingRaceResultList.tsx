@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 
 import { getRemainingEventList } from "../../common/getRemainingEvents";
@@ -33,6 +33,7 @@ export function UpcomingRaceResultList({
     raceSchedule,
     previousEvent
   )[0];
+  const [currentExpanded, setCurrentExpanded] = useState<number | null>(null);
 
   const getNextRaceName = () => {
     return `${upcomingRaceEvent.Race.season} ${
@@ -56,6 +57,7 @@ export function UpcomingRaceResultList({
   const addNextRace = () => {
     const nextRaceResult = getRaceResult(upcomingRaceEvent);
     setUpcomingRaceResultList((prevState) => [...prevState, nextRaceResult]);
+    setCurrentExpanded(upcomingRaceResultList.length);
   };
 
   const removeLastRace = () => {
@@ -66,14 +68,32 @@ export function UpcomingRaceResultList({
     });
   };
 
+  const toggleExpanded = (index: number) => () => {
+    const expanded = index === currentExpanded ? null : index;
+    setCurrentExpanded(expanded);
+  };
+
+  const createSetRaceResultFn =
+    (index: number) => (result: IUpcomingRaceResult) => {
+      const updatedResults = [...upcomingRaceResultList].map(
+        (currentResult, currentIndex) => {
+          return index === currentIndex ? result : currentResult;
+        }
+      );
+      setUpcomingRaceResultList(updatedResults);
+    };
+
   return (
     <UpcomingRaceResultListContainer>
       <SectionHeader active={true}>Upcoming Races:</SectionHeader>
       {upcomingRaceResultList.length > 0 &&
-        upcomingRaceResultList.map((raceResult) => (
+        upcomingRaceResultList.map((raceResult, index) => (
           <UpcomingRaceResult
             key={raceResult.RaceEvent.id}
             raceResult={raceResult}
+            setRaceResult={createSetRaceResultFn(index)}
+            expanded={index === currentExpanded}
+            toggleExpanded={toggleExpanded(index)}
           />
         ))}
 

@@ -43,8 +43,10 @@ export const ShortList = styled.div`
 const ChevronCell = styled.div<{ expanded: boolean }>`
   flex: 1.4rem 0 0;
   padding-right: 0.5rem;
+  min-height: 2rem;
 
   svg {
+    transition: transform 0.2s ease;
     ${(props) => props.expanded && "transform: rotate(90deg)"}
   }
 `;

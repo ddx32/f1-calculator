@@ -4,7 +4,6 @@ import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import { ReactComponent as FormulaCarIcon } from "../../svg/formula_car.svg";
 import { IConstructorStanding } from "../../types/api";
 import { IRaceEvent } from "../../types/app";
-import { TitleTrophy } from "../TitleTrophy";
 import { ConstructorPill } from "./ConstructorPill";
 import {
   Chevron,
@@ -14,6 +13,7 @@ import {
   StandingsContainer,
   StandingsHeader,
 } from "./StandingsSection";
+import { TitleTrophy } from "./TitleTrophy";
 
 type Props = {
   constructorStandings: IConstructorStanding[];

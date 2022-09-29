@@ -36,7 +36,7 @@ function App() {
       standingsList={driverStandings}
       driverStandings={driverStandings.DriverStandings}
       constructorStandings={constructorStandings.ConstructorStandings}
-    ></LayoutContainer>
+    />
   ) : (
     <div>Loading...</div>
   );
