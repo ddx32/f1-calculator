@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 import { getStandingsAfterRounds } from "../services/standings";
 import {
@@ -12,8 +13,21 @@ import {
   RaceType,
   StandingsType,
 } from "../types/app";
+import { Footer } from "./Footer";
 import { Standings } from "./Standings/Standings";
 import { UpcomingRaceResultList } from "./UpcomingRaceResults/UpcomingRaceResultList";
+
+const ContentContainer = styled.div`
+  padding: 1rem;
+`;
+
+const Header = styled.header`
+  background-color: var(--dark-gray);
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--light-gray);
+  text-align: center;
+`;
 
 type Props = {
   standingsList: IStandingsList;
@@ -51,10 +65,10 @@ export function LayoutContainer(props: Props) {
 
   return (
     <div className="app-container">
-      <header>
+      <Header>
         <h1>F1 Championship Calculator</h1>
-      </header>
-      <div className="content-container">
+      </Header>
+      <ContentContainer>
         {lastRound && (
           <Standings
             lastRound={lastRound}
@@ -82,7 +96,9 @@ export function LayoutContainer(props: Props) {
             constructorStandings={calculatedResults.constructors}
           />
         )}
-      </div>
+      </ContentContainer>
+
+      <Footer />
     </div>
   );
 }

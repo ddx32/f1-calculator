@@ -25,26 +25,14 @@ body, div, h1, h2, h3, h4, p, header, footer, aside, section, ul, ol {
 	margin: 0;
 }
 
-header {
-	background-color: var(--dark-gray);
-	padding: 0.8rem;
-	margin-bottom: 0.5rem;
-	border-bottom: 2px solid var(--light-gray);
-}
-
 h1 {
 	font-size: 1.2rem;
-	text-align: center;
 }
 
 h2 {
 	font-size: 1.2rem;
 }
 
-.content-container {
-	padding: 1rem;
-}
-
-.potentialTitle {
-	filter: grayscale(1);
+a {
+	color: #fff;
 }

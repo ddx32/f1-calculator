@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="A simple tool to let you play with different outcomes of an upcoming F1 race and its impact on the championship standings."
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo256.png" />
-    <title>F1 Championship Calculator</title>
-	<script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"jsolonborov",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="theme-color" content="#000000" />
+	<meta
+		name="description"
+		content="Easy to use app which lets you play around with different outcomes of upcoming Formula 1 races and their impact on the championship standings and title chances."
+	/>
+	<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo256.png" />
+	<title>F1 Championship Calculator</title>
+	<script>if (!sessionStorage.getItem("_swa") && document.referrer.indexOf(location.protocol + "//" + location.host) !== 0) {
+		fetch("https://counter.dev/track?" + new URLSearchParams({
+			referrer: document.referrer,
+			screen: screen.width + "x" + screen.height,
+			user: "jsolonborov",
+			utcoffset: "1"
+		}));
+	}
+	sessionStorage.setItem("_swa", "1");</script>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+</body>
 </html>
