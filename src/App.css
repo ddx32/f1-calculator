@@ -1,119 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap');
+
 body {
-  background-color: #171717;
+	background-color: #171717;
+	color: #fff;
+	font-family: 'Chakra Petch', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
 }
 
-h2 {
-  color: #fff;
+body, div, h1, h2, h3, h4, p, header, footer, aside, section, ul, ol {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
 
-.app-container {
-  display: grid;
-  grid-template-columns: 2fr 3fr 3fr;
-  gap: 1rem;
-  max-width: 1400px;
-  margin: 0 auto 3rem;
+h1, h2 {
+	font-size: 1.2rem;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td {
-  margin: 0;
-  padding: 0.25rem;
-  border: none;
-}
-
-.race-results {
-  background-color: transparent;
-  border: 0;
-  color: #fff;
-}
-
-.race-results td {
-  padding: 0.5rem;
-}
-
-.race-results .driver-name {
-  flex-grow: 4;
-}
-
-.race-results td:last-child {
-}
-
-.race-results tr {
-  display: flex;
-  margin-bottom: 0.1rem;
-  border-radius: 1rem;
-  cursor: move;
-  align-items: center;
-}
-
-.fastestLapContainer {
-  position: relative;
-  padding: 0 !important;
-  width: 25px;
-  height: 25px;
-  display: block;
-  cursor: pointer;
-}
-
-.fastestLapContainer input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  width: 0;
-  height: 0;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  border-radius: 3px;
-}
-
-.checkmark:hover {
-  background-image: url("./fastestLap.png");
-}
-
-.fastestLapContainer input:checked ~ .checkmark {
-  background-image: url("./fastestLap.png");
-}
-
-.standings {
-  text-align: center;
-  border-radius: 0.5rem;
-  background-color: #cccccc;
-  margin-bottom: 1rem;
-}
-
-.standings tr {
-  border-bottom: 1px solid #bdbdbd;
-}
-
-.standings tr:last-child {
-  border-bottom: none;
-}
-
-.help-text {
-  color: #fff;
-  display: flex;
-  gap: 5rem;
-}
-
-.help-text a {
-  color: #fff;
-}
-
-.help-text a:hover {
-  color: #c7c7c7;
-}
-
-.potentialTitle {
-	filter: grayscale(1);
+a {
+	color: #fff;
 }

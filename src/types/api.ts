@@ -93,8 +93,3 @@ export interface IRaceResult {
   Constructors: IConstructor[];
   fastestLap: boolean;
 }
-
-export enum RaceTypes {
-  GRAND_PRIX,
-  SPRINT_RACE,
-}

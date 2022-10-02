@@ -1,5 +1,10 @@
 # F1 Championship position calculator
 
-I'm into Formula One lately and the 2021 season in particular has been a tight one. So much so that it's not always the easiest to calculate who would be realistically able to grasp the championship title within how many races. This is a work in progress on my attempt to help myself clarify that.
+Formula One Championship can get pretty dramatic at times and it's fun to speculate about how the end-of-season
+standings might look like given specific results. This app will help you do just that - by designing your custom
+upcoming race results you can calculate title chances and create your own season scenarios. Useful for F1 enthusiasts,
+the media and sport statistics buffs.
+
+The source data is sourced from the amazing [Ergast Motorsport API](https://ergast.com/mrd/).
 
 Deploys via Netlify to <https://f1calculator.com/>.

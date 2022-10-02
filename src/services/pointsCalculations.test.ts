@@ -1,16 +1,15 @@
+import { raceSchedule } from "../../fixtures/raceSchedule";
+import {
+  constructorStandings,
+  driverStandings,
+} from "../../fixtures/standings";
 import {
   getGainedPoints,
   getPointsPerRace,
   getPositionChange,
-  getRemainingDriverPoints,
   getRemainingConstructorsPoints,
+  getRemainingDriverPoints,
 } from "./pointsCalculations";
-
-import {
-  driverStandings,
-  constructorStandings,
-} from "../../fixtures/standings";
-import { raceSchedule } from "../../fixtures/raceSchedule";
 
 test("returns points for a race result", () => {
   expect(getPointsPerRace(0, false)).toBe(25);

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { IRaceTable } from "../constants/types";
-import { BASE_URL, PATH } from "../constants/apiPaths";
 
-export function getRaceSchedule(responseData: any): IRaceTable | undefined {
+import { BASE_URL, PATH } from "../constants/apiPaths";
+import { IRaceTable } from "../types/api";
+import { IRaceEvent, RaceType } from "../types/app";
+
+function getRaceSchedule(responseData: any): IRaceTable | undefined {
   if (!Array.isArray(responseData?.MRData?.RaceTable?.Races)) {
     return;
   }
@@ -27,10 +29,29 @@ export function getRaceSchedule(responseData: any): IRaceTable | undefined {
   };
 }
 
+function getEventsSchedule(raceSchedule: IRaceTable): IRaceEvent[] {
+  return raceSchedule.Races.reduce((eventList: IRaceEvent[], current) => {
+    const id = current.round.toString();
+
+    if (current.Sprint) {
+      eventList.push({
+        Race: current,
+        eventType: RaceType.SPRINT_RACE,
+        id: id + "-s",
+      });
+    }
+
+    eventList.push({
+      Race: current,
+      eventType: RaceType.GRAND_PRIX,
+      id,
+    });
+    return eventList;
+  }, []);
+}
+
 export function useRaceSchedule() {
-  const [raceSchedule, setRaceSchedule] = useState<IRaceTable | undefined>(
-    undefined
-  );
+  const [raceSchedule, setRaceSchedule] = useState<IRaceEvent[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +60,10 @@ export function useRaceSchedule() {
       );
       const raceScheduleData = await raceScheduleResponse.json();
       const raceScheduleObject = getRaceSchedule(raceScheduleData);
-      setRaceSchedule(raceScheduleObject);
+      const eventSchedule = raceScheduleObject
+        ? getEventsSchedule(raceScheduleObject)
+        : [];
+      setRaceSchedule(eventSchedule);
     };
 
     fetchData();

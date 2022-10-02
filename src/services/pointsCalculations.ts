@@ -1,18 +1,23 @@
-import { FASTEST_LAP_POINTS, POINTS_PER_POSITION } from "../constants/scoring";
-
-import { IRaceTable, IStanding, RaceTypes } from "../constants/types";
-import { getRemainingRaces } from "./getRemainingRaces";
 import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
+import { FASTEST_LAP_POINTS, POINTS_PER_POSITION } from "../constants/scoring";
+import { IRaceTable, IStanding } from "../types/api";
+import { RaceType } from "../types/app";
+import { getRemainingRaces } from "./getRemainingRaces";
 
 export function getPointsPerRace(
   index: number,
   fastestLap: boolean,
-  raceType = RaceTypes.GRAND_PRIX
+  raceType = RaceType.GRAND_PRIX
 ): number {
   const positionPoints =
-    raceType === RaceTypes.GRAND_PRIX
+    raceType === RaceType.GRAND_PRIX
       ? POINTS_PER_POSITION.fullGrandPrix[index]
       : POINTS_PER_POSITION.sprintRace[index];
+
+  if (raceType === RaceType.SPRINT_RACE) {
+    return positionPoints || 0;
+  }
+
   return index < 10 && fastestLap ? positionPoints + 1 : positionPoints || 0;
 }
 

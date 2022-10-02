@@ -1,5 +1,5 @@
-import { getRemainingRaces } from "./getRemainingRaces";
 import { raceSchedule } from "../../fixtures/raceSchedule";
+import { getRemainingRaces } from "./getRemainingRaces";
 
 test("should calculate remaining races", () => {
   const remainingEvents = getRemainingRaces(raceSchedule, 1);
