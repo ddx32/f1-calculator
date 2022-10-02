@@ -1,16 +1,14 @@
-import { raceResults } from "../../fixtures/raceResults";
 import { driverStandings } from "../../fixtures/standings";
-import { RaceType } from "../types/app";
+import { upcomingRaceResults } from "../../fixtures/upcomingRaceResults";
 import { getStandingsAfterRounds } from "./standings";
 
-// test("should calculate standings after a race (races)", () => {
-//   const afterRaceStandings = getStandingsAfterRounds(
-//     driverStandings,
-//     raceResults,
-//     RaceType.GRAND_PRIX
-//   );
+test("should calculate standings after a race (races)", () => {
+  const afterRaceStandings = getStandingsAfterRounds(
+    driverStandings,
+    upcomingRaceResults
+  );
 
-//   expect(afterRaceStandings[3].Driver.driverId).toBe("sainz");
-//   expect(afterRaceStandings[1].Driver.driverId).toBe("max_verstappen");
-//   expect(afterRaceStandings[0].wins).toBe(3);
-// });
+  expect(afterRaceStandings[3].Driver.driverId).toBe("russell");
+  expect(afterRaceStandings[1].Driver.driverId).toBe("leclerc");
+  expect(afterRaceStandings[0].wins).toBe(7);
+});
