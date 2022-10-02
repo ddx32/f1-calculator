@@ -14,6 +14,7 @@ export const StandingsHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 
   .summary-container {
     flex: auto 0 0;

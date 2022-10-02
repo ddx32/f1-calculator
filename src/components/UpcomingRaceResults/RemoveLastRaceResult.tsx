@@ -11,6 +11,8 @@ const RemoveLastRaceResultButton = styled.div`
   gap: 0.8rem;
   align-content: center;
   align-items: center;
+  cursor: pointer;
+  
   svg {
     width: 1.7rem;
   }

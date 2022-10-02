@@ -6,7 +6,8 @@ const FooterContainer = styled.footer`
   color: ${colors.thinGray};
   padding: 2rem 1rem;
   border-top: 1px solid ${colors.darkGray};
-  margin-top: 1rem;
+  margin: 1rem auto;
+  max-width: 70rem;
 `;
 
 export function Footer() {

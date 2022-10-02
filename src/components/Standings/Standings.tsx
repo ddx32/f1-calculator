@@ -2,14 +2,12 @@ import styled from "styled-components";
 
 import { colors } from "../../common/colors";
 import { IConstructorStanding, IDriverStanding } from "../../types/api";
-import { IRaceEvent, StandingsType } from "../../types/app";
+import { IRaceEvent, RaceType } from "../../types/app";
 import { SectionHeader } from "../common/SectionHeader";
 import { ConstructorStandings } from "./ConstructorStandings";
 import { DriverStandings } from "./DriverStandings";
 
-const StandingsContainer = styled.section`
-  margin-bottom: 1rem;
-`;
+const StandingsSection = styled.section``;
 
 const RoundInfo = styled.div`
   background-color: ${colors.lightGray};
@@ -27,30 +25,25 @@ type Props = {
   constructorStandings: IConstructorStanding[];
   raceSchedule: IRaceEvent[];
   lastRound: IRaceEvent;
-  standingsType: StandingsType;
 };
 
 export function Standings({
   lastRound,
-  standingsType,
   raceSchedule,
   driverStandings,
   constructorStandings,
 }: Props) {
+  const lastRoundTitle = `${lastRound.Race.season} ${lastRound.Race.raceName}${
+    lastRound.eventType === RaceType.SPRINT_RACE ? " (Sprint race)" : ""
+  }`;
+
   return (
-    <StandingsContainer>
-      <SectionHeader active={true}>
-        {standingsType === StandingsType.CURRENT && "Current standings"}
-        {standingsType === StandingsType.CALCULATED && "Calculated standings"}
-      </SectionHeader>
+    <StandingsSection>
+      <SectionHeader active={true}>Calculated standings</SectionHeader>
       <div className="standings-container">
-        {standingsType === StandingsType.CURRENT && (
-          <RoundInfo>
-            <h3 className="last-round">
-              Last Round: {lastRound.Race.season} {lastRound.Race.raceName}
-            </h3>
-          </RoundInfo>
-        )}
+        <RoundInfo>
+          <h3 className="last-round">Last Round: {lastRoundTitle}</h3>
+        </RoundInfo>
 
         <DriverStandings
           driverStandings={driverStandings}
@@ -64,6 +57,6 @@ export function Standings({
           lastRound={lastRound}
         />
       </div>
-    </StandingsContainer>
+    </StandingsSection>
   );
 }

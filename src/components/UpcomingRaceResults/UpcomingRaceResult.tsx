@@ -17,6 +17,7 @@ const UpcomingRaceContainer = styled.div`
     align-items: center;
     gap: 0.5rem;
     justify-content: center;
+    cursor: pointer;
   }
 
   .race-event-round {

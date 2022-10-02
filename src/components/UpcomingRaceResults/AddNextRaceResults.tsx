@@ -10,6 +10,7 @@ const AddNextRaceButton = styled.div`
   padding: 0.8rem;
   gap: 0.8rem;
   align-content: center;
+  cursor: pointer;
 
   strong {
     display: block;

@@ -9,9 +9,7 @@ import { AddNextRaceResults } from "./AddNextRaceResults";
 import { RemoveLastRaceResult } from "./RemoveLastRaceResult";
 import { UpcomingRaceResult } from "./UpcomingRaceResult";
 
-const UpcomingRaceResultListContainer = styled.section`
-  margin-bottom: 1rem;
-`;
+const ResultsSection = styled.section``;
 
 type Props = {
   lastRound: IRaceEvent;
@@ -84,7 +82,7 @@ export function UpcomingRaceResultList({
     };
 
   return (
-    <UpcomingRaceResultListContainer>
+    <ResultsSection>
       <SectionHeader active={true}>Upcoming Races:</SectionHeader>
       {upcomingRaceResultList.length > 0 &&
         upcomingRaceResultList.map((raceResult, index) => (
@@ -107,6 +105,6 @@ export function UpcomingRaceResultList({
       {upcomingRaceResultList.length > 0 && (
         <RemoveLastRaceResult onClick={removeLastRace} />
       )}
-    </UpcomingRaceResultListContainer>
+    </ResultsSection>
   );
 }

@@ -7,18 +7,18 @@ import {
   IDriverStanding,
   IStandingsList,
 } from "../types/api";
-import {
-  IRaceEvent,
-  IUpcomingRaceResult,
-  RaceType,
-  StandingsType,
-} from "../types/app";
+import { IRaceEvent, IUpcomingRaceResult, RaceType } from "../types/app";
 import { Footer } from "./Footer";
 import { Standings } from "./Standings/Standings";
 import { UpcomingRaceResultList } from "./UpcomingRaceResults/UpcomingRaceResultList";
 
 const ContentContainer = styled.div`
   padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  max-width: 70rem;
+  margin: auto;
 `;
 
 const Header = styled.header`
@@ -68,17 +68,8 @@ export function LayoutContainer(props: Props) {
       <Header>
         <h1>F1 Championship Calculator</h1>
       </Header>
-      <ContentContainer>
-        {lastRound && (
-          <Standings
-            lastRound={lastRound}
-            raceSchedule={props.raceSchedule}
-            driverStandings={props.driverStandings}
-            constructorStandings={props.constructorStandings}
-            standingsType={StandingsType.CURRENT}
-          />
-        )}
 
+      <ContentContainer>
         <UpcomingRaceResultList
           raceSchedule={props.raceSchedule}
           lastRound={lastRound}
@@ -87,10 +78,9 @@ export function LayoutContainer(props: Props) {
           setUpcomingRaceResultList={setUpcomingRaceResultList}
         />
 
-        {lastCalculatedRound && (
+        {lastRound && (
           <Standings
-            standingsType={StandingsType.CALCULATED}
-            lastRound={lastCalculatedRound}
+            lastRound={lastCalculatedRound || lastRound}
             raceSchedule={props.raceSchedule}
             driverStandings={calculatedResults.drivers}
             constructorStandings={calculatedResults.constructors}
