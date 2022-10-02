@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap');
 
-:root {
-	--black: #000000;
-	--dark-gray: #292929;
-	--light-gray: #4E4E4E;
-}
-
 body {
 	background-color: #171717;
 	color: #fff;
@@ -25,11 +19,7 @@ body, div, h1, h2, h3, h4, p, header, footer, aside, section, ul, ol {
 	margin: 0;
 }
 
-h1 {
-	font-size: 1.2rem;
-}
-
-h2 {
+h1, h2 {
 	font-size: 1.2rem;
 }
 
