@@ -65,7 +65,7 @@ export function ConstructorStandings({
             <tr>
               <th />
               <th>P</th>
-              <th>Driver</th>
+              <th>Constructor</th>
               <th>Points</th>
               <th>Wins</th>
             </tr>
