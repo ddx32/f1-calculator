@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { useConstructorStandings } from "./api/useConstructorStandings";
@@ -42,7 +42,7 @@ function App() {
           Driver: driverStanding.Driver,
           Constructors: driverStanding.Constructors,
           fastestLap: index === 0 || false,
-        })
+        }),
       );
       setRaceResults(raceResult);
     }

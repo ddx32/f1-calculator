@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import { ReactComponent as MinusButton } from "../../svg/minus-button.svg";
+import MinusButton from "../../svg/minus-button.svg?react";
 
 const RemoveLastRaceResultButton = styled.div`
   background-color: ${colors.darkGray};
@@ -12,7 +12,7 @@ const RemoveLastRaceResultButton = styled.div`
   align-content: center;
   align-items: center;
   cursor: pointer;
-  
+
   svg {
     width: 1.7rem;
   }

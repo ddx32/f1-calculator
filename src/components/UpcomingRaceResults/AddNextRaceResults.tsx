@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import { ReactComponent as PlusButtonIcon } from "../../svg/plus-button.svg";
+import PlusButtonIcon from "../../svg/plus-button.svg?react";
 
 const AddNextRaceButton = styled.div`
   background-color: ${colors.lightGray};

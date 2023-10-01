@@ -7,11 +7,11 @@ import { IRaceEvent } from "../types/app";
 function getRemainingDriverPoints(
   raceSchedule: IRaceEvent[],
   lastRound: IRaceEvent,
-  bestPosition: number = 1
+  bestPosition: number = 1,
 ) {
   const { grandsPrixRemaining, sprintsRemaining } = getRemainingEventCount(
     raceSchedule,
-    lastRound
+    lastRound,
   );
 
   const grandsPrixPointsRemaining =
@@ -30,7 +30,7 @@ function getRemainingDriverPoints(
 
 function getRemainingConstructorPoints(
   raceSchedule: IRaceEvent[],
-  lastRound: IRaceEvent
+  lastRound: IRaceEvent,
 ) {
   return (
     getRemainingDriverPoints(raceSchedule, lastRound, 1) +
@@ -41,11 +41,11 @@ function getRemainingConstructorPoints(
 function getStandingsWithMaximumValues<T extends IStanding>(
   standings: T[],
   raceSchedule: IRaceEvent[],
-  lastRound: IRaceEvent
+  lastRound: IRaceEvent,
 ) {
   const { grandsPrixRemaining } = getRemainingEventCount(
     raceSchedule,
-    lastRound
+    lastRound,
   );
 
   return standings.map((standing) => {
@@ -75,7 +75,7 @@ function getStandingsWithMaximumValues<T extends IStanding>(
 function getTitleChance(
   chanceOnPoints: boolean,
   chanceOnWins: boolean,
-  isPointsTied: boolean
+  isPointsTied: boolean,
 ): TitleChance {
   if (chanceOnPoints) {
     return TitleChance.POTENTIAL;
@@ -89,12 +89,12 @@ function getTitleChance(
 export function getStandingsWithTitleChance<T extends IStanding>(
   standings: T[],
   raceSchedule: IRaceEvent[],
-  lastRound: IRaceEvent
+  lastRound: IRaceEvent,
 ) {
   const standingsWithMaximumValues = getStandingsWithMaximumValues(
     standings,
     raceSchedule,
-    lastRound
+    lastRound,
   );
 
   if (
@@ -105,9 +105,7 @@ export function getStandingsWithTitleChance<T extends IStanding>(
 
   const standingsWithTitleChance = standingsWithMaximumValues.map(
     (standing, index) => {
-      const others = standings.filter(
-        (standing, listIndex) => index !== listIndex
-      );
+      const others = standings.filter((_, listIndex) => index !== listIndex);
 
       const chanceOnPoints = others.every((entrant) => {
         standing.maximumPoints = standing.maximumPoints || 0;
@@ -127,11 +125,11 @@ export function getStandingsWithTitleChance<T extends IStanding>(
         ...standing,
         titleChance: getTitleChance(chanceOnPoints, chanceOnWins, isPointsTied),
       };
-    }
+    },
   );
 
   const titleContenders = standingsWithTitleChance.filter(
-    (standing) => standing.titleChance === TitleChance.POTENTIAL
+    (standing) => standing.titleChance === TitleChance.POTENTIAL,
   );
 
   if (titleContenders.length === 1) {

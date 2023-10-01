@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import { ReactComponent as ChevronIcon } from "../../svg/chevron.svg";
+import ChevronIcon from "../../svg/chevron.svg?react";
 
 export const StandingsContainer = styled.div`
   background: ${colors.darkGray};
@@ -41,14 +41,14 @@ export const ShortList = styled.div`
   margin-bottom: 0.3rem;
 `;
 
-const ChevronCell = styled.div<{ expanded: boolean }>`
+const ChevronCell = styled.div<{ $expanded: boolean }>`
   flex: 1.4rem 0 0;
   padding-right: 0.5rem;
   min-height: 2rem;
 
   svg {
     transition: transform 0.2s ease;
-    ${(props) => props.expanded && "transform: rotate(90deg)"}
+    ${(props) => props.$expanded && "transform: rotate(90deg)"}
   }
 `;
 
@@ -69,7 +69,7 @@ export const IconCell = styled.div<{
 `;
 
 export const Chevron = ({ expanded }: { expanded: boolean }) => (
-  <ChevronCell expanded={expanded}>
+  <ChevronCell $expanded={expanded}>
     <ChevronIcon />
   </ChevronCell>
 );

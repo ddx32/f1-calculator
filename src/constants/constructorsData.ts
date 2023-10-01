@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 
-import { ReactComponent as AstonMartinIcon } from "../svg/teams/am.svg";
-import { ReactComponent as FerrariIcon } from "../svg/teams/ferrari.svg";
-import { ReactComponent as MercedesIcon } from "../svg/teams/mercedes.svg";
-import { ReactComponent as RedBullIcon } from "../svg/teams/redbull.svg";
+import AstonMartinIcon from "../svg/teams/am.svg?react";
+import FerrariIcon from "../svg/teams/ferrari.svg?react";
+import MercedesIcon from "../svg/teams/mercedes.svg?react";
+import RedBullIcon from "../svg/teams/redbull.svg?react";
 
 export interface ConstructorMeta {
   constructorId: string;
