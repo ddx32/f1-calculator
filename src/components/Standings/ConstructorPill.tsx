@@ -5,9 +5,9 @@ import CONSTRUCTOR_DATA, {
 } from "../../constants/constructorsData";
 import { IConstructor, IConstructorStanding } from "../../types/api";
 
-const Pill = styled.div<{ constructorObj: ConstructorMeta }>`
-  background-color: ${(props) => props.constructorObj.background};
-  color: ${(props) => props.constructorObj.foreground};
+const Pill = styled.div<{ $constructorMeta: ConstructorMeta }>`
+  background-color: ${(props) => props.$constructorMeta.background};
+  color: ${(props) => props.$constructorMeta.foreground};
   padding: 0.25rem 0.5rem;
   margin-right: 0.3rem;
   font-size: 0.9rem;
@@ -29,7 +29,7 @@ const Pill = styled.div<{ constructorObj: ConstructorMeta }>`
 function getConstructorMeta(constructor: IConstructor) {
   return CONSTRUCTOR_DATA.find(
     (constructorMeta) =>
-      constructorMeta.constructorId === constructor.constructorId
+      constructorMeta.constructorId === constructor.constructorId,
   );
 }
 
@@ -46,7 +46,7 @@ export function ConstructorPill({ constructorStanding }: Props) {
   const { Icon } = constructorMeta;
 
   return (
-    <Pill constructorObj={constructorMeta}>
+    <Pill $constructorMeta={constructorMeta}>
       <div className="position">{constructorStanding.position}</div>
       {Icon ? <Icon /> : null}
     </Pill>

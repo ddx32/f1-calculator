@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
-import { ReactComponent as FormulaCarIcon } from "../../svg/formula_car.svg";
+import FormulaCarIcon from "../../svg/formula_car.svg?react";
 import { IConstructorStanding } from "../../types/api";
 import { IRaceEvent } from "../../types/app";
 import { ConstructorPill } from "./ConstructorPill";
@@ -30,7 +30,7 @@ export function ConstructorStandings({
   const fullStandings = getStandingsWithTitleChance(
     constructorStandings,
     raceSchedule,
-    lastRound
+    lastRound,
   );
   const shortList = fullStandings.slice(0, 3);
 

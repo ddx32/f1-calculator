@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
-import { ReactComponent as HelmetIcon } from "../../svg/helmet.svg";
+import HelmetIcon from "../../svg/helmet.svg?react";
 import { IDriverStanding } from "../../types/api";
 import { IRaceEvent } from "../../types/app";
 import { DriverPill } from "../common/DriverPill";
@@ -30,7 +30,7 @@ export function DriverStandings({
   const fullStandings = getStandingsWithTitleChance(
     driverStandings,
     raceSchedule,
-    lastRound
+    lastRound,
   );
   const shortList = fullStandings.slice(0, 3);
 
