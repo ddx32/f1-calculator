@@ -29,22 +29,24 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^20.8.0",
-    "@types/react": "^18.2.24",
-    "@types/react-beautiful-dnd": "^13.1.5",
-    "@types/react-dom": "^18.2.8",
-    "@types/styled-components": "^5.1.28",
+    "@cloudflare/workers-types": "^4.20241216.0",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "@types/react-dom": "^19.0.2",
+    "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
+    "@vitejs/plugin-react-swc": "^3.7.2",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "vite": "^4.4.5",
-    "vite-plugin-svgr": "^4.1.0",
-    "vitest": "^0.34.6"
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vite-plugin-svgr": "^4.3.0",
+    "vitest": "^2.1.8",
+    "wrangler": "^3.96.0"
   }
 }

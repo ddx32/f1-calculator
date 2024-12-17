@@ -29,8 +29,12 @@ export function Footer() {
       </div>
       <div>
         Data sourced from{" "}
-        <a href="https://ergast.com/mrd/" target="_blank" rel="noreferrer">
-          Ergast API
+        <a
+          href="https://github.com/jolpica/jolpica-f1"
+          target="_blank"
+          rel="noreferrer"
+        >
+          jolpica-f1 API
         </a>
       </div>
     </FooterContainer>

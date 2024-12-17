@@ -1,0 +1,5 @@
+name = "race-calculator"
+pages_build_output_dir = "build"
+
+[vars]
+API_URL = "https://api.jolpi.ca/ergast/f1/"

@@ -1,12 +1,9 @@
-// Use cached API for production
-// export const BASE_URL = import.meta.env.DEV
-//   ? "https://ergast.com/api/f1"
-//   : "/api";
+export const BASE_URL = "/api";
 
-export const BASE_URL = "https://ergast.com/api/f1";
+const currentYear = new Date().getFullYear();
 
 export const PATH = {
-  driverStandings: "current/driverStandings.json",
-  constructorStandings: "current/constructorStandings.json",
-  raceSchedule: "current.json",
+  driverStandings: `${currentYear}/driverstandings/`,
+  constructorStandings: `${currentYear}/constructorstandings/`,
+  raceSchedule: `${currentYear}/results/`,
 };
