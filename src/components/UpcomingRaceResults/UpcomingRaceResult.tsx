@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import { IUpcomingRaceResult, RaceType } from "../../types/app";
+import {
+  RaceType,
+  UpcomingRaceResult as UpcomingRaceResultType,
+} from "../../types/entities";
 import { DriverPill } from "../common/DriverPill";
 import { Chevron } from "../Standings/StandingsSection";
 import { RaceResultEditor } from "./RaceResultEditor/RaceResultEditor";
@@ -51,8 +54,8 @@ export function UpcomingRaceResult({
   expanded,
   toggleExpanded,
 }: {
-  raceResult: IUpcomingRaceResult;
-  setRaceResult: (result: IUpcomingRaceResult) => void;
+  raceResult: UpcomingRaceResultType;
+  setRaceResult: (result: UpcomingRaceResultType) => void;
   expanded: boolean;
   toggleExpanded: React.MouseEventHandler<HTMLElement>;
 }) {

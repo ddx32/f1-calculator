@@ -1,32 +1,48 @@
 import { useState } from "react";
 
+import { useConstructorStandings } from "../api/useConstructorStandings";
+import { useDriverStandings } from "../api/useDriverStandings";
+import { useRaceSchedule } from "../api/useRaceSchedule";
 import { getStandingsAfterRounds } from "../services/standings";
-import {
-  IConstructorStanding,
-  IDriverStanding,
-  IStandingsList,
-} from "../types/api";
-import { IRaceEvent, IUpcomingRaceResult, RaceType } from "../types/app";
+import { RaceType, UpcomingRaceResult } from "../types/entities";
+import { LoadingLayout } from "./LoadingLayout";
 import { Standings } from "./Standings/Standings";
 import { UpcomingRaceResultList } from "./UpcomingRaceResults/UpcomingRaceResultList";
 
-type Props = {
-  standingsList: IStandingsList;
-  driverStandings: IDriverStanding[];
-  constructorStandings: IConstructorStanding[];
-  raceSchedule: IRaceEvent[];
-};
+export function StandingsController() {
+  const {
+    raceSchedule,
+    eventSchedule,
+    isLoading: isRaceScheduleLoading,
+  } = useRaceSchedule();
+  const { driverStandings, isLoading: isDriverStandingsLoading } =
+    useDriverStandings();
+  const { constructorStandings, isLoading: isConstructorStandingsLoading } =
+    useConstructorStandings();
 
-export function StandingsController(props: Props) {
   const [upcomingRaceResultList, setUpcomingRaceResultList] = useState<
-    IUpcomingRaceResult[]
+    UpcomingRaceResult[]
   >([]);
 
-  const reversedSchedule = [...props.raceSchedule].reverse();
+  // Check if any data is loading or if required data is missing
+  const isLoading =
+    isRaceScheduleLoading ||
+    isDriverStandingsLoading ||
+    isConstructorStandingsLoading;
+  const hasRequiredData =
+    raceSchedule &&
+    driverStandings?.DriverStandings &&
+    constructorStandings?.ConstructorStandings;
+
+  if (isLoading || !hasRequiredData) {
+    return <LoadingLayout />;
+  }
+
+  const reversedSchedule = eventSchedule.toReversed();
 
   const lastRoundIndex = reversedSchedule.findIndex((event) => {
     return (
-      event.Race.round <= props.standingsList.round &&
+      event.Race.round <= (driverStandings?.round || 0) &&
       event.eventType === RaceType.GRAND_PRIX
     );
   });
@@ -35,11 +51,11 @@ export function StandingsController(props: Props) {
   const lastCalculatedRound = upcomingRaceResultList.at(-1)?.RaceEvent;
   const calculatedResults = {
     drivers: getStandingsAfterRounds(
-      props.driverStandings,
+      driverStandings.DriverStandings || [],
       upcomingRaceResultList
     ),
     constructors: getStandingsAfterRounds(
-      props.constructorStandings,
+      constructorStandings.ConstructorStandings || [],
       upcomingRaceResultList
     ),
   };
@@ -47,16 +63,16 @@ export function StandingsController(props: Props) {
   return (
     <>
       <UpcomingRaceResultList
-        raceSchedule={props.raceSchedule}
+        raceSchedule={eventSchedule}
         lastRound={lastRound}
-        driverStandings={props.driverStandings}
+        driverStandings={driverStandings.DriverStandings || []}
         upcomingRaceResultList={upcomingRaceResultList}
         setUpcomingRaceResultList={setUpcomingRaceResultList}
       />
 
       <Standings
         lastRound={lastCalculatedRound || lastRound}
-        raceSchedule={props.raceSchedule}
+        raceSchedule={eventSchedule}
         driverStandings={calculatedResults.drivers}
         constructorStandings={calculatedResults.constructors}
       />

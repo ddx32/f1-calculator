@@ -1,8 +1,8 @@
-import { IRaceEvent, RaceType } from "../types/app";
+import { RaceEvent, RaceType } from "../types/entities";
 
 export function getRemainingEventList(
-  raceSchedule: IRaceEvent[],
-  lastRound: IRaceEvent
+  raceSchedule: RaceEvent[],
+  lastRound: RaceEvent
 ) {
   const lastEventIndex = raceSchedule.findIndex((event) => {
     return (
@@ -15,8 +15,8 @@ export function getRemainingEventList(
 }
 
 export function getRemainingEventCount(
-  raceSchedule: IRaceEvent[],
-  lastRound: IRaceEvent
+  raceSchedule: RaceEvent[],
+  lastRound: RaceEvent
 ) {
   const remainingEvents = getRemainingEventList(raceSchedule, lastRound);
 

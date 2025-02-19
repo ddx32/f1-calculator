@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { BASE_URL, PATH } from "../constants/apiPaths";
-import { IConstructorStanding, IStandingsList } from "../types/api";
+import { IConstructorStanding, IConstructorStandings } from "../types/api";
+import { StandingsList } from "../types/entities";
+import { getConstructorStandings } from "./api";
 
-function getConstructorStandings(
-  responseData: any
-): IStandingsList | undefined {
-  if (responseData?.MRData?.StandingsTable?.StandingsLists.length <= 0) {
+function transformConstructorStandings(data?: IConstructorStandings) {
+  if (!data?.MRData?.StandingsTable?.StandingsLists?.length) {
     return;
   }
 
-  const [standingsList] = responseData.MRData.StandingsTable.StandingsLists;
+  const [standingsList] = data.MRData.StandingsTable.StandingsLists;
 
-  return {
+  const constructorStandings: StandingsList = {
     ...standingsList,
     round: Number(standingsList.round),
     ConstructorStandings: standingsList.ConstructorStandings.map(
@@ -24,28 +23,17 @@ function getConstructorStandings(
       })
     ),
   };
+
+  return constructorStandings;
 }
 
 export function useConstructorStandings() {
-  const [constructorStandings, setConstructorStandings] = useState<
-    IStandingsList | undefined
-  >(undefined);
+  const { data, isLoading, isError } = useQuery<IConstructorStandings>({
+    queryKey: ["constructorStandings"],
+    queryFn: getConstructorStandings,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const constructorStandingsResponse = await fetch(
-        `${BASE_URL}/${PATH.constructorStandings}`
-      );
-      const constructorStandingsData =
-        await constructorStandingsResponse.json();
-      const constructorStandingsObject = getConstructorStandings(
-        constructorStandingsData
-      );
-      setConstructorStandings(constructorStandingsObject);
-    };
+  const constructorStandings = transformConstructorStandings(data);
 
-    fetchData();
-  }, []);
-
-  return constructorStandings;
+  return { constructorStandings, isLoading, isError };
 }

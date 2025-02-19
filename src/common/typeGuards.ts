@@ -1,11 +1,11 @@
-import { IConstructorStanding, IDriverStanding } from "../types/api";
+import { ConstructorStanding, DriverStanding } from "../types/entities";
 
-export function isDriverStanding(standing: any): standing is IDriverStanding {
+export function isDriverStanding(standing: any): standing is DriverStanding {
   return standing.Driver !== undefined;
 }
 
 export function isConstructorStanding(
   standing: any
-): standing is IConstructorStanding {
+): standing is ConstructorStanding {
   return standing.Constructor !== undefined;
 }

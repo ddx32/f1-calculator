@@ -1,6 +1,19 @@
-export interface IDriver {
+interface IMRData {
+  xmlns: "";
+  series: "f1";
+  url: string;
+  limit: string;
+  offset: string;
+  total: string;
+}
+
+interface IBase<T = object> {
+  MRData: IMRData & T;
+}
+
+interface IDriver {
   driverId: string;
-  permanentNumber: number;
+  permanentNumber: string;
   code: string;
   url: string;
   givenName: string;
@@ -9,87 +22,96 @@ export interface IDriver {
   nationality: string;
 }
 
-export interface IConstructor {
+interface IConstructor {
   constructorId: string;
   url: string;
   name: string;
   nationality: string;
 }
 
-export enum TitleChance {
-  SECURED = "SECURED",
-  POTENTIAL = "POTENTIAL",
-  NONE = "NONE",
-}
-
-export type IStanding = {
-  position: number;
-  positionText: string;
-  points: number;
-  wins: number;
-  maximumPoints?: number;
-  maximumWins?: number;
-  titleChance?: TitleChance;
-};
-
-type DriverStandingFields = {
-  Driver: IDriver;
-  Constructors: IConstructor[];
-};
-
-type ConstructorStandingFields = {
-  Constructor: IConstructor;
-};
-
-export type IDriverStanding = IStanding & DriverStandingFields;
-export type IConstructorStanding = IStanding & ConstructorStandingFields;
-
-export interface IStandingsList {
-  season: string;
-  round: number;
-  DriverStandings?: IDriverStanding[];
-  ConstructorStandings?: IConstructorStanding[];
+interface ILocation {
+  lat: number;
+  long: number;
+  locality: string;
+  country: string;
 }
 
 interface ICircuit {
   circuitId: string;
   url: string;
   circuitName: string;
-  Location: {
-    lat: number;
-    long: number;
-    locality: string;
-    country: string;
-  };
+  Location: ILocation;
 }
 
-interface IDateTime {
+export interface ITime {
   date: string;
   time: string;
 }
 
 export interface IRace {
   season: string;
-  round: number;
-  url: string;
+  round: string;
   raceName: string;
   Circuit: ICircuit;
   date: string;
   time: string;
-  FirstPractice: IDateTime;
-  SecondPractice: IDateTime;
-  ThirdPractice?: IDateTime;
-  Sprint?: IDateTime;
-  Qualifying?: IDateTime;
+  FirstPractice: ITime;
+  Qualifying: ITime;
+  SecondPractice?: ITime;
+  ThirdPractice?: ITime;
+  Sprint?: ITime;
+  SprintQualifying?: ITime;
 }
 
-export interface IRaceTable {
-  season: number;
-  Races: IRace[];
-}
-
-export interface IRaceResult {
+export interface IDriverStanding {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
   Driver: IDriver;
   Constructors: IConstructor[];
-  fastestLap: boolean;
 }
+
+export interface IConstructorStanding {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Constructor: IConstructor;
+}
+
+interface IDriverStandingsData {
+  StandingsTable: {
+    season: string;
+    round: string;
+    StandingsLists: {
+      season: string;
+      round: string;
+      DriverStandings: IDriverStanding[];
+    }[];
+  };
+}
+
+interface IConstructorStandingsData {
+  StandingsTable: {
+    season: string;
+    round: string;
+    StandingsLists: {
+      season: string;
+      round: string;
+      ConstructorStandings: IConstructorStanding[];
+    }[];
+  };
+}
+
+interface IRaceScheduleData {
+  RaceTable: {
+    season: string;
+    Races: IRace[];
+  };
+}
+
+export interface IDriverStandings extends IBase<IDriverStandingsData> {}
+export interface IConstructorStandings
+  extends IBase<IConstructorStandingsData> {}
+export interface IRaceSchedule extends IBase<IRaceScheduleData> {}

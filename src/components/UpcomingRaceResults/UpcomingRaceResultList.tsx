@@ -2,21 +2,25 @@ import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 
 import { getRemainingEventList } from "../../common/getRemainingEvents";
-import { IDriverStanding } from "../../types/api";
-import { IRaceEvent, IUpcomingRaceResult, RaceType } from "../../types/app";
+import {
+  DriverStanding,
+  RaceEvent,
+  RaceType,
+  UpcomingRaceResult,
+} from "../../types/entities";
 import { SectionHeader } from "../common/SectionHeader";
 import { AddNextRaceResults } from "./AddNextRaceResults";
 import { RemoveLastRaceResult } from "./RemoveLastRaceResult";
-import { UpcomingRaceResult } from "./UpcomingRaceResult";
+import { UpcomingRaceResult as UpcomingRaceResultComponent } from "./UpcomingRaceResult";
 
 const ResultsSection = styled.section``;
 
 type Props = {
-  lastRound: IRaceEvent;
-  raceSchedule: IRaceEvent[];
-  driverStandings: IDriverStanding[];
-  upcomingRaceResultList: IUpcomingRaceResult[];
-  setUpcomingRaceResultList: Dispatch<SetStateAction<IUpcomingRaceResult[]>>;
+  lastRound: RaceEvent;
+  raceSchedule: RaceEvent[];
+  driverStandings: DriverStanding[];
+  upcomingRaceResultList: UpcomingRaceResult[];
+  setUpcomingRaceResultList: Dispatch<SetStateAction<UpcomingRaceResult[]>>;
 };
 
 export function UpcomingRaceResultList({
@@ -41,7 +45,7 @@ export function UpcomingRaceResultList({
     }`;
   };
 
-  const getRaceResult = (raceEvent: IRaceEvent): IUpcomingRaceResult => {
+  const getRaceResult = (raceEvent: RaceEvent): UpcomingRaceResult => {
     return {
       RaceEvent: raceEvent,
       results: driverStandings.map((standing, index) => ({
@@ -72,7 +76,7 @@ export function UpcomingRaceResultList({
   };
 
   const createSetRaceResultFn =
-    (index: number) => (result: IUpcomingRaceResult) => {
+    (index: number) => (result: UpcomingRaceResult) => {
       const updatedResults = [...upcomingRaceResultList].map(
         (currentResult, currentIndex) => {
           return index === currentIndex ? result : currentResult;
@@ -86,7 +90,7 @@ export function UpcomingRaceResultList({
       <SectionHeader active={true}>Upcoming Races:</SectionHeader>
       {upcomingRaceResultList.length > 0 &&
         upcomingRaceResultList.map((raceResult, index) => (
-          <UpcomingRaceResult
+          <UpcomingRaceResultComponent
             key={raceResult.RaceEvent.id}
             raceResult={raceResult}
             setRaceResult={createSetRaceResultFn(index)}

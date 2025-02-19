@@ -2,8 +2,7 @@ import { useState } from "react";
 
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import HelmetIcon from "../../svg/helmet.svg?react";
-import { IDriverStanding } from "../../types/api";
-import { IRaceEvent } from "../../types/app";
+import { DriverStanding, RaceEvent } from "../../types/entities";
 import { DriverPill } from "../common/DriverPill";
 import {
   Chevron,
@@ -16,9 +15,9 @@ import {
 import { TitleTrophy } from "./TitleTrophy";
 
 type Props = {
-  driverStandings: IDriverStanding[];
-  raceSchedule: IRaceEvent[];
-  lastRound: IRaceEvent;
+  driverStandings: DriverStanding[];
+  raceSchedule: RaceEvent[];
+  lastRound: RaceEvent;
 };
 
 export function DriverStandings({

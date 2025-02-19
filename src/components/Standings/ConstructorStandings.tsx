@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import FormulaCarIcon from "../../svg/formula_car.svg?react";
-import { IConstructorStanding } from "../../types/api";
-import { IRaceEvent } from "../../types/app";
+import { RaceEvent } from "../../types/entities";
+import { ConstructorStanding } from "../../types/entities";
 import { ConstructorPill } from "./ConstructorPill";
 import {
   Chevron,
@@ -16,9 +16,9 @@ import {
 import { TitleTrophy } from "./TitleTrophy";
 
 type Props = {
-  constructorStandings: IConstructorStanding[];
-  raceSchedule: IRaceEvent[];
-  lastRound: IRaceEvent;
+  constructorStandings: ConstructorStanding[];
+  raceSchedule: RaceEvent[];
+  lastRound: RaceEvent;
 };
 
 export function ConstructorStandings({

@@ -1,7 +1,6 @@
 import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
 import { FASTEST_LAP_POINTS, POINTS_PER_POSITION } from "../constants/scoring";
-import { IRaceTable, IStanding } from "../types/api";
-import { RaceType } from "../types/app";
+import { RaceEvent, RaceType, Standing } from "../types/entities";
 import { getRemainingRaces } from "./getRemainingRaces";
 
 export function getPointsPerRace(
@@ -26,7 +25,7 @@ export function getGainedPoints(index: number, fastestLap: boolean): string {
   return points ? `+ ${points}` : "";
 }
 
-export function getPositionChange<T extends IStanding>(
+export function getPositionChange<T extends Standing>(
   standing: T,
   currentStandings: T[]
 ): number {
@@ -52,7 +51,7 @@ export function getPositionChange<T extends IStanding>(
 }
 
 export function getRemainingDriverPoints(
-  raceSchedule: IRaceTable,
+  raceSchedule: RaceEvent[],
   currentRound: number,
   position: number = 1
 ): number {
@@ -67,7 +66,7 @@ export function getRemainingDriverPoints(
 }
 
 export function getRemainingConstructorsPoints(
-  raceSchedule: IRaceTable,
+  raceSchedule: RaceEvent[],
   currentRound: number
 ): number {
   return (
