@@ -10,6 +10,7 @@ import {
 } from "../../types/entities";
 import { SectionHeader } from "../common/SectionHeader";
 import { AddNextRaceResults } from "./AddNextRaceResults";
+import { NoUpcomingRaces } from "./NoUpcomingRaces";
 import { RemoveLastRaceResult } from "./RemoveLastRaceResult";
 import { UpcomingRaceResult as UpcomingRaceResultComponent } from "./UpcomingRaceResult";
 
@@ -109,6 +110,8 @@ export function UpcomingRaceResultList({
       {upcomingRaceResultList.length > 0 && (
         <RemoveLastRaceResult onClick={removeLastRace} />
       )}
+
+      {upcomingRaceResultList.length <= 0 && <NoUpcomingRaces />}
     </ResultsSection>
   );
 }
