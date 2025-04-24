@@ -11,7 +11,7 @@ interface IBase<T = object> {
   MRData: IMRData & T;
 }
 
-interface IDriver {
+export interface IDriver {
   driverId: string;
   permanentNumber: string;
   code: string;
@@ -22,7 +22,7 @@ interface IDriver {
   nationality: string;
 }
 
-interface IConstructor {
+export interface IConstructor {
   constructorId: string;
   url: string;
   name: string;

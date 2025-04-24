@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 import { IDriverStanding, IDriverStandings } from "../types/api";
 import { StandingsList } from "../types/entities";
@@ -45,17 +46,16 @@ export function useDriverStandings() {
 export function useDefaultRaceResult() {
   const { driverStandings } = useDriverStandings();
 
-  if (!driverStandings?.DriverStandings) {
-    return [];
-  }
+  return useMemo(() => {
+    if (!driverStandings?.DriverStandings) {
+      return [];
+    }
 
-  const raceResult = driverStandings.DriverStandings.map(
-    (driverStanding, index) => ({
+    const standings = driverStandings.DriverStandings;
+    return standings.map((driverStanding, index) => ({
       Driver: driverStanding.Driver,
       Constructors: driverStanding.Constructors,
-      fastestLap: index === 0 || false,
-    })
-  );
-
-  return raceResult;
+      fastestLap: index === 0,
+    }));
+  }, [driverStandings?.DriverStandings]);
 }

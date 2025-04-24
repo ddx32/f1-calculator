@@ -1,8 +1,7 @@
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 import { getPointsPerRace } from "../../../services/pointsCalculations";
-import { IRaceResult } from "../../../types/api";
-import { RaceType } from "../../../types/app";
+import { RaceResult, RaceType } from "../../../types/entities";
 
 export function ResultRow({
   result,
@@ -10,7 +9,7 @@ export function ResultRow({
   raceType,
   setFastestLap,
 }: {
-  result: IRaceResult;
+  result: RaceResult;
   index: number;
   raceType: RaceType;
   setFastestLap: () => void;

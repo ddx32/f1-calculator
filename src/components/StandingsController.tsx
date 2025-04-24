@@ -6,6 +6,7 @@ import { useRaceSchedule } from "../api/useRaceSchedule";
 import { getStandingsAfterRounds } from "../services/standings";
 import { RaceType, UpcomingRaceResult } from "../types/entities";
 import { LoadingLayout } from "./LoadingLayout";
+import { NoSeasonData } from "./NoSeasonData";
 import { Standings } from "./Standings/Standings";
 import { UpcomingRaceResultList } from "./UpcomingRaceResults/UpcomingRaceResultList";
 
@@ -24,7 +25,6 @@ export function StandingsController() {
     UpcomingRaceResult[]
   >([]);
 
-  // Check if any data is loading or if required data is missing
   const isLoading =
     isRaceScheduleLoading ||
     isDriverStandingsLoading ||
@@ -34,8 +34,16 @@ export function StandingsController() {
     driverStandings?.DriverStandings &&
     constructorStandings?.ConstructorStandings;
 
-  if (isLoading || !hasRequiredData) {
+  if (isLoading) {
     return <LoadingLayout />;
+  }
+
+  if (!hasRequiredData) {
+    return (
+      <NoSeasonData>
+        There is no data available or the season has not started yet!
+      </NoSeasonData>
+    );
   }
 
   const reversedSchedule = eventSchedule.toReversed();

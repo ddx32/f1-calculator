@@ -1,11 +1,10 @@
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 import styled from "styled-components";
 
 import { colors } from "../../../common/colors";
-import { IUpcomingRaceResult } from "../../../types/app";
+import { UpcomingRaceResult } from "../../../types/entities";
 import { ResultEditorContainer } from "./RaceResultEditor.styled";
 import { ResultRow } from "./ResultRow";
-
 const Hint = styled.div`
   color: ${colors.thinGray};
   padding-bottom: 0.3rem;
@@ -16,8 +15,8 @@ export function RaceResultEditor({
   raceResult,
   setRaceResult,
 }: {
-  raceResult: IUpcomingRaceResult;
-  setRaceResult: (result: IUpcomingRaceResult) => void;
+  raceResult: UpcomingRaceResult;
+  setRaceResult: (result: UpcomingRaceResult) => void;
 }) {
   const setFastestLap = (index: number) => {
     const updatedResults = raceResult.results.map((result, currentIndex) => {
