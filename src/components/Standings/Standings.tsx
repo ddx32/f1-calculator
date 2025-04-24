@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 import { colors } from "../../common/colors";
-import { IConstructorStanding, IDriverStanding } from "../../types/api";
-import { IRaceEvent, RaceType } from "../../types/app";
+import {
+  ConstructorStanding,
+  DriverStanding,
+  RaceEvent,
+  RaceType,
+} from "../../types/entities";
 import { SectionHeader } from "../common/SectionHeader";
 import { ConstructorStandings } from "./ConstructorStandings";
 import { DriverStandings } from "./DriverStandings";
@@ -21,10 +25,10 @@ const RoundInfo = styled.div`
 `;
 
 type Props = {
-  driverStandings: IDriverStanding[];
-  constructorStandings: IConstructorStanding[];
-  raceSchedule: IRaceEvent[];
-  lastRound: IRaceEvent;
+  driverStandings: DriverStanding[];
+  constructorStandings: ConstructorStanding[];
+  raceSchedule: RaceEvent[];
+  lastRound: RaceEvent;
 };
 
 export function Standings({

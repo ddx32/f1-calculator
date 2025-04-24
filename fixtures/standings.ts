@@ -1,6 +1,6 @@
-import { IConstructorStanding, IDriverStanding } from "../src/types/api";
+import { ConstructorStanding, DriverStanding } from "../src/types/entities";
 
-export const driverStandings: IDriverStanding[] = [
+export const driverStandings: DriverStanding[] = [
   {
     position: 1,
     positionText: "1",
@@ -123,7 +123,7 @@ export const driverStandings: IDriverStanding[] = [
   },
 ];
 
-export const constructorStandings: IConstructorStanding[] = [
+export const constructorStandings: ConstructorStanding[] = [
   {
     position: 1,
     positionText: "1",

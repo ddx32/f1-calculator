@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { BASE_URL, PATH } from "../constants/apiPaths";
-import { IRaceTable } from "../types/api";
-import { IRaceEvent, RaceType } from "../types/app";
+import { IRace, IRaceSchedule, ITime } from "../types/api";
+import { RaceEvent, RaceTable, RaceType } from "../types/entities";
+import { getRaceSchedule } from "./api";
 
-function getRaceSchedule(responseData: any): IRaceTable | undefined {
+function dateTimeToDate(dateTime: ITime): Date {
+  return new Date(`${dateTime.date}T${dateTime.time}`);
+}
+
+function transformRaceSchedule(
+  responseData: IRaceSchedule
+): RaceTable | undefined {
   if (!Array.isArray(responseData?.MRData?.RaceTable?.Races)) {
     return;
   }
@@ -14,9 +20,18 @@ function getRaceSchedule(responseData: any): IRaceTable | undefined {
   return {
     ...raceTable,
     season: Number(raceTable.season),
-    Races: raceTable.Races.map((race: any) => ({
+    Races: raceTable.Races.map((race: IRace) => ({
       ...race,
       round: Number(race.round),
+      FirstPractice: dateTimeToDate(race.FirstPractice),
+      Qualifying: dateTimeToDate(race.Qualifying),
+      SecondPractice: race.SecondPractice
+        ? dateTimeToDate(race.SecondPractice)
+        : undefined,
+      ThirdPractice: race.ThirdPractice
+        ? dateTimeToDate(race.ThirdPractice)
+        : undefined,
+      Sprint: race.Sprint ? dateTimeToDate(race.Sprint) : undefined,
       Circuit: {
         ...race.Circuit,
         Location: {
@@ -29,8 +44,8 @@ function getRaceSchedule(responseData: any): IRaceTable | undefined {
   };
 }
 
-function getEventsSchedule(raceSchedule: IRaceTable): IRaceEvent[] {
-  return raceSchedule.Races.reduce((eventList: IRaceEvent[], current) => {
+function getEventsSchedule(raceSchedule: RaceTable): RaceEvent[] {
+  return raceSchedule.Races.reduce((eventList: RaceEvent[], current) => {
     const id = current.round.toString();
 
     if (current.Sprint) {
@@ -51,23 +66,20 @@ function getEventsSchedule(raceSchedule: IRaceTable): IRaceEvent[] {
 }
 
 export function useRaceSchedule() {
-  const [raceSchedule, setRaceSchedule] = useState<IRaceEvent[]>([]);
+  const { data, isLoading } = useQuery<IRaceSchedule>({
+    queryKey: ["raceSchedule"],
+    queryFn: getRaceSchedule,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const raceScheduleResponse = await fetch(
-        `${BASE_URL}/${PATH.raceSchedule}`
-      );
-      const raceScheduleData = await raceScheduleResponse.json();
-      const raceScheduleObject = getRaceSchedule(raceScheduleData);
-      const eventSchedule = raceScheduleObject
-        ? getEventsSchedule(raceScheduleObject)
-        : [];
-      setRaceSchedule(eventSchedule);
-    };
+  const raceScheduleObject = data ? transformRaceSchedule(data) : undefined;
 
-    fetchData();
-  }, []);
+  const eventSchedule = raceScheduleObject
+    ? getEventsSchedule(raceScheduleObject)
+    : [];
 
-  return raceSchedule;
+  return {
+    raceSchedule: raceScheduleObject,
+    eventSchedule,
+    isLoading,
+  };
 }

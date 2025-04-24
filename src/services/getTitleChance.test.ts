@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 
 import { raceEvents } from "../../fixtures/raceEvents";
 import { driverStandings } from "../../fixtures/standings";
-import { TitleChance } from "../types/api";
+import { TitleChance } from "../types/entities";
 import { getStandingsWithTitleChance } from "./getTitleChance";
 
 test("should calculate title chance", () => {

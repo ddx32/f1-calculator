@@ -1,9 +1,8 @@
 import { isConstructorStanding, isDriverStanding } from "../common/typeGuards";
-import { IStanding } from "../types/api";
-import { IUpcomingRaceResult } from "../types/app";
+import { Standing, UpcomingRaceResult } from "../types/entities";
 import { getPointsPerRace } from "./pointsCalculations";
 
-function sortPositions<T extends IStanding>(entrants: T[]) {
+function sortPositions<T extends Standing>(entrants: T[]) {
   return entrants.sort((a, b) => {
     const pointsComparison = b.points - a.points;
 
@@ -15,9 +14,9 @@ function sortPositions<T extends IStanding>(entrants: T[]) {
   });
 }
 
-function getStandingsAfterRound<T extends IStanding>(
+function getStandingsAfterRound<T extends Standing>(
   standings: T[],
-  upcomingRaceResult: IUpcomingRaceResult
+  upcomingRaceResult: UpcomingRaceResult
 ): T[] {
   return upcomingRaceResult.results.reduce(
     (standings, currentResult, position) => {
@@ -57,9 +56,9 @@ function getStandingsAfterRound<T extends IStanding>(
   );
 }
 
-export function getStandingsAfterRounds<T extends IStanding>(
+export function getStandingsAfterRounds<T extends Standing>(
   currentStandings: T[],
-  raceResultList: IUpcomingRaceResult[]
+  raceResultList: UpcomingRaceResult[]
 ) {
   const finalStandings: T[] = raceResultList.reduce(
     (standings, upcomingRaceResult) => {

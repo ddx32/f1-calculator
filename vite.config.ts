@@ -8,4 +8,12 @@ export default defineConfig({
   build: {
     outDir: "build",
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://f1calculator.com",
+        changeOrigin: true,
+      },
+    },
+  },
 });

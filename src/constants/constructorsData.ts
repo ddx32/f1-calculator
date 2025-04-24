@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 
 import AstonMartinIcon from "../svg/teams/am.svg?react";
 import FerrariIcon from "../svg/teams/ferrari.svg?react";
+import McLarenIcon from "../svg/teams/mclaren.svg?react";
 import MercedesIcon from "../svg/teams/mercedes.svg?react";
 import RedBullIcon from "../svg/teams/redbull.svg?react";
 
@@ -31,6 +32,9 @@ const CONSTRUCTOR_DATA: ConstructorMeta[] = [
   {
     constructorId: "mclaren",
     primaryColor: "#FF9800",
+    background: "#FF9800",
+    foreground: "#FFFFFF",
+    Icon: McLarenIcon,
   },
   {
     constructorId: "ferrari",

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CONSTRUCTOR_DATA, {
   ConstructorMeta,
 } from "../../constants/constructorsData";
-import { IConstructor, IConstructorStanding } from "../../types/api";
+import { Constructor, ConstructorStanding } from "../../types/entities";
 
 const Pill = styled.div<{ $constructorMeta: ConstructorMeta }>`
   background-color: ${(props) => props.$constructorMeta.background};
@@ -26,15 +26,15 @@ const Pill = styled.div<{ $constructorMeta: ConstructorMeta }>`
   }
 `;
 
-function getConstructorMeta(constructor: IConstructor) {
+function getConstructorMeta(constructor: Constructor) {
   return CONSTRUCTOR_DATA.find(
     (constructorMeta) =>
-      constructorMeta.constructorId === constructor.constructorId,
+      constructorMeta.constructorId === constructor.constructorId
   );
 }
 
 type Props = {
-  constructorStanding: IConstructorStanding;
+  constructorStanding: ConstructorStanding;
 };
 
 export function ConstructorPill({ constructorStanding }: Props) {
