@@ -6,7 +6,7 @@ export function Footer() {
       className={css({
         color: "thinGray",
         padding: "2rem 1rem",
-        borderTop: "1px solid darkGray",
+        borderTop: "1px solid token(colors.darkGray)",
         margin: "1rem auto",
         maxWidth: "70rem",
       })}
