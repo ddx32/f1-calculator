@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import styled from "styled-components";
 
 import { getRemainingEventList } from "../../common/getRemainingEvents";
 import {
@@ -12,8 +11,6 @@ import { SectionHeader } from "../common/SectionHeader";
 import { AddNextRaceResults } from "./AddNextRaceResults";
 import { RemoveLastRaceResult } from "./RemoveLastRaceResult";
 import { UpcomingRaceResult as UpcomingRaceResultComponent } from "./UpcomingRaceResult";
-
-const ResultsSection = styled.section``;
 
 type Props = {
   lastRound: RaceEvent;
@@ -86,7 +83,7 @@ export function UpcomingRaceResultList({
     };
 
   return (
-    <ResultsSection>
+    <section>
       <SectionHeader active={true}>Upcoming Races:</SectionHeader>
       {upcomingRaceResultList.length > 0 &&
         upcomingRaceResultList.map((raceResult, index) => (
@@ -109,6 +106,6 @@ export function UpcomingRaceResultList({
       {upcomingRaceResultList.length > 0 && (
         <RemoveLastRaceResult onClick={removeLastRace} />
       )}
-    </ResultsSection>
+    </section>
   );
 }

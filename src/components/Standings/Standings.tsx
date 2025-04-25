@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-import { colors } from "../../common/colors";
+import { css } from "../../../styled-system/css";
 import {
   ConstructorStanding,
   DriverStanding,
@@ -10,19 +8,6 @@ import {
 import { SectionHeader } from "../common/SectionHeader";
 import { ConstructorStandings } from "./ConstructorStandings";
 import { DriverStandings } from "./DriverStandings";
-
-const StandingsSection = styled.section``;
-
-const RoundInfo = styled.div`
-  background-color: ${colors.lightGray};
-  padding: 0.2rem 0.5rem;
-  margin-bottom: 0.4rem;
-
-  h3 {
-    font-size: 1rem;
-    font-weight: normal;
-  }
-`;
 
 type Props = {
   driverStandings: DriverStanding[];
@@ -42,12 +27,20 @@ export function Standings({
   }`;
 
   return (
-    <StandingsSection>
+    <section>
       <SectionHeader active={true}>Calculated standings</SectionHeader>
       <div className="standings-container">
-        <RoundInfo>
-          <h3 className="last-round">Last Round: {lastRoundTitle}</h3>
-        </RoundInfo>
+        <div
+          className={css({
+            backgroundColor: "lightGray",
+            padding: "0.2rem 0.5rem",
+            marginBottom: "0.4rem",
+          })}
+        >
+          <h3 className={css({ fontSize: "1rem", fontWeight: "normal" })}>
+            Last Round: {lastRoundTitle}
+          </h3>
+        </div>
 
         <DriverStandings
           driverStandings={driverStandings}
@@ -61,6 +54,6 @@ export function Standings({
           lastRound={lastRound}
         />
       </div>
-    </StandingsSection>
+    </section>
   );
 }

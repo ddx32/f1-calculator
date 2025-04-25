@@ -1,12 +1,12 @@
 import { useState } from "react";
 
+import { css } from "../../../styled-system/css";
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import HelmetIcon from "../../svg/helmet.svg?react";
 import { DriverStanding, RaceEvent } from "../../types/entities";
+import { Chevron } from "../common/Chevron";
 import { DriverPill } from "../common/DriverPill";
 import {
-  Chevron,
-  IconCell,
   ResultsTable,
   ShortList,
   StandingsContainer,
@@ -29,7 +29,7 @@ export function DriverStandings({
   const fullStandings = getStandingsWithTitleChance(
     driverStandings,
     raceSchedule,
-    lastRound,
+    lastRound
   );
   const shortList = fullStandings.slice(0, 3);
 
@@ -37,9 +37,18 @@ export function DriverStandings({
     <StandingsContainer>
       <StandingsHeader onClick={() => setExpanded((prevState) => !prevState)}>
         <div style={{ display: "flex" }}>
-          <IconCell size="4.4rem" offset="-1.2rem">
-            <HelmetIcon />
-          </IconCell>
+          <div
+            className={css({
+              flex: "4.4rem 0 0",
+            })}
+          >
+            <HelmetIcon
+              className={css({
+                transform: "translate(-1.2rem)",
+              })}
+            />
+          </div>
+
           <div className="summary-container">
             <h2>Drivers</h2>
             {!expanded && (

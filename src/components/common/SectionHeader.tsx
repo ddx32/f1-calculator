@@ -1,14 +1,6 @@
 import { ReactNode } from "react";
-import styled from "styled-components";
 
-const PointyArrow = styled.span`
-  font-size: 1.4rem;
-  padding-left: 0.5rem;
-`;
-
-const Heading = styled.h2`
-  margin-bottom: 0.5rem;
-`;
+import { css } from "../../../styled-system/css";
 
 export function SectionHeader({
   active,
@@ -18,9 +10,11 @@ export function SectionHeader({
   children: ReactNode;
 }) {
   return (
-    <Heading>
+    <h2 className={css({ marginBottom: "0.5rem" })}>
       {children}
-      <PointyArrow>{active ? "▾" : "▸"}</PointyArrow>
-    </Heading>
+      <span className={css({ fontSize: "1.4rem", paddingLeft: "0.5rem" })}>
+        {active ? "▾" : "▸"}
+      </span>
+    </h2>
   );
 }

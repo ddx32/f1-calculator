@@ -1,26 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 
-import { colors } from "../../common/colors";
+import { css } from "../../../styled-system/css";
 import PlusButtonIcon from "../../svg/plus-button.svg?react";
-
-const AddNextRaceButton = styled.div`
-  background-color: ${colors.lightGray};
-  display: flex;
-  padding: 0.8rem;
-  gap: 0.8rem;
-  align-content: center;
-  cursor: pointer;
-
-  strong {
-    display: block;
-    font-size: 1.1rem;
-  }
-
-  svg {
-    width: 2.5rem;
-  }
-`;
 
 export function AddNextRaceResults({
   raceName,
@@ -30,12 +11,33 @@ export function AddNextRaceResults({
   onClick: React.MouseEventHandler<HTMLElement>;
 }) {
   return (
-    <AddNextRaceButton onClick={onClick}>
+    <div
+      className={css({
+        backgroundColor: "lightGray",
+        display: "flex",
+        padding: "0.8rem",
+        gap: "0.8rem",
+        alignContent: "center",
+        cursor: "pointer",
+
+        "& > svg": {
+          width: "2.5rem",
+        },
+      })}
+      onClick={onClick}
+    >
       <PlusButtonIcon />
       <div className="add-next-race-text">
-        <strong>Add next race results</strong>
+        <strong
+          className={css({
+            display: "block",
+            fontSize: "1.1rem",
+          })}
+        >
+          Add next race results
+        </strong>
         {raceName}
       </div>
-    </AddNextRaceButton>
+    </div>
   );
 }

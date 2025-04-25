@@ -1,30 +1,16 @@
-import styled from "styled-components";
+import { css } from "../../../styled-system/css";
 
-import { colors } from "../../common/colors";
-
-const DriverPillStyled = styled.div`
-  background-color: ${colors.white};
-  border: 0.1rem ${colors.black} solid;
-  color: ${colors.black};
-  margin-right: 0.3rem;
-  padding: 0;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .position {
-    background-color: ${colors.thinGray};
-    border: none;
-    border-right: 0.1rem ${colors.black} solid;
-    color: ${colors.black};
-    padding: 0.1rem 0.3rem;
-  }
-
-  .driver-code {
-    padding: 0 0.3rem;
-  }
-`;
+const driverPill = css({
+  backgroundColor: "white",
+  border: "0.1rem token(colors.black) solid",
+  color: "black",
+  marginRight: "0.3rem",
+  padding: 0,
+  fontSize: "0.9rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
 
 export function DriverPill({
   driverCode,
@@ -34,9 +20,25 @@ export function DriverPill({
   position: number;
 }) {
   return (
-    <DriverPillStyled>
-      <div className="position">{position}</div>
-      <div className="driver-code">{driverCode}</div>
-    </DriverPillStyled>
+    <div className={driverPill}>
+      <div
+        className={css({
+          backgroundColor: "thinGray",
+          border: "none",
+          borderRight: "0.1rem token(colors.black) solid",
+          color: "black",
+          padding: "0.1rem 0.3rem",
+        })}
+      >
+        {position}
+      </div>
+      <div
+        className={css({
+          padding: "0 0.3rem",
+        })}
+      >
+        {driverCode}
+      </div>
+    </div>
   );
 }

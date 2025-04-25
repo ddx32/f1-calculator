@@ -1,13 +1,13 @@
 import { useState } from "react";
 
+import { css } from "../../../styled-system/css";
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
 import FormulaCarIcon from "../../svg/formula_car.svg?react";
 import { RaceEvent } from "../../types/entities";
 import { ConstructorStanding } from "../../types/entities";
+import { Chevron } from "../common/Chevron";
 import { ConstructorPill } from "./ConstructorPill";
 import {
-  Chevron,
-  IconCell,
   ResultsTable,
   ShortList,
   StandingsContainer,
@@ -30,7 +30,7 @@ export function ConstructorStandings({
   const fullStandings = getStandingsWithTitleChance(
     constructorStandings,
     raceSchedule,
-    lastRound,
+    lastRound
   );
   const shortList = fullStandings.slice(0, 3);
 
@@ -38,9 +38,18 @@ export function ConstructorStandings({
     <StandingsContainer>
       <StandingsHeader onClick={() => setExpanded((prevState) => !prevState)}>
         <div style={{ display: "flex" }}>
-          <IconCell size="4.4rem" scale="1.3" offset="0.6rem" rotate="36deg">
-            <FormulaCarIcon />
-          </IconCell>
+          <div
+            className={css({
+              flex: "4.4rem 0 0",
+            })}
+          >
+            <FormulaCarIcon
+              className={css({
+                height: "4.4rem",
+                transform: "translate(0.6rem) scale(1.3) rotate(36deg)",
+              })}
+            />
+          </div>
           <div className="summary-container">
             <h2>Constructors</h2>
             {!expanded && (

@@ -1,18 +1,16 @@
-import styled from "styled-components";
-
-import { colors } from "../common/colors";
-
-const FooterContainer = styled.footer`
-  color: ${colors.thinGray};
-  padding: 2rem 1rem;
-  border-top: 1px solid ${colors.darkGray};
-  margin: 1rem auto;
-  max-width: 70rem;
-`;
+import { css } from "../../styled-system/css";
 
 export function Footer() {
   return (
-    <FooterContainer>
+    <footer
+      className={css({
+        color: "thinGray",
+        padding: "2rem 1rem",
+        borderTop: "1px solid darkGray",
+        margin: "1rem auto",
+        maxWidth: "70rem",
+      })}
+    >
       <div>
         &copy; {new Date().getFullYear().toString()}{" "}
         <a href="https://filipruzicka.com">Filip Růžička</a>
@@ -37,6 +35,6 @@ export function Footer() {
           jolpica-f1 API
         </a>
       </div>
-    </FooterContainer>
+    </footer>
   );
 }
