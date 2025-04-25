@@ -3,7 +3,6 @@ import { RaceType } from "../types/entities";
 
 export function getPointsPerRace(
   index: number,
-  fastestLap: boolean,
   raceType = RaceType.GRAND_PRIX
 ): number {
   const positionPoints =
@@ -15,5 +14,9 @@ export function getPointsPerRace(
     return positionPoints || 0;
   }
 
-  return index < 10 && fastestLap ? positionPoints + 1 : positionPoints || 0;
+  if (index < 10) {
+    return positionPoints || 0;
+  }
+
+  return 0;
 }
