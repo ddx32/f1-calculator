@@ -1,15 +1,8 @@
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
-import styled from "styled-components";
 
-import { colors } from "../../../common/colors";
+import { css } from "../../../../styled-system/css";
 import { UpcomingRaceResult } from "../../../types/entities";
-import { ResultEditorContainer } from "./RaceResultEditor.styled";
 import { ResultRow } from "./ResultRow";
-const Hint = styled.div`
-  color: ${colors.thinGray};
-  padding-bottom: 0.3rem;
-  font-size: 0.9rem;
-`;
 
 export function RaceResultEditor({
   raceResult,
@@ -53,11 +46,22 @@ export function RaceResultEditor({
     <DragDropContext onDragEnd={setUpdatedOrder}>
       <Droppable droppableId={raceResult.RaceEvent.id}>
         {(provided) => (
-          <ResultEditorContainer
+          <div
             ref={provided.innerRef}
             {...provided.droppableProps}
+            className={css({
+              padding: "0 1rem 1rem 1rem",
+            })}
           >
-            <Hint>Drag and drop to rearrange</Hint>
+            <div
+              className={css({
+                color: "thinGray",
+                paddingBottom: "0.3rem",
+                fontSize: "0.9rem",
+              })}
+            >
+              Drag and drop to rearrange
+            </div>
             {raceResult.results.map((result, index) => (
               <ResultRow
                 key={result.Driver.driverId}
@@ -68,7 +72,7 @@ export function RaceResultEditor({
               />
             ))}
             {provided.placeholder}
-          </ResultEditorContainer>
+          </div>
         )}
       </Droppable>
     </DragDropContext>

@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import classNames from "classnames";
 
+import { css } from "../../../styled-system/css";
 import TrophyPotentialIcon from "../../svg/trophy-potential.svg?react";
 import TrophySecuredIcon from "../../svg/trophy-secured.svg?react";
 import { Standing, TitleChance } from "../../types/entities";
@@ -15,24 +16,21 @@ function getDescription(titleChance: TitleChance): string {
   }
 }
 
-const TrophyContainer = styled.div`
-  svg {
-    width: 1rem;
-  }
-`;
-
 export function TitleTrophy<T extends Standing>({ standing }: { standing: T }) {
   return standing.titleChance ? (
-    <TrophyContainer
-      className={
-        standing.titleChance === TitleChance.POTENTIAL ? "potentialTitle" : ""
-      }
+    <div
+      className={classNames({
+        potentialTitle: standing.titleChance === TitleChance.POTENTIAL,
+        securedTitle: standing.titleChance === TitleChance.SECURED,
+      })}
       title={getDescription(standing.titleChance)}
     >
       {standing.titleChance === TitleChance.POTENTIAL && (
-        <TrophyPotentialIcon />
+        <TrophyPotentialIcon className={css({ width: "1rem" })} />
       )}
-      {standing.titleChance === TitleChance.SECURED && <TrophySecuredIcon />}
-    </TrophyContainer>
+      {standing.titleChance === TitleChance.SECURED && (
+        <TrophySecuredIcon className={css({ width: "1rem" })} />
+      )}
+    </div>
   ) : null;
 }

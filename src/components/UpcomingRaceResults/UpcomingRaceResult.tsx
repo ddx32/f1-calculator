@@ -1,52 +1,51 @@
 import React from "react";
-import styled from "styled-components";
 
-import { colors } from "../../common/colors";
+import { css } from "../../../styled-system/css";
 import {
   RaceType,
   UpcomingRaceResult as UpcomingRaceResultType,
 } from "../../types/entities";
+import { Chevron } from "../common/Chevron";
 import { DriverPill } from "../common/DriverPill";
-import { Chevron } from "../Standings/StandingsSection";
 import { RaceResultEditor } from "./RaceResultEditor/RaceResultEditor";
 
-const UpcomingRaceContainer = styled.div`
-  background-color: ${colors.darkGray};
-  margin-bottom: 0.5rem;
+const upcomingRaceContainer = css({
+  backgroundColor: "darkGray",
+  marginBottom: "0.5rem",
+});
 
-  .race-event-summary {
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center;
-    cursor: pointer;
-  }
+const raceEventSummary = css({
+  padding: "0.5rem",
+  display: "flex",
+  alignItems: "center",
+  gap: "0.5rem",
+  justifyContent: "center",
+  cursor: "pointer",
+});
 
-  .race-event-round {
-    font-size: 1.5rem;
-    text-align: center;
-    flex: 3rem 0 0;
+const raceEventRound = css({
+  fontSize: "1.5rem",
+  textAlign: "center",
+  flex: "3rem 0 0",
 
-    &.expanded {
-      font-size: 1.2rem;
-    }
-  }
+  "&.expanded": {
+    fontSize: "1.2rem",
+  },
+});
 
-  .race-event-details {
-    flex: auto 1 0;
-  }
+const raceEventDetails = css({
+  flex: "auto 1 0",
+});
 
-  .race-event-short-results {
-    display: flex;
-    margin-top: 0.3rem;
-  }
+const raceEventShortResults = css({
+  display: "flex",
+  marginTop: "0.3rem",
+});
 
-  .chevron {
-    flex: 1.4rem 0 0;
-    text-align: right;
-  }
-`;
+const chevron = css({
+  flex: "1.4rem 0 0",
+  textAlign: "right",
+});
 
 export function UpcomingRaceResult({
   raceResult,
@@ -61,22 +60,22 @@ export function UpcomingRaceResult({
 }) {
   const { RaceEvent } = raceResult;
   return (
-    <UpcomingRaceContainer>
-      <div className="race-event-summary" onClick={toggleExpanded}>
-        <div className={`race-event-round ${expanded ? "expanded" : ""}`}>
+    <div className={upcomingRaceContainer}>
+      <div className={raceEventSummary} onClick={toggleExpanded}>
+        <div className={`${raceEventRound} ${expanded ? "expanded" : ""}`}>
           {RaceEvent.eventType === RaceType.SPRINT_RACE
             ? "S"
             : `#${RaceEvent.Race.round}`}
         </div>
-        <div className="race-event-details">
-          <div className="race-event-name">
+        <div className={raceEventDetails}>
+          <div>
             {RaceEvent.Race.raceName}
             {RaceEvent.eventType === RaceType.SPRINT_RACE
               ? " (Sprint race)"
               : ""}
           </div>
           {!expanded && (
-            <div className="race-event-short-results">
+            <div className={raceEventShortResults}>
               {raceResult.results.slice(0, 3).map((result, index) => (
                 <DriverPill
                   key={result.Driver.code}
@@ -87,7 +86,7 @@ export function UpcomingRaceResult({
             </div>
           )}
         </div>
-        <div className="chevron">
+        <div className={chevron}>
           <Chevron expanded={expanded} />
         </div>
       </div>
@@ -98,6 +97,6 @@ export function UpcomingRaceResult({
           setRaceResult={setRaceResult}
         />
       )}
-    </UpcomingRaceContainer>
+    </div>
   );
 }

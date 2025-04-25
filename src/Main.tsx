@@ -1,38 +1,36 @@
 import "./App.css";
 
-import styled from "styled-components";
-
-import { colors } from "./common/colors";
+import { css } from "../styled-system/css";
 import { Footer } from "./components/Footer";
 import { StandingsController } from "./components/StandingsController";
 
-const Header = styled.header`
-  background-color: ${colors.darkGray};
-  padding: 0.8rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 2px solid ${colors.lightGray};
-  text-align: center;
-`;
+const header = css({
+  backgroundColor: "darkGray",
+  padding: "0.8rem",
+  marginBottom: "0.5rem",
+  borderBottom: "2px solid lightGray",
+  textAlign: "center",
+});
 
-const ContentContainer = styled.div`
-  padding: 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  max-width: 70rem;
-  margin: auto;
-`;
+const contentContainer = css({
+  padding: "1rem",
+  display: "grid",
+  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fit, minmax(20rem, 1fr))",
+  maxWidth: "70rem",
+  margin: "auto",
+});
 
 function Main() {
   return (
     <div className="app-container">
-      <Header>
+      <header className={header}>
         <h1>F1 Championship Calculator</h1>
-      </Header>
+      </header>
 
-      <ContentContainer>
+      <div className={contentContainer}>
         <StandingsController />
-      </ContentContainer>
+      </div>
 
       <Footer />
     </div>

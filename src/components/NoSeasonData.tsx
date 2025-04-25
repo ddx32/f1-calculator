@@ -1,11 +1,18 @@
-import styled from "styled-components";
+import { css } from "../../styled-system/css";
 
-export const NoSeasonData = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 2rem;
-`;
+export function NoSeasonData(props: { children: React.ReactNode }) {
+  return (
+    <div
+      className={css({
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+        fontSize: "1.5rem",
+        fontWeight: "bold",
+      })}
+    >
+      {props.children}
+    </div>
+  );
+}

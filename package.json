@@ -8,7 +8,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "tsc": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "panda codegen"
   },
   "browserslist": {
     "production": [
@@ -25,12 +26,13 @@
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "@tanstack/react-query": "^5.74.4",
+    "classnames": "^2.5.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "styled-components": "^6.1.17"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250424.0",
+    "@pandacss/dev": "^0.53.4",
     "@types/node": "^22.15.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
@@ -41,11 +43,17 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.1.2",
     "wrangler": "^4.13.1"
+  },
+  "postcss": {
+    "plugins": {
+      "@pandacss/dev/postcss": {}
+    }
   }
 }
