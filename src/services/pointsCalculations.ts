@@ -3,7 +3,7 @@ import { RaceType } from "../types/entities";
 
 export function getPointsPerRace(
   index: number,
-  raceType = RaceType.GRAND_PRIX
+  raceType = RaceType.GRAND_PRIX,
 ): number {
   const positionPoints =
     raceType === RaceType.GRAND_PRIX

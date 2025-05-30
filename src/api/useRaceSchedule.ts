@@ -9,7 +9,7 @@ function dateTimeToDate(dateTime: ITime): Date {
 }
 
 function transformRaceSchedule(
-  responseData: IRaceSchedule
+  responseData: IRaceSchedule,
 ): RaceTable | undefined {
   if (!Array.isArray(responseData?.MRData?.RaceTable?.Races)) {
     return;

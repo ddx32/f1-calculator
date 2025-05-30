@@ -7,4 +7,3 @@ test("returns points for a race result", () => {
   expect(getPointsPerRace(4)).toBe(10);
   expect(getPointsPerRace(10)).toBe(0);
 });
-

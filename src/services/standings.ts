@@ -16,7 +16,7 @@ function sortPositions<T extends Standing>(entrants: T[]) {
 
 function getStandingsAfterRound<T extends Standing>(
   standings: T[],
-  upcomingRaceResult: UpcomingRaceResult
+  upcomingRaceResult: UpcomingRaceResult,
 ): T[] {
   return upcomingRaceResult.results.reduce(
     (standings, currentResult, position) => {
@@ -51,23 +51,23 @@ function getStandingsAfterRound<T extends Standing>(
       };
       return updatedStandings;
     },
-    standings
+    standings,
   );
 }
 
 export function getStandingsAfterRounds<T extends Standing>(
   currentStandings: T[],
-  raceResultList: UpcomingRaceResult[]
+  raceResultList: UpcomingRaceResult[],
 ) {
   const finalStandings: T[] = raceResultList.reduce(
     (standings, upcomingRaceResult) => {
       const standingsAfterRound = getStandingsAfterRound(
         standings,
-        upcomingRaceResult
+        upcomingRaceResult,
       );
       return standingsAfterRound;
     },
-    currentStandings
+    currentStandings,
   );
 
   const sortedPositions = sortPositions(finalStandings);

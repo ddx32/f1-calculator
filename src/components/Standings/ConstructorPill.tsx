@@ -20,7 +20,7 @@ const pill = css({
 function getConstructorMeta(constructor: Constructor) {
   return CONSTRUCTOR_DATA.find(
     (constructorMeta) =>
-      constructorMeta.constructorId === constructor.constructorId
+      constructorMeta.constructorId === constructor.constructorId,
   );
 }
 

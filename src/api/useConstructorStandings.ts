@@ -20,7 +20,7 @@ function transformConstructorStandings(data?: IConstructorStandings) {
         position: Number(standing.position),
         points: Number(standing.points),
         wins: Number(standing.wins),
-      })
+      }),
     ),
   };
 

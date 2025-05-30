@@ -1,12 +1,11 @@
-import { IUpcomingRaceResult } from "../src/types/app";
+import { UpcomingRaceResult } from "../src/types/entities";
 
-export const upcomingRaceResults: IUpcomingRaceResult[] = [
+export const upcomingRaceResults: UpcomingRaceResult[] = [
   {
     RaceEvent: {
       Race: {
         season: "2022",
         round: 17,
-        url: "http://en.wikipedia.org/wiki/2022_Singapore_Grand_Prix",
         raceName: "Singapore Grand Prix",
         Circuit: {
           circuitId: "marina_bay",
@@ -21,10 +20,10 @@ export const upcomingRaceResults: IUpcomingRaceResult[] = [
         },
         date: "2022-10-02",
         time: "12:00:00Z",
-        FirstPractice: { date: "2022-09-30", time: "10:00:00Z" },
-        SecondPractice: { date: "2022-09-30", time: "13:00:00Z" },
-        ThirdPractice: { date: "2022-10-01", time: "10:00:00Z" },
-        Qualifying: { date: "2022-10-01", time: "13:00:00Z" },
+        FirstPractice: new Date("2022-09-30T10:00:00Z"),
+        SecondPractice: new Date("2022-09-30T13:00:00Z"),
+        ThirdPractice: new Date("2022-10-01T10:00:00Z"),
+        Qualifying: new Date("2022-10-01T13:00:00Z"),
       },
       eventType: 0,
       id: "17",
@@ -142,7 +141,6 @@ export const upcomingRaceResults: IUpcomingRaceResult[] = [
       Race: {
         season: "2022",
         round: 18,
-        url: "http://en.wikipedia.org/wiki/2022_Japanese_Grand_Prix",
         raceName: "Japanese Grand Prix",
         Circuit: {
           circuitId: "suzuka",
@@ -157,10 +155,10 @@ export const upcomingRaceResults: IUpcomingRaceResult[] = [
         },
         date: "2022-10-09",
         time: "05:00:00Z",
-        FirstPractice: { date: "2022-10-07", time: "03:00:00Z" },
-        SecondPractice: { date: "2022-10-07", time: "06:00:00Z" },
-        ThirdPractice: { date: "2022-10-08", time: "03:00:00Z" },
-        Qualifying: { date: "2022-10-08", time: "06:00:00Z" },
+        FirstPractice: new Date("2022-10-07T03:00:00Z"),
+        SecondPractice: new Date("2022-10-07T06:00:00Z"),
+        ThirdPractice: new Date("2022-10-08T03:00:00Z"),
+        Qualifying: new Date("2022-10-08T06:00:00Z"),
       },
       eventType: 0,
       id: "18",
@@ -278,7 +276,6 @@ export const upcomingRaceResults: IUpcomingRaceResult[] = [
       Race: {
         season: "2022",
         round: 19,
-        url: "http://en.wikipedia.org/wiki/2022_United_States_Grand_Prix",
         raceName: "United States Grand Prix",
         Circuit: {
           circuitId: "americas",
@@ -293,10 +290,10 @@ export const upcomingRaceResults: IUpcomingRaceResult[] = [
         },
         date: "2022-10-23",
         time: "19:00:00Z",
-        FirstPractice: { date: "2022-10-21", time: "19:00:00Z" },
-        SecondPractice: { date: "2022-10-21", time: "22:00:00Z" },
-        ThirdPractice: { date: "2022-10-22", time: "19:00:00Z" },
-        Qualifying: { date: "2022-10-22", time: "22:00:00Z" },
+        FirstPractice: new Date("2022-10-21T19:00:00Z"),
+        SecondPractice: new Date("2022-10-21T22:00:00Z"),
+        ThirdPractice: new Date("2022-10-22T19:00:00Z"),
+        Qualifying: new Date("2022-10-22T22:00:00Z"),
       },
       eventType: 0,
       id: "19",
