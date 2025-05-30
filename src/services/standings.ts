@@ -37,8 +37,7 @@ function getStandingsAfterRound<T extends Standing>(
 
       const points = getPointsPerRace(
         position,
-        currentResult.fastestLap,
-        upcomingRaceResult.RaceEvent.eventType
+        upcomingRaceResult.RaceEvent.eventType,
       );
 
       const updatedStandings = [...standings];
