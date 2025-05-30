@@ -11,21 +11,6 @@ export function RaceResultEditor({
   raceResult: UpcomingRaceResult;
   setRaceResult: (result: UpcomingRaceResult) => void;
 }) {
-  const setFastestLap = (index: number) => {
-    const updatedResults = raceResult.results.map((result, currentIndex) => {
-      return {
-        ...result,
-        fastestLap: currentIndex === index,
-      };
-    });
-
-    return () =>
-      setRaceResult({
-        ...raceResult,
-        results: updatedResults,
-      });
-  };
-
   const setUpdatedOrder = (result: DropResult) => {
     const updatedOrder = [...raceResult.results];
     if (!result.destination) {
@@ -68,7 +53,6 @@ export function RaceResultEditor({
                 result={result}
                 index={index}
                 raceType={raceResult.RaceEvent.eventType}
-                setFastestLap={setFastestLap(index)}
               />
             ))}
             {provided.placeholder}

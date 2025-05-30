@@ -1,11 +1,13 @@
 import { ConstructorStanding, DriverStanding } from "../types/entities";
 
-export function isDriverStanding(standing: any): standing is DriverStanding {
-  return standing.Driver !== undefined;
+export function isDriverStanding(
+  standing: unknown,
+): standing is DriverStanding {
+  return (standing as DriverStanding).Driver !== undefined;
 }
 
 export function isConstructorStanding(
-  standing: any
+  standing: unknown,
 ): standing is ConstructorStanding {
-  return standing.Constructor !== undefined;
+  return (standing as ConstructorStanding).Constructor !== undefined;
 }

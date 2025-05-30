@@ -60,11 +60,11 @@ export function StandingsController() {
   const calculatedResults = {
     drivers: getStandingsAfterRounds(
       driverStandings.DriverStandings || [],
-      upcomingRaceResultList
+      upcomingRaceResultList,
     ),
     constructors: getStandingsAfterRounds(
       constructorStandings.ConstructorStandings || [],
-      upcomingRaceResultList
+      upcomingRaceResultList,
     ),
   };
 

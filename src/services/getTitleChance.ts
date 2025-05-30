@@ -6,11 +6,11 @@ import { RaceEvent, Standing, TitleChance } from "../types/entities";
 function getRemainingDriverPoints(
   raceSchedule: RaceEvent[],
   lastRound: RaceEvent,
-  bestPosition: number = 1
+  bestPosition: number = 1,
 ) {
   const { grandsPrixRemaining, sprintsRemaining } = getRemainingEventCount(
     raceSchedule,
-    lastRound
+    lastRound,
   );
 
   const grandsPrixPointsRemaining =
@@ -29,7 +29,7 @@ function getRemainingDriverPoints(
 
 function getRemainingConstructorPoints(
   raceSchedule: RaceEvent[],
-  lastRound: RaceEvent
+  lastRound: RaceEvent,
 ) {
   return (
     getRemainingDriverPoints(raceSchedule, lastRound, 1) +
@@ -40,11 +40,11 @@ function getRemainingConstructorPoints(
 function getStandingsWithMaximumValues<T extends Standing>(
   standings: T[],
   raceSchedule: RaceEvent[],
-  lastRound: RaceEvent
+  lastRound: RaceEvent,
 ) {
   const { grandsPrixRemaining } = getRemainingEventCount(
     raceSchedule,
-    lastRound
+    lastRound,
   );
 
   return standings.map((standing) => {
@@ -74,7 +74,7 @@ function getStandingsWithMaximumValues<T extends Standing>(
 function getTitleChance(
   chanceOnPoints: boolean,
   chanceOnWins: boolean,
-  isPointsTied: boolean
+  isPointsTied: boolean,
 ): TitleChance {
   if (chanceOnPoints) {
     return TitleChance.POTENTIAL;
@@ -88,12 +88,12 @@ function getTitleChance(
 export function getStandingsWithTitleChance<T extends Standing>(
   standings: T[],
   raceSchedule: RaceEvent[],
-  lastRound: RaceEvent
+  lastRound: RaceEvent,
 ) {
   const standingsWithMaximumValues = getStandingsWithMaximumValues(
     standings,
     raceSchedule,
-    lastRound
+    lastRound,
   );
 
   if (
@@ -124,11 +124,11 @@ export function getStandingsWithTitleChance<T extends Standing>(
         ...standing,
         titleChance: getTitleChance(chanceOnPoints, chanceOnWins, isPointsTied),
       };
-    }
+    },
   );
 
   const titleContenders = standingsWithTitleChance.filter(
-    (standing) => standing.titleChance === TitleChance.POTENTIAL
+    (standing) => standing.titleChance === TitleChance.POTENTIAL,
   );
 
   if (titleContenders.length === 1) {

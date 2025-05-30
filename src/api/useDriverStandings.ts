@@ -25,7 +25,7 @@ function transformDriverStandings(data: IDriverStandings) {
           ...standing.Driver,
           permanentNumber: Number(standing.Driver.permanentNumber),
         },
-      })
+      }),
     ),
   };
 

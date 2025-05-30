@@ -29,7 +29,7 @@ export function DriverStandings({
   const fullStandings = getStandingsWithTitleChance(
     driverStandings,
     raceSchedule,
-    lastRound
+    lastRound,
   );
   const shortList = fullStandings.slice(0, 3);
 

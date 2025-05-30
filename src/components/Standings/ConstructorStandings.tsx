@@ -30,7 +30,7 @@ export function ConstructorStandings({
   const fullStandings = getStandingsWithTitleChance(
     constructorStandings,
     raceSchedule,
-    lastRound
+    lastRound,
   );
   const shortList = fullStandings.slice(0, 3);
 

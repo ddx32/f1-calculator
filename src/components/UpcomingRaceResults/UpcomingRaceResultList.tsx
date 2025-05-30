@@ -30,7 +30,7 @@ export function UpcomingRaceResultList({
   const previousEvent = upcomingRaceResultList.at(-1)?.RaceEvent || lastRound;
   const upcomingRaceEvent = getRemainingEventList(
     raceSchedule,
-    previousEvent
+    previousEvent,
   )[0];
   const [currentExpanded, setCurrentExpanded] = useState<number | null>(null);
 
@@ -77,7 +77,7 @@ export function UpcomingRaceResultList({
       const updatedResults = [...upcomingRaceResultList].map(
         (currentResult, currentIndex) => {
           return index === currentIndex ? result : currentResult;
-        }
+        },
       );
       setUpcomingRaceResultList(updatedResults);
     };
