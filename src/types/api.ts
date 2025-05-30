@@ -111,7 +111,6 @@ interface IRaceScheduleData {
   };
 }
 
-export interface IDriverStandings extends IBase<IDriverStandingsData> {}
-export interface IConstructorStandings
-  extends IBase<IConstructorStandingsData> {}
-export interface IRaceSchedule extends IBase<IRaceScheduleData> {}
+export type IDriverStandings = IBase<IDriverStandingsData>;
+export type IConstructorStandings = IBase<IConstructorStandingsData>;
+export type IRaceSchedule = IBase<IRaceScheduleData>;
