@@ -5,15 +5,22 @@ import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config(
+export default defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
-  reactHooksPlugin.configs["recommended-latest"],
   reactRefreshPlugin.configs.recommended,
   eslintPluginPrettierRecommended,
+  {
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
   {
     ignores: [
       "dist/**",
@@ -31,16 +38,14 @@ export default tseslint.config(
     },
     plugins: {
       "simple-import-sort": simpleImportSort,
+      "react-hooks": reactHooksPlugin,
     },
     rules: {
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "prettier/prettier": "error",
-    },
-    settings: {
-      react: {
-        version: "detect",
-      },
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
 );
