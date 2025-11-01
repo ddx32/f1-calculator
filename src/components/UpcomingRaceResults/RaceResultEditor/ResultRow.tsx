@@ -1,4 +1,5 @@
-import { Draggable } from "@hello-pangea/dnd";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 import { css } from "../../../../styled-system/css";
 import { getPointsPerRace } from "../../../services/pointsCalculations";
@@ -25,26 +26,31 @@ export function ResultRow({
   const position = index + 1;
   const pointsGained = getPointsPerRace(index, raceType);
 
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: result.Driver.driverId });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   return (
-    <Draggable draggableId={result.Driver.driverId} index={index}>
-      {(provided) => (
-        <div
-          className={resultRow}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <div className={css({ flex: "1.4rem 0 0", textAlign: "right" })}>
-            {position.toString()}
-          </div>
-          <div className={css({ flex: "auto 1 1", paddingLeft: "0.5rem" })}>
-            {result.Driver.givenName} {result.Driver.familyName}
-          </div>
-          <div className={css({ alignSelf: "flex-end" })}>
-            {pointsGained > 0 && `+ ${pointsGained.toString()}`}
-          </div>
-        </div>
-      )}
-    </Draggable>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={resultRow}
+    >
+      <div className={css({ flex: "1.4rem 0 0", textAlign: "right" })}>
+        {position.toString()}
+      </div>
+      <div className={css({ flex: "auto 1 1", paddingLeft: "0.5rem" })}>
+        {result.Driver.givenName} {result.Driver.familyName}
+      </div>
+      <div className={css({ alignSelf: "flex-end" })}>
+        {pointsGained > 0 && `+ ${pointsGained.toString()}`}
+      </div>
+    </div>
   );
 }
