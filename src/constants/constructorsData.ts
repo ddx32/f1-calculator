@@ -1,17 +1,15 @@
-import { FunctionComponent } from "react";
-
-import AstonMartinIcon from "../svg/teams/am.svg?react";
-import FerrariIcon from "../svg/teams/ferrari.svg?react";
-import McLarenIcon from "../svg/teams/mclaren.svg?react";
-import MercedesIcon from "../svg/teams/mercedes.svg?react";
-import RedBullIcon from "../svg/teams/redbull.svg?react";
+import astonMartinSrc from "../svg/teams/am.svg";
+import ferrariSrc from "../svg/teams/ferrari.svg";
+import mclarenSrc from "../svg/teams/mclaren.svg";
+import mercedesSrc from "../svg/teams/mercedes.svg";
+import redbullSrc from "../svg/teams/redbull.svg";
 
 export interface ConstructorMeta {
   constructorId: string;
   primaryColor: string;
   foreground?: string;
   background?: string;
-  Icon?: FunctionComponent;
+  icon?: string;
 }
 
 const CONSTRUCTOR_DATA: ConstructorMeta[] = [
@@ -20,28 +18,28 @@ const CONSTRUCTOR_DATA: ConstructorMeta[] = [
     primaryColor: "#00827D",
     foreground: "#FFFFFF",
     background: "#000000",
-    Icon: MercedesIcon,
+    icon: mercedesSrc,
   },
   {
     constructorId: "red_bull",
     primaryColor: "#001061",
     background: "#0A1248",
     foreground: "#FFFFFF",
-    Icon: RedBullIcon,
+    icon: redbullSrc,
   },
   {
     constructorId: "mclaren",
     primaryColor: "#FF9800",
     background: "#FF9800",
     foreground: "#FFFFFF",
-    Icon: McLarenIcon,
+    icon: mclarenSrc,
   },
   {
     constructorId: "ferrari",
     primaryColor: "#D8291B",
     foreground: "#FFFFFF",
     background: "#B9000D",
-    Icon: FerrariIcon,
+    icon: ferrariSrc,
   },
   {
     constructorId: "alphatauri",
@@ -56,7 +54,7 @@ const CONSTRUCTOR_DATA: ConstructorMeta[] = [
     primaryColor: "#00584F",
     background: "#00665E",
     foreground: "#FFFFFF",
-    Icon: AstonMartinIcon,
+    icon: astonMartinSrc,
   },
   {
     constructorId: "williams",

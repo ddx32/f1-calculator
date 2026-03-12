@@ -1,7 +1,7 @@
 import React from "react";
 
 import { css } from "../../../styled-system/css";
-import PlusButtonIcon from "../../svg/plus-button.svg?react";
+import plusButtonSrc from "../../svg/plus-button.svg";
 
 export function AddNextRaceResults({
   raceName,
@@ -20,13 +20,13 @@ export function AddNextRaceResults({
         alignContent: "center",
         cursor: "pointer",
 
-        "& > svg": {
+        "& > img": {
           width: "2.5rem",
         },
       })}
       onClick={onClick}
     >
-      <PlusButtonIcon />
+      <img src={plusButtonSrc} alt="" />
       <div className="add-next-race-text">
         <strong
           className={css({

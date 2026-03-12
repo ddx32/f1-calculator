@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { css } from "../../../styled-system/css";
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
-import HelmetIcon from "../../svg/helmet.svg?react";
+import helmetSrc from "../../svg/helmet.svg";
 import { DriverStanding, RaceEvent } from "../../types/entities";
 import { Chevron } from "../common/Chevron";
 import { DriverPill } from "../common/DriverPill";
@@ -42,7 +42,9 @@ export function DriverStandings({
               flex: "4.4rem 0 0",
             })}
           >
-            <HelmetIcon
+            <img
+              src={helmetSrc}
+              alt=""
               className={css({
                 transform: "translate(-1.2rem)",
               })}
