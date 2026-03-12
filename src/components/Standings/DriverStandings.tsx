@@ -88,7 +88,7 @@ export function DriverStandings({
                 <td>
                   <TitleTrophy standing={standing} />
                 </td>
-                <td>{standing.position}</td>
+                <td>{standing.positionText}</td>
                 <td>
                   {standing.Driver.givenName} {standing.Driver.familyName}
                 </td>

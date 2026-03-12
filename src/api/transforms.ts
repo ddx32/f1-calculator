@@ -6,7 +6,7 @@ import {
   IRace,
   IRaceSchedule,
   ITime,
-} from "../types/api";
+} from "../types/apiSchemas";
 import {
   RaceEvent,
   RaceTable,
@@ -29,6 +29,7 @@ export function transformDriverStandings(data: IDriverStandings) {
         ...standing,
         points: Number(standing.points),
         position: Number(standing.position),
+        positionText: standing.positionText,
         wins: Number(standing.wins),
         Driver: {
           ...standing.Driver,
