@@ -1,9 +1,7 @@
 import { useState } from "react";
 
-import { useConstructorStandings } from "../api/useConstructorStandings";
-import { useDriverStandings } from "../api/useDriverStandings";
-import { useRaceSchedule } from "../api/useRaceSchedule";
 import { getStandingsAfterRounds } from "../services/standings";
+import { useStore } from "../store";
 import { RaceType, UpcomingRaceResult } from "../types/entities";
 import { LoadingLayout } from "./LoadingLayout";
 import { NoSeasonData } from "./NoSeasonData";
@@ -11,24 +9,15 @@ import { Standings } from "./Standings/Standings";
 import { UpcomingRaceResultList } from "./UpcomingRaceResults/UpcomingRaceResultList";
 
 export function StandingsController() {
-  const {
-    raceSchedule,
-    eventSchedule,
-    isLoading: isRaceScheduleLoading,
-  } = useRaceSchedule();
-  const { driverStandings, isLoading: isDriverStandingsLoading } =
-    useDriverStandings();
-  const { constructorStandings, isLoading: isConstructorStandingsLoading } =
-    useConstructorStandings();
+  const raceSchedule = useStore((s) => s.raceSchedule);
+  const eventSchedule = useStore((s) => s.eventSchedule);
+  const driverStandings = useStore((s) => s.driverStandings);
+  const constructorStandings = useStore((s) => s.constructorStandings);
+  const isLoading = useStore((s) => s.isLoading);
 
   const [upcomingRaceResultList, setUpcomingRaceResultList] = useState<
     UpcomingRaceResult[]
   >([]);
-
-  const isLoading =
-    isRaceScheduleLoading ||
-    isDriverStandingsLoading ||
-    isConstructorStandingsLoading;
   const hasRequiredData =
     raceSchedule &&
     driverStandings?.DriverStandings &&

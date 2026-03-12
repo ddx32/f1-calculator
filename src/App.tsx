@@ -1,13 +1,14 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 import Main from "./Main";
+import { useStore } from "./store";
 
 export default function App() {
-  const queryClient = new QueryClient();
+  const fetchAll = useStore((s) => s.fetchAll);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Main />
-    </QueryClientProvider>
-  );
+  useEffect(() => {
+    fetchAll();
+  }, [fetchAll]);
+
+  return <Main />;
 }
