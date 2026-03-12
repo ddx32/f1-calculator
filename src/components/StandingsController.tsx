@@ -1,8 +1,9 @@
 import { useState } from "react";
 
+import { getEventDate } from "../common/getEventDate";
 import { getStandingsAfterRounds } from "../services/standings";
 import { useStore } from "../store";
-import { RaceType, UpcomingRaceResult } from "../types/entities";
+import { UpcomingRaceResult } from "../types/entities";
 import { LoadingLayout } from "./LoadingLayout";
 import { NoSeasonData } from "./NoSeasonData";
 import { Standings } from "./Standings/Standings";
@@ -37,10 +38,13 @@ export function StandingsController() {
 
   const reversedSchedule = eventSchedule.toReversed();
 
+  const now = new Date();
   const lastRoundIndex = reversedSchedule.findIndex((event) => {
+    const eventDate = getEventDate(event);
     return (
       event.Race.round <= (driverStandings?.round || 0) &&
-      event.eventType === RaceType.GRAND_PRIX
+      eventDate !== undefined &&
+      eventDate <= now
     );
   });
 
