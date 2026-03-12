@@ -10,10 +10,10 @@ const pill = css({
   alignItems: "center",
   gap: "0.5rem",
 
-  "& svg": {
+  "& img": {
     width: "100%",
-    height: "1.6rem",
-    maxWidth: "2.3rem",
+    height: "2rem",
+    maxWidth: "2.5rem",
   },
 });
 
@@ -34,7 +34,7 @@ export function ConstructorPill({ constructorStanding }: Props) {
     return null;
   }
 
-  const { Icon } = constructorMeta;
+  const { icon } = constructorMeta;
 
   return (
     <div
@@ -47,7 +47,9 @@ export function ConstructorPill({ constructorStanding }: Props) {
       <div className={css({ fontSize: "1.2rem" })}>
         {constructorStanding.position}
       </div>
-      {Icon ? <Icon /> : null}
+      {icon ? (
+        <img src={icon} alt={constructorStanding.Constructor.name} />
+      ) : null}
     </div>
   );
 }

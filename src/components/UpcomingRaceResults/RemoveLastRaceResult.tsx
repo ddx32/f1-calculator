@@ -1,7 +1,7 @@
 import React from "react";
 
 import { css } from "../../../styled-system/css";
-import MinusButton from "../../svg/minus-button.svg?react";
+import minusButtonSrc from "../../svg/minus-button.svg";
 
 export function RemoveLastRaceResult({
   onClick,
@@ -18,13 +18,13 @@ export function RemoveLastRaceResult({
         alignContent: "center",
         cursor: "pointer",
 
-        "& > svg": {
+        "& > img": {
           width: "1.7rem",
         },
       })}
       onClick={onClick}
     >
-      <MinusButton />
+      <img src={minusButtonSrc} alt="" />
       <strong>Remove last race results</strong>
     </div>
   );

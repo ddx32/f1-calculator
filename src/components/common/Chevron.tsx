@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 import { css } from "../../../styled-system/css";
-import ChevronIcon from "../../svg/chevron.svg?react";
+import chevronSrc from "../../svg/chevron.svg";
 
 const rotated = css({
   transform: "rotate(90deg)",
@@ -15,7 +15,9 @@ export const Chevron = ({ expanded }: { expanded: boolean }) => (
       minHeight: "2rem",
     })}
   >
-    <ChevronIcon
+    <img
+      src={chevronSrc}
+      alt=""
       className={classNames(css({ transition: "transform 0.2s ease" }), {
         [rotated]: expanded,
       })}

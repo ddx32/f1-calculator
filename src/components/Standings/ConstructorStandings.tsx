@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { css } from "../../../styled-system/css";
 import { getStandingsWithTitleChance } from "../../services/getTitleChance";
-import FormulaCarIcon from "../../svg/formula_car.svg?react";
+import formulaCarSrc from "../../svg/formula_car.svg";
 import { RaceEvent } from "../../types/entities";
 import { ConstructorStanding } from "../../types/entities";
 import { Chevron } from "../common/Chevron";
@@ -43,7 +43,9 @@ export function ConstructorStandings({
               flex: "4.4rem 0 0",
             })}
           >
-            <FormulaCarIcon
+            <img
+              src={formulaCarSrc}
+              alt=""
               className={css({
                 height: "4.4rem",
                 transform: "translate(0.6rem) scale(1.3) rotate(36deg)",
