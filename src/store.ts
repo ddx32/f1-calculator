@@ -8,10 +8,10 @@ import {
   transformRaceSchedule,
 } from "./api/transforms";
 import {
-  IConstructorStandings,
-  IDriverStandings,
-  IRaceSchedule,
-} from "./types/api";
+  ConstructorStandingsResponseSchema,
+  DriverStandingsResponseSchema,
+  RaceScheduleResponseSchema,
+} from "./types/apiSchemas";
 import { RaceEvent, RaceTable, StandingsList } from "./types/entities";
 
 interface F1Store {
@@ -42,9 +42,9 @@ export const useStore = create<F1Store>((set, get) => ({
 
     try {
       const [driverData, constructorData, raceData] = await Promise.all([
-        fetchApi<IDriverStandings>("driverStandings"),
-        fetchApi<IConstructorStandings>("constructorStandings"),
-        fetchApi<IRaceSchedule>("raceSchedule"),
+        fetchApi("driverStandings", DriverStandingsResponseSchema),
+        fetchApi("constructorStandings", ConstructorStandingsResponseSchema),
+        fetchApi("raceSchedule", RaceScheduleResponseSchema),
       ]);
 
       const driverStandings = transformDriverStandings(driverData);
