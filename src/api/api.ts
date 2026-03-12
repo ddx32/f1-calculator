@@ -2,7 +2,7 @@ const baseUrl = "/api";
 const currentYear = new Date().getFullYear();
 // const currentYear = 2024;
 
-export const apiPaths = {
+const apiPaths = {
   driverStandings: `${currentYear}/driverstandings/`,
   constructorStandings: `${currentYear}/constructorstandings/`,
   raceSchedule: `${currentYear}/races/`,
@@ -11,31 +11,9 @@ export const apiPaths = {
   constructors: `${currentYear}/constructors/`,
 } as const;
 
-async function get(path: string) {
-  const response = await fetch(`${baseUrl}/${path}`);
+export type ApiEndpoint = keyof typeof apiPaths;
+
+export async function fetchApi<T>(endpoint: ApiEndpoint): Promise<T> {
+  const response = await fetch(`${baseUrl}/${apiPaths[endpoint]}`);
   return response.json();
-}
-
-export async function getDriverStandings() {
-  return get(apiPaths.driverStandings);
-}
-
-export async function getConstructorStandings() {
-  return get(apiPaths.constructorStandings);
-}
-
-export async function getDrivers() {
-  return get(apiPaths.drivers);
-}
-
-export async function getConstructors() {
-  return get(apiPaths.constructors);
-}
-
-export async function getRaceSchedule() {
-  return get(apiPaths.raceSchedule);
-}
-
-export async function getRaceResults() {
-  return get(apiPaths.raceResults);
 }

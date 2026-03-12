@@ -1,13 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import Markdown from "react-markdown";
 
 import { css } from "../../styled-system/css";
+import { useStore } from "../store";
 
 export function Changelog() {
-  const { data: changelog } = useQuery({
-    queryKey: ["changelog"],
-    queryFn: () => fetch("/changelog.md").then((res) => res.text()),
-  });
+  const changelog = useStore((s) => s.changelog);
+  const fetchChangelog = useStore((s) => s.fetchChangelog);
+
+  useEffect(() => {
+    fetchChangelog();
+  }, [fetchChangelog]);
 
   if (!changelog) return null;
 
